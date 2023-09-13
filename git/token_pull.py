@@ -32,6 +32,7 @@ class GitUI(QtWidgets.QWidget):
 
         self.repo_path_label = QtWidgets.QLabel('Local Repository Path:')
         self.repo_path_input = QtWidgets.QLineEdit()
+        self.repo_path_input.setText('/hosts/mtlws505/user_data/mahy/git/stash/nukesd')
         self.repo_path_button = QtWidgets.QPushButton('<')
         self.repo_path_button.clicked.connect(self.load_directory)
 
@@ -63,11 +64,18 @@ class GitUI(QtWidgets.QWidget):
 
         try:
             repo = Repo(local_repo_path)
-            with repo.git.custom_environment(GIT_ASKPASS=token):
-                repo.remotes.origin.pull()
+            origin = repo.remote('origin')
+            
+            with repo.git.custom_environment(GIT_USERNAME=username, GIT_PASSWORD=token):
+                origin.pull()
+            
             QtWidgets.QMessageBox.information(self, "Success", "Successfully pulled the latest updates.")
         except Exception as e:
             QtWidgets.QMessageBox.critical(self, "Error", str(e))
+
+
+
+
 
     def git_push(self):
         repo_url = self.repo_url_input.text()

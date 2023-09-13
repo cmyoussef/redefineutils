@@ -61,10 +61,13 @@ class GitUI(QtWidgets.QWidget):
         token = self.token_input.text()
         local_repo_path = self.repo_path_input.text()
 
-        full_repo_url = f"https://{username}@{repo_url.split('https://')[1]}"
-
-        repo = Repo.clone_from(full_repo_url, local_repo_path, env={'GIT_ASKPASS': token})
-        repo.git.pull()
+        try:
+            repo = Repo(local_repo_path)
+            with repo.git.custom_environment(GIT_ASKPASS=token):
+                repo.remotes.origin.pull()
+            QtWidgets.QMessageBox.information(self, "Success", "Successfully pulled the latest updates.")
+        except Exception as e:
+            QtWidgets.QMessageBox.critical(self, "Error", str(e))
 
     def git_push(self):
         repo_url = self.repo_url_input.text()

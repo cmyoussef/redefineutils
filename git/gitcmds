@@ -1,0 +1,22 @@
+# branch switch 
+git fetch origin
+git branch -r
+git checkout -b feature/ADG-36-nukesd-tiles-support origin/feature/ADG-36-nukesd-tiles-support
+git branch
+git pull origin feature/ADG-36-nukesd-tiles-support
+
+
+# back to develop 
+git checkout develop
+git pull origin develop
+git fetch -p
+git branch -vv
+git branch -d feature/ADG-36-nukesd-tiles-support
+
+
+
+# back to develop 
+git checkout develop
+git pull origin develop
+git fetch -p
+

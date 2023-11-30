@@ -1,0 +1,5 @@
+git config --global https.proxy https://mahy:@proxy:3128
+git config --global http.proxy http://mahy:@proxy:3128
+cd ~
+kinit
+B@7abMisho6543

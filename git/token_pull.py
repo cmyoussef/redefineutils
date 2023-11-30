@@ -1,6 +1,8 @@
 import sys
 from PySide2 import QtWidgets
 from git import Repo
+import subprocess
+from urllib.parse import quote
 
 
 class GitUI(QtWidgets.QWidget):
@@ -22,7 +24,9 @@ class GitUI(QtWidgets.QWidget):
 
         self.token_label = QtWidgets.QLabel('Personal Access Token:')
         self.token_input = QtWidgets.QLineEdit()
-        self.token_input.setText('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')
+        # self.token_input.setText('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')
+        self.token_input.setText('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')
+
 
         self.pull_button = QtWidgets.QPushButton('Pull')
         self.pull_button.clicked.connect(self.git_pull)
@@ -32,7 +36,7 @@ class GitUI(QtWidgets.QWidget):
 
         self.repo_path_label = QtWidgets.QLabel('Local Repository Path:')
         self.repo_path_input = QtWidgets.QLineEdit()
-        self.repo_path_input.setText('/hosts/mtlws505/user_data/mahy/git/stash/nukesd')
+        self.repo_path_input.setText('/hosts/mtlws1546/user_data/mahy/git/stash/nuke-sd/src/nukesd')
         self.repo_path_button = QtWidgets.QPushButton('<')
         self.repo_path_button.clicked.connect(self.load_directory)
 
@@ -56,6 +60,7 @@ class GitUI(QtWidgets.QWidget):
         if directory:
             self.repo_path_input.setText(directory)
 
+
     def git_pull(self):
         repo_url = self.repo_url_input.text()
         username = self.username_input.text()
@@ -63,17 +68,21 @@ class GitUI(QtWidgets.QWidget):
         local_repo_path = self.repo_path_input.text()
 
         try:
-            repo = Repo(local_repo_path)
-            origin = repo.remote('origin')
+            # Encodes username and token to ensure they are URL safe
+            encoded_username = quote(username, safe='')
+            encoded_token = quote(token, safe='')
             
-            with repo.git.custom_environment(GIT_USERNAME=username, GIT_PASSWORD=token):
-                origin.pull()
+            # Forming the git pull command with the encoded credentials
+            pull_command = f"git pull https://{encoded_username}:{encoded_token}@{repo_url.split('https://')[1]}"
             
-            QtWidgets.QMessageBox.information(self, "Success", "Successfully pulled the latest updates.")
+            result = subprocess.run(pull_command, shell=True, cwd=local_repo_path, capture_output=True, text=True)
+            
+            if result.returncode == 0:
+                QtWidgets.QMessageBox.information(self, "Success", "Successfully pulled the latest updates.")
+            else:
+                QtWidgets.QMessageBox.critical(self, "Error", result.stderr)
         except Exception as e:
             QtWidgets.QMessageBox.critical(self, "Error", str(e))
-
-
 
 
 
@@ -82,12 +91,39 @@ class GitUI(QtWidgets.QWidget):
         username = self.username_input.text()
         token = self.token_input.text()
         local_repo_path = self.repo_path_input.text()
+        commit_message = "Auto commit message"
 
-        full_repo_url = f"https://{username}@{repo_url.split('https://')[1]}"
+        try:
+            repo = Repo(local_repo_path)
 
-        repo = Repo(local_repo_path)
-        remote = repo.create_remote('origin', full_repo_url)
-        repo.git.push(env={'GIT_ASKPASS': token})
+            # Stage all changes
+            repo.git.add('--all')
+
+            # Commit changes
+            repo.git.commit('-m', commit_message)
+
+            # URL-encode the token and username
+            encoded_username = quote(username, safe='')
+            encoded_token = quote(token, safe='')
+
+            # Form the git URL including the token and username
+            git_url_with_token = f"https://{encoded_username}:{encoded_token}@{repo_url.split('https://')[1]}"
+
+            # Check if 'origin' remote exists, else create
+            if 'origin' in [remote.name for remote in repo.remotes]:
+                remote = repo.remote('origin')
+                remote.set_url(git_url_with_token)
+            else:
+                remote = repo.create_remote('origin', git_url_with_token)
+
+            # Push changes
+            remote.push()
+
+            QtWidgets.QMessageBox.information(self, "Success", "Successfully pushed to the repository.")
+        except Exception as e:
+            QtWidgets.QMessageBox.critical(self, "Error", str(e))
+
+
 
 
 if __name__ == '__main__':
@@ -95,3 +131,9 @@ if __name__ == '__main__':
     ex = GitUI()
     ex.show()
     sys.exit(app.exec_())
+
+"""
+bob-world -t python3.9;
+python /hosts/mtlws1546/user_data/mahy/git/stash/redefineutils/git/token_pull.py
+"""
+

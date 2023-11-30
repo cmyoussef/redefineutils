@@ -1,0 +1,4 @@
+git config --global https.proxy https://cmyoussef:@proxy:3128
+git config --global http.proxy http://cmyoussef:@proxy:3128
+~/ kinit
+klist

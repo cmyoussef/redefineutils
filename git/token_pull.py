@@ -25,7 +25,7 @@ class GitUI(QtWidgets.QWidget):
         self.token_label = QtWidgets.QLabel('Personal Access Token:')
         self.token_input = QtWidgets.QLineEdit()
         # self.token_input.setText('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')
-        self.token_input.setText('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')
+        self.token_input.setText('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')
 
 
         self.pull_button = QtWidgets.QPushButton('Pull')

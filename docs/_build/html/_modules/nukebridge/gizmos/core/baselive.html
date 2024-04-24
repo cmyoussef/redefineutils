@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nukebridge.gizmos.core.baselive &mdash; NukeBridge 1.0.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=d55fa986"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            NukeBridge
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules.html">nukebridge</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">NukeBridge</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../../nukebridge.html">nukebridge</a></li>
+          <li class="breadcrumb-item"><a href="../../gizmos.html">nukebridge.gizmos</a></li>
+      <li class="breadcrumb-item active">nukebridge.gizmos.core.baselive</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nukebridge.gizmos.core.baselive</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">nuke</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="kn">from</span> <span class="nn">nukebridge.utils.execute_thread</span> <span class="kn">import</span> <span class="n">ExecuteThread</span>
+<span class="kn">from</span> <span class="nn">nukebridge.utils.soketserver</span> <span class="kn">import</span> <span class="n">SocketServer</span><span class="p">,</span> <span class="n">SocketClient</span>
+
+<span class="kn">from</span> <span class="nn">nukebridge.utils.icons</span> <span class="kn">import</span> <span class="n">Icons</span>
+<span class="kn">from</span> <span class="nn">nukebridge.utils.logger</span> <span class="kn">import</span> <span class="n">logger_level</span><span class="p">,</span> <span class="n">logger</span>
+
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logger_level</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">nukebridge.gizmos.core.base</span> <span class="kn">import</span> <span class="n">Base</span>
+
+
+<div class="viewcode-block" id="BaseLive">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive">[docs]</a>
+<span class="k">class</span> <span class="nc">BaseLive</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The BaseLive class extends the Base class and provides additional functionality for live interaction with gizmos in Nuke.</span>
+<span class="sd">    It includes methods for creating and managing a server connection, updating the UI, and handling knob changes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gizmo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">          Initializes a new instance of the BaseLive class.</span>
+
+<span class="sd">          Args:</span>
+<span class="sd">              gizmo: The gizmo to associate with this instance. Defaults to None.</span>
+<span class="sd">              name: The name to use for this instance. Defaults to None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_port</span> <span class="o">=</span> <span class="mi">64306</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">updateUI_knobs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_frame</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">frame</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">gizmo</span><span class="o">=</span><span class="n">gizmo</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">knob_change_timer</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server_respond</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># prevent initializing classes</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initialized</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_settings_is_loaded</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">updateUI_knobs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s2">&quot;gizmo_class_type&quot;</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">SocketClient</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_knob_value</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_live_data</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">.run_instance_method(&quot;updateUI&quot;)&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;updateUI&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;time_out&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">600</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">port</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Property that gets the port for the server connection. If a &#39;port_knob&#39; exists on the gizmo, its value is used.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The port for the server connection.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;port_knob&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_port</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;port_knob&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_port</span>
+
+    <span class="nd">@port</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">port</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the port for the server connection. If a &#39;port_knob&#39; exists on the gizmo, its value is also updated.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            port (int): The new port for the server connection.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;port_knob&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;port_knob&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_port</span><span class="p">)</span>
+
+    <span class="c1"># region ui</span>
+
+<div class="viewcode-block" id="BaseLive.create_server_utils_knobs">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.create_server_utils_knobs">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_server_utils_knobs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a set of utility knobs on the gizmo for managing the server connection. These include knobs for setting the port,</span>
+<span class="sd">        finding an available port, starting the server, connecting to the server, and closing the server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_divider</span><span class="p">(</span><span class="s2">&quot;Server Utils&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;port_knob&#39;</span><span class="p">):</span>
+            <span class="n">port_knob</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">Int_Knob</span><span class="p">(</span><span class="s1">&#39;port_knob&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Port </span><span class="si">{</span><span class="n">Icons</span><span class="o">.</span><span class="n">key_symbol</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">port_knob</span><span class="o">.</span><span class="n">setFlag</span><span class="p">(</span><span class="n">nuke</span><span class="o">.</span><span class="n">STARTLINE</span><span class="p">)</span>
+            <span class="n">port_knob</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_port</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">addKnob</span><span class="p">(</span><span class="n">port_knob</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;find_available_port_knob&#39;</span><span class="p">):</span>
+            <span class="n">cn_button</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">PyScript_Knob</span><span class="p">(</span><span class="s1">&#39;find_available_port_knob&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">Icons</span><span class="o">.</span><span class="n">reuse_symbol</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="c1"># cn_button.setFlag(nuke.STARTLINE)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">addKnob</span><span class="p">(</span><span class="n">cn_button</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;find_available_port_knob&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setCommand</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;import </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_class</span><span class="si">}</span><span class="s1">;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">.run_instance_method(&quot;set_port_to_available&quot;)&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;start_server&#39;</span><span class="p">):</span>
+            <span class="n">cn_button</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">PyScript_Knob</span><span class="p">(</span><span class="s1">&#39;start_server&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Start</span><span class="si">{</span><span class="n">Icons</span><span class="o">.</span><span class="n">launch_gui_symbol</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">cn_button</span><span class="o">.</span><span class="n">setFlag</span><span class="p">(</span><span class="n">nuke</span><span class="o">.</span><span class="n">STARTLINE</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">addKnob</span><span class="p">(</span><span class="n">cn_button</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;start_server&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setCommand</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;import </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_class</span><span class="si">}</span><span class="s1">;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">.run_instance_method(&quot;ensure_server_connection&quot;)&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;connect_to_server&#39;</span><span class="p">):</span>
+            <span class="n">cn_button</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">PyScript_Knob</span><span class="p">(</span><span class="s1">&#39;connect_to_server&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Connect</span><span class="si">{</span><span class="n">Icons</span><span class="o">.</span><span class="n">link_symbol</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="c1"># cn_button.setFlag(nuke.STARTLINE)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">addKnob</span><span class="p">(</span><span class="n">cn_button</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;connect_to_server&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setCommand</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;import </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_class</span><span class="si">}</span><span class="s1">;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">.run_instance_method(&quot;attempt_reconnect&quot;)&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;close_server&#39;</span><span class="p">):</span>
+            <span class="n">cn_button</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">PyScript_Knob</span><span class="p">(</span><span class="s1">&#39;close_server&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Close</span><span class="si">{</span><span class="n">Icons</span><span class="o">.</span><span class="n">link_symbol</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="c1"># cn_button.setFlag(nuke.STARTLINE)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">addKnob</span><span class="p">(</span><span class="n">cn_button</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;close_server&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setCommand</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;import </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_class</span><span class="si">}</span><span class="s1">;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">.run_instance_method(&quot;close_server&quot;)&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BaseLive.create_generate_knobs">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.create_generate_knobs">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_generate_knobs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a set of knobs on the gizmo for generating output. These include knobs for setting the frame range,</span>
+<span class="sd">        starting a batch process, and updating the UI.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_generate_tab</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_server_utils_knobs</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_divider</span><span class="p">()</span>
+        <span class="c1"># region frame rang</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;first_frame_knob&#39;</span><span class="p">):</span>
+            <span class="n">first_frame_knob</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">Int_Knob</span><span class="p">(</span><span class="s1">&#39;first_frame_knob&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">nuke</span><span class="o">.</span><span class="n">root</span><span class="p">()</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;first_frame&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+            <span class="n">first_frame_knob</span><span class="o">.</span><span class="n">setFlag</span><span class="p">(</span><span class="n">nuke</span><span class="o">.</span><span class="n">STARTLINE</span><span class="p">)</span>
+            <span class="n">first_frame_knob</span><span class="o">.</span><span class="n">setFlag</span><span class="p">(</span><span class="n">nuke</span><span class="o">.</span><span class="n">DISABLED</span><span class="p">)</span>
+            <span class="n">first_frame_knob</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">nuke</span><span class="o">.</span><span class="n">root</span><span class="p">()</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;first_frame&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">()))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">addKnob</span><span class="p">(</span><span class="n">first_frame_knob</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;last_frame_knob&#39;</span><span class="p">):</span>
+            <span class="n">end_frame_knob</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">Int_Knob</span><span class="p">(</span><span class="s1">&#39;last_frame_knob&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">end_frame_knob</span><span class="o">.</span><span class="n">clearFlag</span><span class="p">(</span><span class="n">nuke</span><span class="o">.</span><span class="n">STARTLINE</span><span class="p">)</span>
+            <span class="n">end_frame_knob</span><span class="o">.</span><span class="n">setFlag</span><span class="p">(</span><span class="n">nuke</span><span class="o">.</span><span class="n">DISABLED</span><span class="p">)</span>
+            <span class="n">end_frame_knob</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">nuke</span><span class="o">.</span><span class="n">root</span><span class="p">()</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;last_frame&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">()))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">addKnob</span><span class="p">(</span><span class="n">end_frame_knob</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;use_frame_range_knobs&#39;</span><span class="p">):</span>
+            <span class="n">use_frame_range_knobs</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">Boolean_Knob</span><span class="p">(</span><span class="s1">&#39;use_frame_range_knobs&#39;</span><span class="p">,</span>
+                                                      <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">Icons</span><span class="o">.</span><span class="n">video_symbol</span><span class="si">}</span><span class="s1"> Use frame range&#39;</span><span class="p">)</span>
+            <span class="n">use_frame_range_knobs</span><span class="o">.</span><span class="n">clearFlag</span><span class="p">(</span><span class="n">nuke</span><span class="o">.</span><span class="n">STARTLINE</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">addKnob</span><span class="p">(</span><span class="n">use_frame_range_knobs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;live_update_knob&#39;</span><span class="p">):</span>
+            <span class="n">live_update_knob</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">Boolean_Knob</span><span class="p">(</span><span class="s1">&#39;live_update_knob&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">Icons</span><span class="o">.</span><span class="n">globe_symbol</span><span class="si">}</span><span class="s1"> live update&#39;</span><span class="p">)</span>
+            <span class="n">live_update_knob</span><span class="o">.</span><span class="n">setFlag</span><span class="p">(</span><span class="n">nuke</span><span class="o">.</span><span class="n">STARTLINE</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">addKnob</span><span class="p">(</span><span class="n">live_update_knob</span><span class="p">)</span>
+
+        <span class="c1"># endregion</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;batch_process_knob&#39;</span><span class="p">):</span>
+            <span class="n">cn_button</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">PyScript_Knob</span><span class="p">(</span><span class="s1">&#39;batch_process_knob&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">Icons</span><span class="o">.</span><span class="n">execute_symbol</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">cn_button</span><span class="o">.</span><span class="n">setFlag</span><span class="p">(</span><span class="n">nuke</span><span class="o">.</span><span class="n">STARTLINE</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">addKnob</span><span class="p">(</span><span class="n">cn_button</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;batch_process_knob&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setCommand</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;import </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_class</span><span class="si">}</span><span class="s1">;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">.run_instance_method(&quot;batch_process&quot;)&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_divider</span><span class="p">()</span>
+
+        <span class="c1"># self.create_terminal_execution_knobs()</span>
+
+        <span class="n">cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">.run_instance_method(&quot;knobChanged&quot;)&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;knobChanged&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_status</span><span class="p">(</span><span class="n">running</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+    <span class="c1"># endregion</span>
+
+    <span class="c1"># region slots</span>
+
+<div class="viewcode-block" id="BaseLive.updateUI">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.updateUI">[docs]</a>
+    <span class="k">def</span> <span class="nf">updateUI</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Updates the UI of the gizmo. This is done by calling the &#39;knobChanged&#39; method for each knob in &#39;updateUI_knobs&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;live_update_knob&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">():</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;updateUI_knobs&#39;</span><span class="p">):</span>
+            <span class="k">return</span>
+
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;updateUI</span><span class="se">\n\t</span><span class="si">{</span><span class="n">nuke</span><span class="o">.</span><span class="n">thisNode</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">()</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">nuke</span><span class="o">.</span><span class="n">frame</span><span class="p">()</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">updateUI_knobs</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_process</span><span class="p">(</span><span class="n">single_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+        <span class="c1"># for k in self.updateUI_knobs:</span>
+        <span class="c1">#     self.knobChanged(k)</span>
+
+<div class="viewcode-block" id="BaseLive.update_live_data">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.update_live_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_live_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">knob</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Updates the live data for a given knob. This method is intended to be overridden by subclasses to provide</span>
+<span class="sd">        specific functionality for different types of knobs.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            knob: The knob for which to update the live data.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: False by default. Subclasses should return True if the live data for the knob was updated successfully.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="BaseLive.knobChanged">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.knobChanged">[docs]</a>
+    <span class="k">def</span> <span class="nf">knobChanged</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">knob</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles a change in the value of a knob. If the knob is in &#39;updateUI_knobs&#39; and its value has changed, or if the current frame has changed,</span>
+<span class="sd">        a timer is started to call the &#39;knob_change_handler&#39; method after a delay.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            knob: The knob that has changed. Defaults to None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># knob will be None if the method is called from the updateUI knob</span>
+        <span class="n">knob</span> <span class="o">=</span> <span class="n">knob</span> <span class="ow">or</span> <span class="n">nuke</span><span class="o">.</span><span class="n">thisKnob</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">knobChanged</span><span class="p">(</span><span class="n">knob</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="n">send_call</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">current_frame</span> <span class="o">!=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">frame</span><span class="p">()]</span>
+
+        <span class="n">send_call</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_live_data</span><span class="p">(</span><span class="n">knob</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">send_call</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">server_respond</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trigger_knob_change_handler</span><span class="p">()</span>
+
+        <span class="c1"># Update the current frame, to track if to send the data or not</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_frame</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">frame</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="BaseLive.trigger_knob_change_handler">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.trigger_knob_change_handler">[docs]</a>
+    <span class="k">def</span> <span class="nf">trigger_knob_change_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Triggers the knob change handler. If a knob change timer is currently running, it is cancelled before a new timer is started.</span>
+<span class="sd">        The new timer will call the &#39;knob_change_handler&#39; method after a delay of 0.5 seconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Cancel the existing timer if it&#39;s running</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">knob_change_timer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">knob_change_timer</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">knob_change_timer</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">knob_change_handler</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">knob_change_timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="BaseLive.knob_change_handler">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.knob_change_handler">[docs]</a>
+    <span class="k">def</span> <span class="nf">knob_change_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles changes in knob values and sends updated data to the server.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            batch (bool): If True, indicates that the method is being called as part of a batch process. Defaults to False.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: The response from the server after attempting to send data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;BATCH: </span><span class="si">{</span><span class="n">batch</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># Very important : execute on main thread the write node.</span>
+        <span class="n">init_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_padding</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_input_img_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_node</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">ext</span><span class="p">)</span>
+        <span class="n">frame_range</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame_range</span> <span class="k">if</span> <span class="n">batch</span> <span class="k">else</span> <span class="p">(</span><span class="n">nuke</span><span class="o">.</span><span class="n">frame</span><span class="p">(),</span> <span class="n">nuke</span><span class="o">.</span><span class="n">frame</span><span class="p">())</span>
+
+        <span class="c1"># Check if the input image exists, if not, write it</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">frame_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">frame_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">image_path</span> <span class="o">=</span> <span class="n">init_path</span> <span class="o">%</span> <span class="n">f</span>
+            <span class="c1"># if not os.path.exists(image_path):</span>
+            <span class="c1">#     nuke.executeInMainThreadWithResult(self.write_inputs, args=((f, f),))</span>
+
+        <span class="c1"># init_path = self.writeInput(self.get_input_img_path(self.input_node), self.input_node, hard_error=True)</span>
+
+        <span class="n">data_to_send</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;output_path&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_path</span><span class="p">,</span>
+            <span class="s1">&#39;frame&#39;</span><span class="p">:</span> <span class="n">nuke</span><span class="o">.</span><span class="n">frame</span><span class="p">(),</span>
+            <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="n">init_path</span><span class="p">,</span>
+            <span class="s1">&#39;frame_range&#39;</span><span class="p">:</span> <span class="n">frame_range</span><span class="p">,</span>
+            <span class="s1">&#39;batch&#39;</span><span class="p">:</span> <span class="n">batch</span><span class="p">,</span>
+            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_live_data</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="c1"># data_to_send.update(input_image_dict)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server_respond</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">is_server_running</span><span class="p">():</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Server is not running, Click on start button to start the server.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;time_out&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_range</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">server_respond</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">attempt_to_send</span><span class="p">(</span><span class="n">data_to_send</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Server Respond: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">server_respond</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">server_respond</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="n">server_respond</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># print(&#39;executeInMainThreadWithResult&#39;)</span>
+        <span class="n">nuke</span><span class="o">.</span><span class="n">executeInMainThreadWithResult</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">process_server_response</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">server_respond</span><span class="p">,))</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">server_respond</span></div>
+
+
+<div class="viewcode-block" id="BaseLive.process_server_response">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.process_server_response">[docs]</a>
+    <span class="k">def</span> <span class="nf">process_server_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server_respond</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># server_respond = server_respond or self.server_respond</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;process_server_response: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">server_respond</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">server_respond</span></div>
+
+
+<div class="viewcode-block" id="BaseLive.batch_process">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.batch_process">[docs]</a>
+    <span class="k">def</span> <span class="nf">batch_process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">single_frame</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Processes a batch of frames, sending updated data for each frame to the server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">is_server_running</span><span class="p">()</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">is_client_connected</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">current_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;live_update_knob&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;live_update_knob&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">frame_range</span> <span class="o">=</span> <span class="p">(</span><span class="n">nuke</span><span class="o">.</span><span class="n">frame</span><span class="p">(),</span> <span class="n">nuke</span><span class="o">.</span><span class="n">frame</span><span class="p">())</span> <span class="k">if</span> <span class="n">single_frame</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame_range</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">frame_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">frame_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">nuke</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">input_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_padding</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_input_img_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_node</span><span class="p">))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;batch_process </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">input_path</span><span class="si">}</span><span class="s1">, single_frame: </span><span class="si">{</span><span class="n">single_frame</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">input_path</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">input_path</span> <span class="o">%</span> <span class="n">f</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">single_frame</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">input_path</span> <span class="o">%</span> <span class="n">f</span><span class="p">))</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">single_frame</span><span class="p">:</span>
+                <span class="n">init_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_input</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_node</span><span class="p">,</span> <span class="n">hard_error</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                             <span class="n">frame_range</span><span class="o">=</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">updateUI_knobs</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">update_live_data</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">knob_change_handler</span><span class="p">(</span><span class="n">batch</span><span class="o">=</span><span class="ow">not</span> <span class="n">single_frame</span><span class="p">)</span>  <span class="c1"># Send the data to the server</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;live_update_knob&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">current_value</span><span class="p">)</span></div>
+
+        <span class="c1"># self.knob_change_handler()</span>
+
+<div class="viewcode-block" id="BaseLive.on_destroy">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.on_destroy">[docs]</a>
+    <span class="k">def</span> <span class="nf">on_destroy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Closes the server when the gizmo is destroyed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">nuke</span><span class="o">.</span><span class="n">thisNode</span><span class="p">()</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">close_server</span><span class="p">()</span></div>
+
+
+    <span class="c1"># endregion</span>
+
+    <span class="c1"># region main execution</span>
+<div class="viewcode-block" id="BaseLive.update_args">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.update_args">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Updates the arguments with the current port.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update_args</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s1">&#39;port&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span></div>
+
+
+<div class="viewcode-block" id="BaseLive.on_interrupt">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.on_interrupt">[docs]</a>
+    <span class="k">def</span> <span class="nf">on_interrupt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles an interrupt signal by closing the server and terminating all running threads.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">close_server</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">THREADS_LIST</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">thread_list</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">t</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">THREADS_LIST</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">thread_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">p</span><span class="p">:</span>
+            <span class="n">nuke</span><span class="o">.</span><span class="n">tprint</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Terminating running processes&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_status</span><span class="p">(</span><span class="n">running</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+    <span class="c1"># endregion</span>
+
+    <span class="c1"># region server utils</span>
+
+<div class="viewcode-block" id="BaseLive.start_server">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.start_server">[docs]</a>
+    <span class="k">def</span> <span class="nf">start_server</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Starts the server and updates the status.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Temporarily disables the &#39;use_frame_range_knobs&#39; setting, updates the arguments,</span>
+        <span class="c1"># and then restores the original setting.</span>
+        <span class="c1"># This is done to ensure that the &#39;use_frame_range_knobs&#39; setting does not affect the argument update process.</span>
+        <span class="c1"># Store the current value of &#39;use_frame_range_knobs&#39;</span>
+        <span class="n">current_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;use_frame_range_knobs&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+        <span class="n">nuke</span><span class="o">.</span><span class="n">executeInMainThreadWithResult</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;use_frame_range_knobs&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setValue</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="kc">False</span><span class="p">,))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_status</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Starting server at port </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="si">}</span><span class="s2"> &lt;&lt; Check terminal&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_args</span><span class="p">()</span>
+
+        <span class="n">pre_cmd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;pre_cmd_knob&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="ow">or</span> <span class="kc">None</span>
+        <span class="n">post_cmd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;post_cmd_knob&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="ow">or</span> <span class="kc">None</span>
+        <span class="n">open_new_terminal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;open_new_terminal&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="ow">or</span> <span class="kc">None</span>
+        <span class="n">thread</span> <span class="o">=</span> <span class="n">ExecuteThread</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">pre_cmd</span><span class="p">,</span> <span class="n">post_cmd</span><span class="p">,</span> <span class="n">open_new_terminal</span><span class="o">=</span><span class="n">open_new_terminal</span><span class="p">)</span>
+        <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thread_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Started server at port </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_status</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Started server at port </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">nuke</span><span class="o">.</span><span class="n">executeInMainThreadWithResult</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;use_frame_range_knobs&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setValue</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">current_value</span><span class="p">,))</span></div>
+
+
+<div class="viewcode-block" id="BaseLive.attempt_reconnect">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.attempt_reconnect">[docs]</a>
+    <span class="k">def</span> <span class="nf">attempt_reconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Attempts to reconnect to the server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">attempt_reconnect</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="BaseLive.close_server">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.close_server">[docs]</a>
+    <span class="k">def</span> <span class="nf">close_server</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Closes the server connection.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">close_server</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="BaseLive.ensure_server_connection">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.ensure_server_connection">[docs]</a>
+    <span class="k">def</span> <span class="nf">ensure_server_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ensures that a connection to the server is established.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">ensure_server_connection</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="BaseLive.set_port_to_available">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.set_port_to_available">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_port_to_available</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the port to an available port.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">SocketServer</span><span class="o">.</span><span class="n">find_available_port</span><span class="p">()</span></div>
+</div>
+
+
+    <span class="c1"># endregion</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Mahmoud Youssef.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

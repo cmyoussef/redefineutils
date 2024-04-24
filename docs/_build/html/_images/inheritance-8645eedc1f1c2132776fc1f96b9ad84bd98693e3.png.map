@@ -1,0 +1,6 @@
+<map id="inheritance8a9dab64ca" name="inheritance8a9dab64ca">
+<area shape="rect" id="node1" href="#nukebridge.utils.image_io.base.ImageIO" target="_top" title="Base class for image input/output operations." alt="" coords="179,5,399,70"/>
+<area shape="rect" id="node2" href="#nukebridge.utils.image_io.base.ImageIOEXR" target="_top" title="Class for image input/output operations with EXR format support." alt="" coords="159,114,419,179"/>
+<area shape="rect" id="node3" href="#nukebridge.utils.image_io.oiio.OpenImageIOIO" target="_top" title="OpenImageIOIO is a subclass of ImageIO that uses the OpenImageIO library to handle images." alt="" coords="5,223,280,288"/>
+<area shape="rect" id="node4" href="#nukebridge.utils.image_io.openexr.OpenExrIO" target="_top" title="OpenExrIO is a subclass of ImageIO that uses the OpenEXR library to handle images." alt="" coords="302,223,571,288"/>
+</map>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nukebridge.utils.image_io.oiio &mdash; NukeBridge 1.0.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=d55fa986"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            NukeBridge
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules.html">nukebridge</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">NukeBridge</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../../nukebridge.html">nukebridge</a></li>
+          <li class="breadcrumb-item"><a href="../image_io.html">nukebridge.utils.image_io</a></li>
+      <li class="breadcrumb-item active">nukebridge.utils.image_io.oiio</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nukebridge.utils.image_io.oiio</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Proper import for OpenImageIO, assuming standard usage</span>
+
+<span class="kn">import</span> <span class="nn">OpenImageIO</span> <span class="k">as</span> <span class="nn">oiio</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">ImageIOEXR</span>
+
+
+<div class="viewcode-block" id="OpenImageIOIO">
+<a class="viewcode-back" href="../../../../nukebridge.utils.image_io.html#nukebridge.utils.image_io.oiio.OpenImageIOIO">[docs]</a>
+<span class="k">class</span> <span class="nc">OpenImageIOIO</span><span class="p">(</span><span class="n">ImageIOEXR</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    OpenImageIOIO is a subclass of ImageIO that uses the OpenImageIO library to handle images.</span>
+
+<span class="sd">    This class provides functionality for reading, saving, and managing multilayer images with OpenImageIO.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="OpenImageIOIO.read_image">
+<a class="viewcode-back" href="../../../../nukebridge.utils.image_io.html#nukebridge.utils.image_io.oiio.OpenImageIOIO.read_image">[docs]</a>
+    <span class="k">def</span> <span class="nf">read_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">frame_range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="s1">&#39;np&#39;</span><span class="p">):</span>
+        <span class="c1"># Using OpenImageIO to read images, handling single and sequences similarly to OpenExrIO</span>
+        <span class="n">image_paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_image_path</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">frame_range</span><span class="p">)</span>
+        <span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">image_path</span> <span class="ow">in</span> <span class="n">image_paths</span><span class="p">:</span>
+            <span class="n">img_input</span> <span class="o">=</span> <span class="n">oiio</span><span class="o">.</span><span class="n">ImageInput</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">img_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unable to open </span><span class="si">{</span><span class="n">image_path</span><span class="si">}</span><span class="s2"> with OpenImageIO.&quot;</span><span class="p">)</span>
+
+            <span class="n">spec</span> <span class="o">=</span> <span class="n">img_input</span><span class="o">.</span><span class="n">spec</span><span class="p">()</span>
+            <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">spec</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">spec</span><span class="o">.</span><span class="n">height</span>
+            <span class="n">num_channels</span> <span class="o">=</span> <span class="n">spec</span><span class="o">.</span><span class="n">nchannels</span>
+
+            <span class="c1"># Read the whole image as a numpy array</span>
+            <span class="n">img_data</span> <span class="o">=</span> <span class="n">img_input</span><span class="o">.</span><span class="n">read_image</span><span class="p">()</span>
+            <span class="n">img_input</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">output_format</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;pil&#39;</span><span class="p">:</span>
+                <span class="c1"># Convert to PIL Image</span>
+                <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">((</span><span class="n">img_data</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">output_format</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;cv2&#39;</span><span class="p">:</span>
+                <span class="c1"># Convert to format suitable for OpenCV</span>
+                <span class="k">if</span> <span class="n">num_channels</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="n">img_data</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img_data</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2BGR</span><span class="p">)</span>
+                <span class="n">img</span> <span class="o">=</span> <span class="p">(</span><span class="n">img_data</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">img</span> <span class="o">=</span> <span class="n">img_data</span>
+
+            <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">images</span></div>
+
+
+<div class="viewcode-block" id="OpenImageIOIO.write_image">
+<a class="viewcode-back" href="../../../../nukebridge.utils.image_io.html#nukebridge.utils.image_io.oiio.OpenImageIOIO.write_image">[docs]</a>
+    <span class="k">def</span> <span class="nf">write_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">image_format</span><span class="o">=</span><span class="s1">&#39;exr&#39;</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">image_format</span> <span class="o">!=</span> <span class="s1">&#39;exr&#39;</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">image_format</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Convert and normalize the image data</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_image_dtype</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+            <span class="n">num_channels</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="mi">1</span>
+
+            <span class="n">spec</span> <span class="o">=</span> <span class="n">oiio</span><span class="o">.</span><span class="n">ImageSpec</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">num_channels</span><span class="p">,</span> <span class="n">oiio</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">compression</span><span class="p">:</span>
+                <span class="n">spec</span><span class="o">.</span><span class="n">attribute</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="s2">&quot;zip&quot;</span><span class="p">)</span>  <span class="c1"># Set compression</span>
+
+            <span class="c1"># Create an ImageOutput object for writing</span>
+            <span class="n">img_output</span> <span class="o">=</span> <span class="n">oiio</span><span class="o">.</span><span class="n">ImageOutput</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">img_output</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to create image output for </span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Define the image spec</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">img_output</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">spec</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to open </span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2"> for writing.&quot;</span><span class="p">)</span>
+
+            <span class="n">img_output</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
+            <span class="n">img_output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="OpenImageIOIO.write_multilayer">
+<a class="viewcode-back" href="../../../../nukebridge.utils.image_io.html#nukebridge.utils.image_io.oiio.OpenImageIOIO.write_multilayer">[docs]</a>
+    <span class="k">def</span> <span class="nf">write_multilayer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layers_dict</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">image_format</span><span class="o">=</span><span class="s1">&#39;exr&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">image_format</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;exr&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Only EXR format is supported by this method.&quot;</span><span class="p">)</span>
+
+        <span class="n">processed_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_layer_data</span><span class="p">(</span><span class="n">layers_dict</span><span class="p">)</span>
+        <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">processed_data</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">num_channels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">processed_data</span><span class="p">)</span>
+
+        <span class="c1"># Initialize a full_image_data array to compile all processed channel data</span>
+        <span class="n">full_image_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">num_channels</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+        <span class="c1"># Populate full_image_data with processed channel data</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">channel_name</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">processed_data</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># For single-channel data</span>
+                <span class="n">full_image_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected data shape for channel </span><span class="si">{</span><span class="n">channel_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Prepare and write the EXR file</span>
+        <span class="n">spec</span> <span class="o">=</span> <span class="n">oiio</span><span class="o">.</span><span class="n">ImageSpec</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">num_channels</span><span class="p">,</span> <span class="n">oiio</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">)</span>
+        <span class="n">spec</span><span class="o">.</span><span class="n">channelnames</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">processed_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">img_buffer</span> <span class="o">=</span> <span class="n">oiio</span><span class="o">.</span><span class="n">ImageBuf</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+        <span class="n">img_buffer</span><span class="o">.</span><span class="n">set_pixels</span><span class="p">(</span><span class="n">oiio</span><span class="o">.</span><span class="n">ROI</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">num_channels</span><span class="p">),</span> <span class="n">full_image_data</span><span class="p">)</span>
+        <span class="n">img_buffer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;OpenImageIOIO class, tailored for handling images with OpenImageIO&quot;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Mahmoud Youssef.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

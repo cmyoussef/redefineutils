@@ -1,0 +1,6 @@
+<map id="inheritance9629844873" name="inheritance9629844873">
+<area shape="rect" id="node1" href="nukebridge.executors.core.html#nukebridge.executors.core.baseexecutor.BaseExecutor" target="_top" title="core.baseexecutor.BaseExecutor" alt="" coords="174,4,400,52"/>
+<area shape="rect" id="node2" href="nukebridge.executors.core.html#nukebridge.executors.core.baseliveexecutor.BaseLiveExecutor" target="_top" title="core.baseliveexecutor.BaseLiveExecutor" alt="" coords="4,85,279,134"/>
+<area shape="rect" id="node3" href="#nukebridge.executors.simpleexecutor.SimpleExecutor" target="_top" title="SimpleExecutor is a class that inherits from the BaseExecutor class." alt="" coords="295,85,572,134"/>
+<area shape="rect" id="node4" href="#nukebridge.executors.simpleliveexecutor.SimpleLiveExecutor" target="_top" title="SimpleLiveExecutor is a class that inherits from the BaseLiveExecutor class." alt="" coords="4,166,331,215"/>
+</map>

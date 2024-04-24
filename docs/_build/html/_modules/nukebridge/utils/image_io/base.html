@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nukebridge.utils.image_io.base &mdash; NukeBridge 1.0.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=d55fa986"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            NukeBridge
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules.html">nukebridge</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">NukeBridge</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../../nukebridge.html">nukebridge</a></li>
+          <li class="breadcrumb-item"><a href="../image_io.html">nukebridge.utils.image_io</a></li>
+      <li class="breadcrumb-item active">nukebridge.utils.image_io.base</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nukebridge.utils.image_io.base</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">nukebridge.utils.logger</span> <span class="kn">import</span> <span class="n">logger</span>
+
+<div class="viewcode-block" id="ImageIO">
+<a class="viewcode-back" href="../../../../nukebridge.utils.image_io.html#nukebridge.utils.image_io.base.ImageIO">[docs]</a>
+<span class="k">class</span> <span class="nc">ImageIO</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for image input/output operations.</span>
+
+<span class="sd">    This class provides basic functionality for loading and saving images. It can handle single images as well as sequences of images. The images can be loaded and saved in different formats, including numpy arrays, PIL images, and OpenCV images.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ImageIO.parse_image_path">
+<a class="viewcode-back" href="../../../../nukebridge.utils.image_io.html#nukebridge.utils.image_io.base.ImageIO.parse_image_path">[docs]</a>
+    <span class="k">def</span> <span class="nf">parse_image_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">frame_range</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parses the image path and generates a list of image paths.</span>
+
+<span class="sd">        This method takes an image path and an optional frame range. If a frame range is provided,</span>
+<span class="sd">        it generates a list of image paths for the sequence of images in the frame range.</span>
+<span class="sd">        If no frame range is provided, it returns a list containing the single image path.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            image_path (str): The path to the image. This can include a pattern for sequences.</span>
+<span class="sd">            frame_range (tuple, optional): An optional tuple specifying the start and end frames for sequences.</span>
+<span class="sd">            Defaults to None.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: A list of image paths. If a frame range is provided,</span>
+<span class="sd">                the list contains the paths for the sequence of images in the frame range.</span>
+<span class="sd">                If no frame range is provided, the list contains the single image path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># If a frame range is specified, generate a list of image paths for the sequence</span>
+        <span class="k">if</span> <span class="n">frame_range</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">image_paths</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">path</span>
+                <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">frame_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">frame_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">image_path</span> <span class="o">%</span> <span class="n">frame</span><span class="p">)</span>
+            <span class="p">]</span>
+            <span class="n">image_paths</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">image_paths</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">image_paths</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">image_path</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">image_paths</span></div>
+
+
+<div class="viewcode-block" id="ImageIO.read_image">
+<a class="viewcode-back" href="../../../../nukebridge.utils.image_io.html#nukebridge.utils.image_io.base.ImageIO.read_image">[docs]</a>
+    <span class="k">def</span> <span class="nf">read_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">frame_range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="s1">&#39;np&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loads an image or a sequence of images as a numpy array, PIL image, or OpenCV image.</span>
+
+<span class="sd">        This method reads an image or a sequence of images from the specified path and returns them in the specified format.</span>
+<span class="sd">        If the image format is &#39;exr&#39;, a ValueError is raised, as this format is not supported in the base ImageIO class.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            image_path (str): Path to the image. This can include a pattern for sequences.</span>
+<span class="sd">            frame_range (tuple, optional): Optional tuple specifying the start and end frames for sequences. Defaults to None.</span>
+<span class="sd">            output_format (str, optional): The format of the output. This can be &#39;np&#39; for numpy array, &#39;PIL&#39; for PIL image, or &#39;cv2&#39; for OpenCV image. Defaults to &#39;np&#39;.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: A list of loaded images in the specified format.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If the image format is &#39;exr&#39;, as this format is not supported in the base ImageIO class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">image_path</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.exr&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;EXR format is not supported in the base ImageIO class. &quot;</span>
+                             <span class="s2">&quot;Please use OpenExrIO or OpenImageIOIO class instead.&quot;</span><span class="p">)</span>
+
+        <span class="n">image_paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_image_path</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">frame_range</span><span class="p">)</span>
+        <span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">image_paths</span><span class="p">:</span>
+            <span class="c1"># If the output format is &#39;PIL&#39;, load the image using PIL&#39;s Image.open method</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Image path </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">output_format</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;pil&#39;</span><span class="p">:</span>
+                <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Otherwise, load the image using OpenCV&#39;s imread method</span>
+                <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                <span class="c1"># If the output format is &#39;np&#39;, convert the image from BGR to RGB</span>
+                <span class="k">if</span> <span class="n">output_format</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;np&#39;</span><span class="p">:</span>
+                    <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">))</span>
+                <span class="c1"># If the output format is &#39;cv2&#39;, append the image as is</span>
+                <span class="k">elif</span> <span class="n">output_format</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;cv2&#39;</span><span class="p">:</span>
+                    <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">images</span></div>
+
+
+<div class="viewcode-block" id="ImageIO.write_image">
+<a class="viewcode-back" href="../../../../nukebridge.utils.image_io.html#nukebridge.utils.image_io.base.ImageIO.write_image">[docs]</a>
+    <span class="k">def</span> <span class="nf">write_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">image_format</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves an image in a specified format.</span>
+
+<span class="sd">        @param image: Image to be saved.</span>
+<span class="sd">        @param output_path: Path to save the image.</span>
+<span class="sd">        @param image_format: Format of the saved image (&#39;png&#39;, &#39;tif&#39;).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">image_format</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="s1">&#39;tif&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                <span class="c1"># Convert from RGB (numpy) to BGR (OpenCV) if necessary</span>
+                <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2BGR</span><span class="p">)</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">image_format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unsupported image format. Please choose &#39;png&#39; or &#39;tif&#39;.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ImageIO.write_multilayer">
+<a class="viewcode-back" href="../../../../nukebridge.utils.image_io.html#nukebridge.utils.image_io.base.ImageIO.write_multilayer">[docs]</a>
+    <span class="k">def</span> <span class="nf">write_multilayer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layers_dict</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">image_format</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves multiple layers of an image in a specified format.</span>
+
+<span class="sd">        This method takes a dictionary where the keys are the names of the layers and the values are numpy arrays representing the images for those layers. It saves each layer as a separate image with a suffix of the layer name. If the specified image format is &#39;exr&#39;, a warning is issued and the image format is set to &#39;png&#39;.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            layers_dict (dict): A dictionary where the keys are the names of the layers and the values are numpy arrays representing the images for those layers.</span>
+<span class="sd">            output_path (str): The path where the images will be saved.</span>
+<span class="sd">            image_format (str, optional): The format of the saved images. Defaults to &#39;png&#39;. If &#39;exr&#39; is specified, a warning is issued and the format is set to &#39;png&#39;.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If the image format is not &#39;png&#39; or &#39;tif&#39;, a ValueError is raised when the `save_image` method is called.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">image_format</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;exr&#39;</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You are instantiating </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> class. The image format will be PNG, &quot;</span>
+                          <span class="sa">f</span><span class="s2">&quot;if you want exr you need to use oiio or OpenExr class that support exr.&quot;</span><span class="p">)</span>
+            <span class="n">image_format</span> <span class="o">=</span> <span class="s1">&#39;png&#39;</span>
+        <span class="k">for</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">layers_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">layer_output_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">layer_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">image_format</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">layer_output_path</span><span class="p">,</span> <span class="n">image_format</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ImageIO.consolidate_masks">
+<a class="viewcode-back" href="../../../../nukebridge.utils.image_io.html#nukebridge.utils.image_io.base.ImageIO.consolidate_masks">[docs]</a>
+    <span class="k">def</span> <span class="nf">consolidate_masks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layers_dict</span><span class="p">,</span> <span class="n">base_image</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">contour</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">contour_width</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Consolidates multiple masks into a single RGBA image.</span>
+
+<span class="sd">        This method takes a dictionary where the keys are the names of the layers and the values are numpy arrays representing the images for those layers. It generates a consolidated RGBA image where each mask is represented by a different color.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            layers_dict (dict): A dictionary where the keys are the names of the layers and the values are numpy arrays representing the images for those layers.</span>
+<span class="sd">            base_image (numpy.ndarray, optional): The base image on which the masks will be applied. If None, a blank image matching the dimensions of the first layer is created.</span>
+<span class="sd">            contour (bool, optional): Whether to draw a contour around each mask. Defaults to False.</span>
+<span class="sd">            contour_width (int, optional): The width of the contour if drawn. Defaults to 1.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The consolidated RGBA image with the applied masks.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># If no base image is provided, create a blank image matching the dimensions of the first layer</span>
+        <span class="k">if</span> <span class="n">base_image</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">first_layer</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">layers_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+            <span class="n">base_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="o">*</span><span class="n">first_layer</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+
+        <span class="c1"># Copy the base image to avoid modifying the original</span>
+        <span class="n">consolidated_image</span> <span class="o">=</span> <span class="n">base_image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># Create an alpha channel as a combination of all the layers</span>
+        <span class="n">alpha_channel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">base_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">layers_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># Check the number of channels in the image</span>
+            <span class="n">num_channels</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="mi">1</span>
+
+            <span class="c1"># If the image has 3 channels, take the max of the RGB values to get a mask</span>
+            <span class="k">if</span> <span class="n">num_channels</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="c1"># If the image has 1 channel, it is already a mask</span>
+            <span class="k">elif</span> <span class="n">num_channels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">mask</span> <span class="o">=</span> <span class="n">image</span>
+            <span class="c1"># If the image has 4 channels, take the alpha channel as the mask</span>
+            <span class="k">elif</span> <span class="n">num_channels</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="n">mask</span> <span class="o">=</span> <span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">3</span><span class="p">]</span>
+
+            <span class="c1"># Add the mask to the alpha channel</span>
+            <span class="n">alpha_channel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">alpha_channel</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+
+            <span class="c1"># Apply the mask to the consolidated image</span>
+            <span class="n">consolidated_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_mask</span><span class="p">(</span><span class="n">consolidated_image</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">contour</span><span class="p">,</span> <span class="n">contour_width</span><span class="p">)</span>
+
+        <span class="c1"># Convert the consolidated image to RGBA</span>
+        <span class="n">consolidated_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">consolidated_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2RGBA</span><span class="p">)</span>
+        <span class="n">consolidated_image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">alpha_channel</span> <span class="o">*</span> <span class="mi">255</span>
+
+        <span class="k">return</span> <span class="n">consolidated_image</span></div>
+
+
+<div class="viewcode-block" id="ImageIO.apply_mask">
+<a class="viewcode-back" href="../../../../nukebridge.utils.image_io.html#nukebridge.utils.image_io.base.ImageIO.apply_mask">[docs]</a>
+    <span class="k">def</span> <span class="nf">apply_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">contour</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">contour_width</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies a mask to an image.</span>
+
+<span class="sd">        This method takes an image and a mask and applies the mask to the image. The mask is represented by a unique color that is determined by the layer name. Optionally, it can also draw a contour around the mask.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            image (numpy.ndarray): The image to which the mask will be applied.</span>
+<span class="sd">            mask (numpy.ndarray): The mask to be applied to the image.</span>
+<span class="sd">            layer_name (str): The name of the layer. This is used to determine the color of the mask.</span>
+<span class="sd">            contour (bool, optional): Whether to draw a contour around the mask. Defaults to False.</span>
+<span class="sd">            contour_width (int, optional): The width of the contour if drawn. Defaults to 1.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The image with the applied mask.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Define a unique color for the mask based on the layer name</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="nb">hash</span><span class="p">(</span><span class="n">layer_name</span><span class="p">)</span> <span class="o">%</span> <span class="mi">256</span><span class="p">,</span> <span class="nb">hash</span><span class="p">(</span><span class="n">layer_name</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">%</span> <span class="mi">256</span><span class="p">,</span> <span class="nb">hash</span><span class="p">(</span><span class="n">layer_name</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span> <span class="o">%</span> <span class="mi">256</span><span class="p">]</span>
+
+        <span class="c1"># Apply the mask to the image</span>
+        <span class="n">image</span><span class="p">[</span><span class="n">mask</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span>
+
+        <span class="c1"># If contour is True, draw a contour around the mask</span>
+        <span class="k">if</span> <span class="n">contour</span><span class="p">:</span>
+            <span class="n">contours</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">findContours</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">RETR_EXTERNAL</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CHAIN_APPROX_SIMPLE</span><span class="p">)</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">drawContours</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">contours</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">contour_width</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">image</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Base ImageIO class, supports &#39;png&#39; and &#39;tif&#39; extensions&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ImageIOEXR">
+<a class="viewcode-back" href="../../../../nukebridge.utils.image_io.html#nukebridge.utils.image_io.base.ImageIOEXR">[docs]</a>
+<span class="k">class</span> <span class="nc">ImageIOEXR</span><span class="p">(</span><span class="n">ImageIO</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class for image input/output operations with EXR format support.</span>
+
+<span class="sd">    This class extends the base ImageIO class to provide support for reading and writing images in the EXR format.</span>
+<span class="sd">    It uses the OpenEXR library to handle EXR images.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        Inherits all attributes from the base ImageIO class.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        Inherits all methods from the base ImageIO class.</span>
+<span class="sd">        _convert_image_dtype(image): Converts the input image to np.float32, normalizing if necessary.</span>
+<span class="sd">        _process_layer_data(layers_dict): Processes and compiles each layer&#39;s data for EXR writing.</span>
+<span class="sd">        __getattr__(name): Overrides Python&#39;s default attribute access to forward the attribute access to the base class if the attribute doesn&#39;t exist in the current class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_convert_image_dtype</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts the input image to np.float32, normalizing if necessary.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            image (numpy.ndarray): The image to be converted.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The image converted to np.float32.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">:</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.0</span>
+        <span class="k">elif</span> <span class="n">image</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">:</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">/</span> <span class="mf">65535.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">image</span>
+
+    <span class="k">def</span> <span class="nf">_process_layer_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layers_dict</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Processes and compiles each layer&#39;s data for EXR writing.</span>
+
+<span class="sd">        This method takes a dictionary where the keys are the names of the layers and the values are numpy arrays representing the images for those layers. It processes each layer&#39;s image data and compiles it into a dictionary that can be used for writing to an EXR file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            layers_dict (dict): A dictionary where the keys are the names of the layers and the values are numpy arrays representing the images for those layers.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: A dictionary where the keys are the names of the layers and the values are the processed image data for those layers.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If the input layers_dict is empty and the image dimensions cannot be determined.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">processed_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+        <span class="k">for</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">layers_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># Convert the image data to np.float32</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_image_dtype</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+            <span class="c1"># Determine the image dimensions from the first layer</span>
+            <span class="k">if</span> <span class="n">height</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">width</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+
+            <span class="c1"># Handle explicitly named channels</span>
+            <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">layer_name</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Layer &#39;</span><span class="si">{</span><span class="n">layer_name</span><span class="si">}</span><span class="s2">&#39; expected to be single channel but received </span><span class="si">{</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+                    <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+                <span class="n">processed_data</span><span class="p">[</span><span class="n">layer_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">image</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># Handle RGB or RGBA images without explicit channel naming</span>
+                <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">or</span> <span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="n">channel_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">layer_name</span><span class="si">}</span><span class="s2">.Y&quot;</span>
+                    <span class="n">image</span> <span class="o">=</span> <span class="n">image</span> <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+                    <span class="n">processed_data</span><span class="p">[</span><span class="n">channel_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">image</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">suffix</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="s2">&quot;RGBA&quot;</span><span class="p">[:</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]]):</span>
+                        <span class="n">channel_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">layer_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">suffix</span><span class="si">}</span><span class="s2">&quot;</span>
+                        <span class="n">processed_data</span><span class="p">[</span><span class="n">channel_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span>
+
+        <span class="c1"># Ensure RGB channels are present, if not, initialize them with zeros</span>
+        <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;rgb.r&#39;</span><span class="p">,</span> <span class="s1">&#39;rgb.g&#39;</span><span class="p">,</span> <span class="s1">&#39;rgb.b&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">channel</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">processed_data</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">height</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">width</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input layers_dict is empty. Cannot determine image dimensions.&quot;</span><span class="p">)</span>
+                <span class="n">processed_data</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">processed_data</span>
+
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overrides Python&#39;s default attribute access to forward the attribute access to the base class if the attribute</span>
+<span class="sd">        doesn&#39;t exist in the current class.</span>
+
+<span class="sd">        This method is called when the default attribute access fails with an AttributeError</span>
+<span class="sd">        (either __getattribute__() raises an AttributeError because name is not an instance attribute</span>
+<span class="sd">        or an attribute in the class tree for self; or __get__() of a name property raises AttributeError).</span>
+<span class="sd">        This method should either return the (computed) attribute value or raise an AttributeError exception.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): The name of the attribute.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Any: The attribute from the base class if it exists.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            AttributeError: If the attribute does not exist in the base class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Mahmoud Youssef.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

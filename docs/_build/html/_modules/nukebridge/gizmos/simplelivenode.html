@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nukebridge.gizmos.simplelivenode &mdash; NukeBridge 1.0.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=d55fa986"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            NukeBridge
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">nukebridge</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">NukeBridge</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../nukebridge.html">nukebridge</a></li>
+          <li class="breadcrumb-item"><a href="../gizmos.html">nukebridge.gizmos</a></li>
+      <li class="breadcrumb-item active">nukebridge.gizmos.simplelivenode</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nukebridge.gizmos.simplelivenode</h1><div class="highlight"><pre>
+<span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">nuke</span>  <span class="c1"># pylint: disable=import-error</span>
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="kn">from</span> <span class="nn">nukebridge.gizmos.core.baselive</span> <span class="kn">import</span> <span class="n">BaseLive</span>
+
+
+<div class="viewcode-block" id="SimpleLiveNode">
+<a class="viewcode-back" href="../../../nukebridge.gizmos.html#nukebridge.gizmos.simplelivenode.SimpleLiveNode">[docs]</a>
+<span class="k">class</span> <span class="nc">SimpleLiveNode</span><span class="p">(</span><span class="n">BaseLive</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SimpleLiveNode is a class that inherits from the BaseLive class provided by the nukebridge package.</span>
+<span class="sd">    This class serves as a simple example of how to use the BaseLive class.</span>
+
+<span class="sd">    The SimpleLiveNode class is responsible for creating and managing user interface elements (knobs) for the gizmo,</span>
+<span class="sd">    tracking knob values, and updating live data based on knob values.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SimpleLiveNode.create_generate_knobs">
+<a class="viewcode-back" href="../../../nukebridge.gizmos.html#nukebridge.gizmos.simplelivenode.SimpleLiveNode.create_generate_knobs">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_generate_knobs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method is responsible for creating the knobs (user interface elements) for the gizmo.</span>
+<span class="sd">        It creates a new tab, adds a divider, creates a tracking knob, and calls the parent class&#39;s method to create additional knobs.</span>
+<span class="sd">        It also checks if there&#39;s an &#39;open_new_terminal&#39; knob and sets its value to True if it exists.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_generate_tab</span><span class="p">()</span>  <span class="c1"># Create a new tab for the knobs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_divider</span><span class="p">(</span><span class="s2">&quot;user knobs&quot;</span><span class="p">)</span>  <span class="c1"># Add a divider with the label &quot;user knobs&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_tracking_knob</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Create a tracking knob</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">create_generate_knobs</span><span class="p">()</span>  <span class="c1"># Call the parent class&#39;s method to create additional knobs</span>
+
+        <span class="c1"># Check if there&#39;s an &#39;open_new_terminal&#39; knob and set its value to True if it exists</span>
+        <span class="n">open_new_terminal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="s1">&#39;open_new_terminal&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">open_new_terminal</span><span class="p">:</span>
+            <span class="n">open_new_terminal</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SimpleLiveNode.create_tracking_knob">
+<a class="viewcode-back" href="../../../nukebridge.gizmos.html#nukebridge.gizmos.simplelivenode.SimpleLiveNode.create_tracking_knob">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_tracking_knob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">neg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        THis</span>
+<span class="sd">        Creates a tracking knob on the gizmo. The knob is named &#39;track_{n:02d}&#39; or &#39;track_{n:02d}_neg&#39; if neg is True.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            n (int): The number to use in the knob name.</span>
+<span class="sd">            neg (bool): Whether to append &#39;_neg&#39; to the knob name. Defaults to False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tracking_label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;track_</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s1">02d</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="n">neg</span><span class="p">:</span>
+            <span class="n">tracking_label</span> <span class="o">+=</span> <span class="s1">&#39;_neg&#39;</span>
+
+        <span class="n">knobName</span> <span class="o">=</span> <span class="n">tracking_label</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="n">knobName</span><span class="p">):</span>
+            <span class="n">track_xy</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">XY_Knob</span><span class="p">(</span><span class="n">knobName</span><span class="p">,</span> <span class="n">tracking_label</span><span class="p">)</span>
+
+            <span class="n">track_xy</span><span class="o">.</span><span class="n">setFlag</span><span class="p">(</span><span class="n">nuke</span><span class="o">.</span><span class="n">STARTLINE</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">neg</span><span class="p">:</span>
+                <span class="n">track_xy</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">addKnob</span><span class="p">(</span><span class="n">track_xy</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">updateUI_knobs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="n">knobName</span><span class="p">))</span>
+
+        <span class="n">knobName</span> <span class="o">=</span> <span class="n">tracking_label</span> <span class="o">+</span> <span class="s1">&#39;_enable&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="n">knobName</span><span class="p">):</span>
+            <span class="n">track_check</span> <span class="o">=</span> <span class="n">nuke</span><span class="o">.</span><span class="n">Boolean_Knob</span><span class="p">(</span><span class="n">knobName</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">neg</span><span class="p">:</span>
+                <span class="n">track_check</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">track_check</span><span class="o">.</span><span class="n">clearFlag</span><span class="p">(</span><span class="n">nuke</span><span class="o">.</span><span class="n">STARTLINE</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">addKnob</span><span class="p">(</span><span class="n">track_check</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">updateUI_knobs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="n">knobName</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="SimpleLiveNode.check_last_knob_value">
+<a class="viewcode-back" href="../../../nukebridge.gizmos.html#nukebridge.gizmos.simplelivenode.SimpleLiveNode.check_last_knob_value">[docs]</a>
+    <span class="k">def</span> <span class="nf">check_last_knob_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xy</span><span class="p">,</span> <span class="n">knob_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if the last known value of a knob is different from the current value.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            xy (tuple): The current value of the knob.</span>
+<span class="sd">            knob_name (str): The name of the knob.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if the last known value is different from the current value, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_knob_value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">nuke</span><span class="o">.</span><span class="n">frame</span><span class="p">(),</span> <span class="p">{})</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">knob_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">xy</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_knob_value</span><span class="p">[</span><span class="n">nuke</span><span class="o">.</span><span class="n">frame</span><span class="p">()][</span><span class="n">knob_name</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="SimpleLiveNode.knobChanged">
+<a class="viewcode-back" href="../../../nukebridge.gizmos.html#nukebridge.gizmos.simplelivenode.SimpleLiveNode.knobChanged">[docs]</a>
+    <span class="k">def</span> <span class="nf">knobChanged</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">knob</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">knob</span> <span class="o">=</span> <span class="n">knob</span> <span class="ow">or</span> <span class="n">nuke</span><span class="o">.</span><span class="n">thisKnob</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">knobChanged</span><span class="p">(</span><span class="n">knob</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="n">knob</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s1">&#39;track_&#39;</span> <span class="ow">in</span> <span class="n">name</span> <span class="ow">and</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_enable&#39;</span><span class="p">):</span>
+            <span class="n">track_knob</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gizmo</span><span class="o">.</span><span class="n">knob</span><span class="p">(</span><span class="n">name</span><span class="p">[:</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="s1">&#39;_enable&#39;</span><span class="p">)])</span>
+            <span class="n">track_knob</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">knob</span><span class="o">.</span><span class="n">value</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="SimpleLiveNode.update_live_data">
+<a class="viewcode-back" href="../../../nukebridge.gizmos.html#nukebridge.gizmos.simplelivenode.SimpleLiveNode.update_live_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_live_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">knob</span><span class="p">):</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="n">knob</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s1">&#39;track_&#39;</span> <span class="ow">in</span> <span class="n">name</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_enable&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">knob</span><span class="o">.</span><span class="n">enabled</span><span class="p">():</span>
+                <span class="n">xy</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">knob</span><span class="o">.</span><span class="n">value</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">knob</span><span class="o">.</span><span class="n">value</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="c1"># Check if the value has changed</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_last_knob_value</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+                    <span class="c1"># Update the last known value</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">last_knob_value</span><span class="p">[</span><span class="n">nuke</span><span class="o">.</span><span class="n">frame</span><span class="p">()]</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="p">(</span><span class="n">xy</span><span class="p">,</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_neg&#39;</span><span class="p">))}</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_live_data</span><span class="p">[</span><span class="n">nuke</span><span class="o">.</span><span class="n">frame</span><span class="p">()]</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">xy</span><span class="p">}</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Mahmoud Youssef.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

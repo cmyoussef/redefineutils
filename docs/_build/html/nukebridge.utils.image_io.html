@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nukebridge.utils.image_io package &mdash; NukeBridge 1.0.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d55fa986"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="nukebridge.utils package" href="nukebridge.utils.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            NukeBridge
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">nukebridge</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="nukebridge.html">nukebridge package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="nukebridge.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.config.html">nukebridge.config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.executors.html">nukebridge.executors package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.html">nukebridge.gizmos package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="nukebridge.utils.html">nukebridge.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nukebridge.html#module-nukebridge">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NukeBridge</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">nukebridge</a></li>
+          <li class="breadcrumb-item"><a href="nukebridge.html">nukebridge package</a></li>
+          <li class="breadcrumb-item"><a href="nukebridge.utils.html">nukebridge.utils package</a></li>
+      <li class="breadcrumb-item active">nukebridge.utils.image_io package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/nukebridge.utils.image_io.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nukebridge-utils-image-io-package">
+<h1>nukebridge.utils.image_io package<a class="headerlink" href="#nukebridge-utils-image-io-package" title="Link to this heading"></a></h1>
+<section id="inheritance-diagrams">
+<h2>Inheritance Diagrams<a class="headerlink" href="#inheritance-diagrams" title="Link to this heading"></a></h2>
+<div class="graphviz"><img src="_images/inheritance-8645eedc1f1c2132776fc1f96b9ad84bd98693e3.png" alt="Inheritance diagram of nukebridge.utils.image_io.base, nukebridge.utils.image_io.oiio, nukebridge.utils.image_io.openexr" usemap="#inheritance8a9dab64ca" class="inheritance graphviz" /></div>
+<map id="inheritance8a9dab64ca" name="inheritance8a9dab64ca">
+<area shape="rect" id="node1" href="#nukebridge.utils.image_io.base.ImageIO" target="_top" title="Base class for image input/output operations." alt="" coords="179,5,399,70"/>
+<area shape="rect" id="node2" href="#nukebridge.utils.image_io.base.ImageIOEXR" target="_top" title="Class for image input/output operations with EXR format support." alt="" coords="159,114,419,179"/>
+<area shape="rect" id="node3" href="#nukebridge.utils.image_io.oiio.OpenImageIOIO" target="_top" title="OpenImageIOIO is a subclass of ImageIO that uses the OpenImageIO library to handle images." alt="" coords="5,223,280,288"/>
+<area shape="rect" id="node4" href="#nukebridge.utils.image_io.openexr.OpenExrIO" target="_top" title="OpenExrIO is a subclass of ImageIO that uses the OpenEXR library to handle images." alt="" coords="302,223,571,288"/>
+</map></section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-nukebridge.utils.image_io.base">
+<span id="nukebridge-utils-image-io-base-module"></span><h2>nukebridge.utils.image_io.base module<a class="headerlink" href="#module-nukebridge.utils.image_io.base" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.base.ImageIO">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.utils.image_io.base.</span></span><span class="sig-name descname"><span class="pre">ImageIO</span></span><a class="reference internal" href="_modules/nukebridge/utils/image_io/base.html#ImageIO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.base.ImageIO" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for image input/output operations.</p>
+<p>This class provides basic functionality for loading and saving images. It can handle single images as well as sequences of images. The images can be loaded and saved in different formats, including numpy arrays, PIL images, and OpenCV images.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.base.ImageIO.apply_mask">
+<span class="sig-name descname"><span class="pre">apply_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contour_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/image_io/base.html#ImageIO.apply_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.base.ImageIO.apply_mask" title="Link to this definition"></a></dt>
+<dd><p>Applies a mask to an image.</p>
+<p>This method takes an image and a mask and applies the mask to the image. The mask is represented by a unique color that is determined by the layer name. Optionally, it can also draw a contour around the mask.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>image (numpy.ndarray): The image to which the mask will be applied.
+mask (numpy.ndarray): The mask to be applied to the image.
+layer_name (str): The name of the layer. This is used to determine the color of the mask.
+contour (bool, optional): Whether to draw a contour around the mask. Defaults to False.
+contour_width (int, optional): The width of the contour if drawn. Defaults to 1.</p>
+</dd>
+<dt>Returns:</dt><dd><p>numpy.ndarray: The image with the applied mask.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.base.ImageIO.consolidate_masks">
+<span class="sig-name descname"><span class="pre">consolidate_masks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layers_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_image</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contour_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/image_io/base.html#ImageIO.consolidate_masks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.base.ImageIO.consolidate_masks" title="Link to this definition"></a></dt>
+<dd><p>Consolidates multiple masks into a single RGBA image.</p>
+<p>This method takes a dictionary where the keys are the names of the layers and the values are numpy arrays representing the images for those layers. It generates a consolidated RGBA image where each mask is represented by a different color.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>layers_dict (dict): A dictionary where the keys are the names of the layers and the values are numpy arrays representing the images for those layers.
+base_image (numpy.ndarray, optional): The base image on which the masks will be applied. If None, a blank image matching the dimensions of the first layer is created.
+contour (bool, optional): Whether to draw a contour around each mask. Defaults to False.
+contour_width (int, optional): The width of the contour if drawn. Defaults to 1.</p>
+</dd>
+<dt>Returns:</dt><dd><p>numpy.ndarray: The consolidated RGBA image with the applied masks.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.base.ImageIO.parse_image_path">
+<span class="sig-name descname"><span class="pre">parse_image_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/image_io/base.html#ImageIO.parse_image_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.base.ImageIO.parse_image_path" title="Link to this definition"></a></dt>
+<dd><p>Parses the image path and generates a list of image paths.</p>
+<p>This method takes an image path and an optional frame range. If a frame range is provided,
+it generates a list of image paths for the sequence of images in the frame range.
+If no frame range is provided, it returns a list containing the single image path.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>image_path (str): The path to the image. This can include a pattern for sequences.
+frame_range (tuple, optional): An optional tuple specifying the start and end frames for sequences.
+Defaults to None.</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>list: A list of image paths. If a frame range is provided,</dt><dd><p>the list contains the paths for the sequence of images in the frame range.
+If no frame range is provided, the list contains the single image path.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.base.ImageIO.read_image">
+<span class="sig-name descname"><span class="pre">read_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'np'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/image_io/base.html#ImageIO.read_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.base.ImageIO.read_image" title="Link to this definition"></a></dt>
+<dd><p>Loads an image or a sequence of images as a numpy array, PIL image, or OpenCV image.</p>
+<p>This method reads an image or a sequence of images from the specified path and returns them in the specified format.
+If the image format is ‘exr’, a ValueError is raised, as this format is not supported in the base ImageIO class.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>image_path (str): Path to the image. This can include a pattern for sequences.
+frame_range (tuple, optional): Optional tuple specifying the start and end frames for sequences. Defaults to None.
+output_format (str, optional): The format of the output. This can be ‘np’ for numpy array, ‘PIL’ for PIL image, or ‘cv2’ for OpenCV image. Defaults to ‘np’.</p>
+</dd>
+<dt>Returns:</dt><dd><p>list: A list of loaded images in the specified format.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If the image format is ‘exr’, as this format is not supported in the base ImageIO class.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.base.ImageIO.write_image">
+<span class="sig-name descname"><span class="pre">write_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'png'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/image_io/base.html#ImageIO.write_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.base.ImageIO.write_image" title="Link to this definition"></a></dt>
+<dd><p>Saves an image in a specified format.</p>
+<p>&#64;param image: Image to be saved.
+&#64;param output_path: Path to save the image.
+&#64;param image_format: Format of the saved image (‘png’, ‘tif’).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.base.ImageIO.write_multilayer">
+<span class="sig-name descname"><span class="pre">write_multilayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layers_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'png'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/image_io/base.html#ImageIO.write_multilayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.base.ImageIO.write_multilayer" title="Link to this definition"></a></dt>
+<dd><p>Saves multiple layers of an image in a specified format.</p>
+<p>This method takes a dictionary where the keys are the names of the layers and the values are numpy arrays representing the images for those layers. It saves each layer as a separate image with a suffix of the layer name. If the specified image format is ‘exr’, a warning is issued and the image format is set to ‘png’.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>layers_dict (dict): A dictionary where the keys are the names of the layers and the values are numpy arrays representing the images for those layers.
+output_path (str): The path where the images will be saved.
+image_format (str, optional): The format of the saved images. Defaults to ‘png’. If ‘exr’ is specified, a warning is issued and the format is set to ‘png’.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If the image format is not ‘png’ or ‘tif’, a ValueError is raised when the <cite>save_image</cite> method is called.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.base.ImageIOEXR">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.utils.image_io.base.</span></span><span class="sig-name descname"><span class="pre">ImageIOEXR</span></span><a class="reference internal" href="_modules/nukebridge/utils/image_io/base.html#ImageIOEXR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.base.ImageIOEXR" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nukebridge.utils.image_io.base.ImageIO" title="nukebridge.utils.image_io.base.ImageIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageIO</span></code></a></p>
+<p>Class for image input/output operations with EXR format support.</p>
+<p>This class extends the base ImageIO class to provide support for reading and writing images in the EXR format.
+It uses the OpenEXR library to handle EXR images.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>Inherits all attributes from the base ImageIO class.</p>
+</dd>
+<dt>Methods:</dt><dd><p>Inherits all methods from the base ImageIO class.
+_convert_image_dtype(image): Converts the input image to np.float32, normalizing if necessary.
+_process_layer_data(layers_dict): Processes and compiles each layer’s data for EXR writing.
+__getattr__(name): Overrides Python’s default attribute access to forward the attribute access to the base class if the attribute doesn’t exist in the current class.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nukebridge.utils.image_io.oiio">
+<span id="nukebridge-utils-image-io-oiio-module"></span><h2>nukebridge.utils.image_io.oiio module<a class="headerlink" href="#module-nukebridge.utils.image_io.oiio" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.oiio.OpenImageIOIO">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.utils.image_io.oiio.</span></span><span class="sig-name descname"><span class="pre">OpenImageIOIO</span></span><a class="reference internal" href="_modules/nukebridge/utils/image_io/oiio.html#OpenImageIOIO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.oiio.OpenImageIOIO" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nukebridge.utils.image_io.base.ImageIOEXR" title="nukebridge.utils.image_io.base.ImageIOEXR"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageIOEXR</span></code></a></p>
+<p>OpenImageIOIO is a subclass of ImageIO that uses the OpenImageIO library to handle images.</p>
+<p>This class provides functionality for reading, saving, and managing multilayer images with OpenImageIO.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.oiio.OpenImageIOIO.read_image">
+<span class="sig-name descname"><span class="pre">read_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'np'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/image_io/oiio.html#OpenImageIOIO.read_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.oiio.OpenImageIOIO.read_image" title="Link to this definition"></a></dt>
+<dd><p>Loads an image or a sequence of images as a numpy array, PIL image, or OpenCV image.</p>
+<p>This method reads an image or a sequence of images from the specified path and returns them in the specified format.
+If the image format is ‘exr’, a ValueError is raised, as this format is not supported in the base ImageIO class.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>image_path (str): Path to the image. This can include a pattern for sequences.
+frame_range (tuple, optional): Optional tuple specifying the start and end frames for sequences. Defaults to None.
+output_format (str, optional): The format of the output. This can be ‘np’ for numpy array, ‘PIL’ for PIL image, or ‘cv2’ for OpenCV image. Defaults to ‘np’.</p>
+</dd>
+<dt>Returns:</dt><dd><p>list: A list of loaded images in the specified format.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If the image format is ‘exr’, as this format is not supported in the base ImageIO class.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.oiio.OpenImageIOIO.write_image">
+<span class="sig-name descname"><span class="pre">write_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'exr'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/image_io/oiio.html#OpenImageIOIO.write_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.oiio.OpenImageIOIO.write_image" title="Link to this definition"></a></dt>
+<dd><p>Saves an image in a specified format.</p>
+<p>&#64;param image: Image to be saved.
+&#64;param output_path: Path to save the image.
+&#64;param image_format: Format of the saved image (‘png’, ‘tif’).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.oiio.OpenImageIOIO.write_multilayer">
+<span class="sig-name descname"><span class="pre">write_multilayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layers_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'exr'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/image_io/oiio.html#OpenImageIOIO.write_multilayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.oiio.OpenImageIOIO.write_multilayer" title="Link to this definition"></a></dt>
+<dd><p>Saves multiple layers of an image in a specified format.</p>
+<p>This method takes a dictionary where the keys are the names of the layers and the values are numpy arrays representing the images for those layers. It saves each layer as a separate image with a suffix of the layer name. If the specified image format is ‘exr’, a warning is issued and the image format is set to ‘png’.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>layers_dict (dict): A dictionary where the keys are the names of the layers and the values are numpy arrays representing the images for those layers.
+output_path (str): The path where the images will be saved.
+image_format (str, optional): The format of the saved images. Defaults to ‘png’. If ‘exr’ is specified, a warning is issued and the format is set to ‘png’.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If the image format is not ‘png’ or ‘tif’, a ValueError is raised when the <cite>save_image</cite> method is called.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nukebridge.utils.image_io.openexr">
+<span id="nukebridge-utils-image-io-openexr-module"></span><h2>nukebridge.utils.image_io.openexr module<a class="headerlink" href="#module-nukebridge.utils.image_io.openexr" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.openexr.OpenExrIO">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.utils.image_io.openexr.</span></span><span class="sig-name descname"><span class="pre">OpenExrIO</span></span><a class="reference internal" href="_modules/nukebridge/utils/image_io/openexr.html#OpenExrIO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.openexr.OpenExrIO" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nukebridge.utils.image_io.base.ImageIOEXR" title="nukebridge.utils.image_io.base.ImageIOEXR"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageIOEXR</span></code></a></p>
+<p>OpenExrIO is a subclass of ImageIO that uses the OpenEXR library to handle images.</p>
+<p>This class overrides the save_image and save_multilayer methods of the ImageIO class to provide functionality for saving images and multilayer images in the EXR format using the OpenEXR library.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.openexr.OpenExrIO.read_image">
+<span class="sig-name descname"><span class="pre">read_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'np'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/image_io/openexr.html#OpenExrIO.read_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.openexr.OpenExrIO.read_image" title="Link to this definition"></a></dt>
+<dd><p>Reads an image from an EXR file.</p>
+<p>This method takes a path to an EXR file and reads it into a numpy array. If the image path does not end with ‘.exr’, it falls back to the base class’s read_image method.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>image_path (str): The path to the EXR file.
+frame_range (tuple, optional): A tuple specifying the range of frames to read. Defaults to None.
+output_format (str, optional): The format of the output image. Can be ‘np’ for numpy array, ‘PIL’ for PIL Image, or ‘cv2’ for OpenCV image. Defaults to ‘np’.</p>
+</dd>
+<dt>Returns:</dt><dd><p>np.array or PIL.Image or cv2.Image: The image read from the EXR file, in the specified output format.</p>
+</dd>
+<dt>Raises:</dt><dd><p>IOError: If the EXR file cannot be read.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.openexr.OpenExrIO.write_image">
+<span class="sig-name descname"><span class="pre">write_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'exr'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/image_io/openexr.html#OpenExrIO.write_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.openexr.OpenExrIO.write_image" title="Link to this definition"></a></dt>
+<dd><p>Writes an image to an EXR file.</p>
+<p>This method takes a numpy array representing an image and writes it to an EXR file. If the image format is not ‘exr’, it falls back to the base class’s write_image method.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>image (np.array): A numpy array representing the image to be written.
+output_path (str): The path where the EXR file will be written.
+image_format (str, optional): The format of the image. Defaults to ‘exr’.</p>
+</dd>
+<dt>Raises:</dt><dd><p>Warning: If the image format is not ‘exr’, a warning will be raised and the base class’s write_image method will be used.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.openexr.OpenExrIO.write_multilayer">
+<span class="sig-name descname"><span class="pre">write_multilayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layers_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'exr'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/image_io/openexr.html#OpenExrIO.write_multilayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.openexr.OpenExrIO.write_multilayer" title="Link to this definition"></a></dt>
+<dd><p>Writes a multilayer image to an EXR file.</p>
+<p>This method takes a dictionary where the keys are the names of the layers and the values are numpy arrays representing the images for those layers. It writes each layer to a separate channel in the EXR file.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>layers_dict (dict): A dictionary where the keys are the names of the layers and the values are numpy arrays representing the images for those layers.
+output_path (str): The path where the EXR file will be written.
+image_format (str, optional): The format of the image. Defaults to ‘exr’.</p>
+</dd>
+<dt>Raises:</dt><dd><p>Warning: If the image format is not ‘exr’, a warning will be raised and the format will be set to ‘exr’.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nukebridge.utils.image_io">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-nukebridge.utils.image_io" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nukebridge.utils.image_io.get_image_io">
+<span class="sig-prename descclassname"><span class="pre">nukebridge.utils.image_io.</span></span><span class="sig-name descname"><span class="pre">get_image_io</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force_base</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/image_io.html#get_image_io"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.image_io.get_image_io" title="Link to this definition"></a></dt>
+<dd><p>Returns an instance of the appropriate ImageIO class based on the available libraries.</p>
+<p>This function tries to import the oiio library first. If it fails because the OpenImageIO library is not installed, it tries to import the OpenExr library. If that also fails, it returns an instance of the base ImageIO class.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>force_base (bool, optional): If True, the function will return an instance of the base ImageIO class regardless of the available libraries. Defaults to False.</p>
+</dd>
+<dt>Returns:</dt><dd><p>ImageIO: An instance of the appropriate ImageIO class.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nukebridge.utils.html" class="btn btn-neutral float-left" title="nukebridge.utils package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Mahmoud Youssef.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

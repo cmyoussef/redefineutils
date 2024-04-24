@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nukebridge.gizmos.core.ui_doc &mdash; NukeBridge 1.0.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=d55fa986"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            NukeBridge
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules.html">nukebridge</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">NukeBridge</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../../nukebridge.html">nukebridge</a></li>
+          <li class="breadcrumb-item"><a href="../../gizmos.html">nukebridge.gizmos</a></li>
+      <li class="breadcrumb-item active">nukebridge.gizmos.core.ui_doc</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nukebridge.gizmos.core.ui_doc</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="UIElementDocs">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs">[docs]</a>
+<span></span><span class="k">class</span> <span class="nc">UIElementDocs</span><span class="p">:</span>
+    <span class="n">logger_level</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    &#39;critical&#39;: &quot;Use this level for very serious errors that may prevent the program from running.&quot;</span>
+<span class="s2">    </span>
+<span class="s2">    &#39;error&#39;: &quot;Use this level for serious errors. The program may still run, but there could be issues.&quot;</span>
+<span class="s2">    </span>
+<span class="s2">    &#39;warning&#39;: &quot;Use this level to indicate potential problems that could occur in the future, or to log unexpected events.&quot;</span>
+<span class="s2">    </span>
+<span class="s2">    &#39;info&#39;: &quot;Use this level for general system information. Useful to confirm that things are operating as expected.&quot;</span>
+<span class="s2">    </span>
+<span class="s2">    &#39;debug&#39;: &quot;Use this level for detailed information useful in diagnosing problems. This level logs output from all steps of a program&#39;s execution.&quot;</span>
+<span class="s2">    </span>
+<span class="s2">    &#39;notset&#39;: &quot;This is a default logger level before a specific level is set. When used in logging, it behaves like the root logger.&quot;</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">use_external_execute</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">     This advanced feature enables you to utilize external machines, either through a render farm or by running advanced code.</span>
+<span class="s2">     &quot;&quot;&quot;</span>
+
+    <span class="n">file_pattern_knob</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Custom Filename and Path Configuration</span>
+
+<span class="s2">    Configure the naming convention for your output files and folders by using a customizable format string. </span>
+<span class="s2">    The default format is:</span>
+<span class="s2">        &lt;span style=&#39;color:blue&#39;&gt;&amp;lt;scriptName&amp;gt;/&amp;lt;nodeName&amp;gt;/%Y%m</span><span class="si">%d</span><span class="s2">/%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&lt;/span&gt;</span>
+<span class="s2">    This format will generate directories and filenames based on the current script name, node name, and timestamp. </span>
+
+<span class="s2">    You can adjust this format to meet your needs. Here&#39;s how:</span>
+
+<span class="s2">    </span><span class="se">\t</span><span class="s2">&lt;b&gt;1 - &lt;span style=&#39;color:green&#39;&gt;&amp;lt;scriptName&amp;gt;&lt;/span&gt;:&lt;/b&gt; Will be replaced with the name of your current Nuke script. If the script is unsaved, &quot;untitled&quot; will be used.</span>
+<span class="s2">    </span><span class="se">\t</span><span class="s2">&lt;b&gt;2 - &lt;span style=&#39;color:green&#39;&gt;&amp;lt;nodeName&amp;gt;&lt;/span&gt;:&lt;/b&gt; Will be replaced with the name of the current node.</span>
+<span class="s2">    </span><span class="se">\t</span><span class="s2">&lt;b&gt;3 - &lt;span style=&#39;color:green&#39;&gt;Date and Time Formatting:&lt;/span&gt;&lt;/b&gt; Use standard Python strftime codes to format the current date and time. </span>
+<span class="s2">    </span><span class="se">\t</span><span class="s2">    For example, &lt;span style=&#39;color:blue&#39;&gt;%Y&lt;/span&gt; for the full year, &lt;span style=&#39;color:blue&#39;&gt;%m&lt;/span&gt; for the month, &lt;span style=&#39;color:blue&#39;&gt;</span><span class="si">%d</span><span class="s2">&lt;/span&gt; for the day, &lt;span style=&#39;color:blue&#39;&gt;%H&lt;/span&gt; for hours, &lt;span style=&#39;color:blue&#39;&gt;%M&lt;/span&gt; for minutes, and &lt;span style=&#39;color:blue&#39;&gt;%S&lt;/span&gt; for seconds.</span>
+<span class="s2">    </span><span class="se">\t</span><span class="s2">&lt;b&gt;4 -&lt;/b&gt; Separate sections with &lt;span style=&#39;color:blue&#39;&gt;/&lt;/span&gt; to create a directory structure in the generated path. </span>
+
+<span class="s2">    Customize the format to organize your outputs into folders by date, script, or node, and append a unique timestamp to filenames to avoid overwrites.</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">execute_btn</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Press this button to generate the image. Once the button is pressed a process is launched on the Nuke&#39;s terminal. You can look there to see the progress or errors.</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">interrupt_btn</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Interrupts the current launched process.</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">save_settings_btn</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Saves the current settings to the current user directory</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">load_settings_btn</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Retrieves the latest saved settings from the current user directory</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">pre_cmd_knob</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Terminal command to be executed before the stable diffusion process starts</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">post_cmd_knob</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Terminal command to be executed after the stable diffusion process has been completed.</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">logger_level_menu</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    &#39;critical&#39;: &quot;Use this level for very serious errors that may prevent the program from running.&quot;</span>
+<span class="s2">    </span>
+<span class="s2">    &#39;error&#39;: &quot;Use this level for serious errors. The program may still run, but there could be issues.&quot;</span>
+<span class="s2">    </span>
+<span class="s2">    &#39;warning&#39;: &quot;Use this level to indicate potential problems that could occur in the future, or to log unexpected events.&quot;</span>
+<span class="s2">    </span>
+<span class="s2">    &#39;info&#39;: &quot;Use this level for general system information. Useful to confirm that things are operating as expected.&quot;</span>
+<span class="s2">    </span>
+<span class="s2">    &#39;debug&#39;: &quot;Use this level for detailed information useful in diagnosing problems. This level logs output from all steps of a program&#39;s execution.&quot;</span>
+<span class="s2">    </span>
+<span class="s2">    &#39;notset&#39;: &quot;This is a default logger level before a specific level is set. When used in logging, it behaves like the root logger.&quot;</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">time_out</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Time out in milliseconds for the process to wait in order to consider there&#39;s an error.</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Directory where the generated images will be stored in PNG format. Located in the local user folder by default.</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">cache_dir</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Directory where the cache for the generated images will be stored.</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">python_path_knob</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Path to the python runtime directory</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">live_update_knob</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Enable this to update the node when moving to a frame that hasn&#39;t been rendered yet.&quot;&quot;&quot;</span>
+
+    <span class="n">batch_process_knob</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Starts a batch process for the range of frames. This will send updated data for each frame to the server.&quot;&quot;&quot;</span>
+
+    <span class="n">time_out</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    This knob sets the maximum time, in milliseconds, that the client will wait for a response from the server for each frame. </span>
+<span class="s2">    If the server does not respond within this time, the process will return None.</span>
+<span class="s2">    When running a batch process, the total waiting time will be this value multiplied by the number of frames in the batch.</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="UIElementDocs.get_doc">
+<a class="viewcode-back" href="../../../../nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.get_doc">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_doc</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ui_name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ui_name</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ui_name</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;    &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Mahmoud Youssef.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

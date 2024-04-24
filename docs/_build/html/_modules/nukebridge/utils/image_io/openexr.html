@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nukebridge.utils.image_io.openexr &mdash; NukeBridge 1.0.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=d55fa986"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            NukeBridge
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules.html">nukebridge</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">NukeBridge</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../../nukebridge.html">nukebridge</a></li>
+          <li class="breadcrumb-item"><a href="../image_io.html">nukebridge.utils.image_io</a></li>
+      <li class="breadcrumb-item active">nukebridge.utils.image_io.openexr</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nukebridge.utils.image_io.openexr</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">Imath</span>
+<span class="kn">import</span> <span class="nn">OpenEXR</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">ImageIOEXR</span>
+<span class="kn">from</span> <span class="nn">nukebridge.utils.logger</span> <span class="kn">import</span> <span class="n">logger</span>
+
+
+<div class="viewcode-block" id="OpenExrIO">
+<a class="viewcode-back" href="../../../../nukebridge.utils.image_io.html#nukebridge.utils.image_io.openexr.OpenExrIO">[docs]</a>
+<span class="k">class</span> <span class="nc">OpenExrIO</span><span class="p">(</span><span class="n">ImageIOEXR</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    OpenExrIO is a subclass of ImageIO that uses the OpenEXR library to handle images.</span>
+
+<span class="sd">    This class overrides the save_image and save_multilayer methods of the ImageIO class to provide functionality for saving images and multilayer images in the EXR format using the OpenEXR library.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="OpenExrIO.read_image">
+<a class="viewcode-back" href="../../../../nukebridge.utils.image_io.html#nukebridge.utils.image_io.openexr.OpenExrIO.read_image">[docs]</a>
+    <span class="k">def</span> <span class="nf">read_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">frame_range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="s1">&#39;np&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads an image from an EXR file.</span>
+
+<span class="sd">        This method takes a path to an EXR file and reads it into a numpy array. If the image path does not end with &#39;.exr&#39;, it falls back to the base class&#39;s read_image method.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            image_path (str): The path to the EXR file.</span>
+<span class="sd">            frame_range (tuple, optional): A tuple specifying the range of frames to read. Defaults to None.</span>
+<span class="sd">            output_format (str, optional): The format of the output image. Can be &#39;np&#39; for numpy array, &#39;PIL&#39; for PIL Image, or &#39;cv2&#39; for OpenCV image. Defaults to &#39;np&#39;.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.array or PIL.Image or cv2.Image: The image read from the EXR file, in the specified output format.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IOError: If the EXR file cannot be read.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">image_path</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.exr&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">read_image</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">frame_range</span><span class="p">,</span> <span class="n">output_format</span><span class="p">)</span>
+        <span class="n">image_paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_image_path</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">frame_range</span><span class="p">)</span>
+        <span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">image_path</span> <span class="ow">in</span> <span class="n">image_paths</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">image_path</span><span class="p">):</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Image path </span><span class="si">{</span><span class="n">image_path</span><span class="si">}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_read_image</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">output_format</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">images</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_read_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="s1">&#39;np&#39;</span><span class="p">):</span>
+
+        <span class="n">exr_file</span> <span class="o">=</span> <span class="n">OpenEXR</span><span class="o">.</span><span class="n">InputFile</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+        <span class="n">dw</span> <span class="o">=</span> <span class="n">exr_file</span><span class="o">.</span><span class="n">header</span><span class="p">()[</span><span class="s1">&#39;dataWindow&#39;</span><span class="p">]</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="n">dw</span><span class="o">.</span><span class="n">max</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">dw</span><span class="o">.</span><span class="n">min</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dw</span><span class="o">.</span><span class="n">max</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">dw</span><span class="o">.</span><span class="n">min</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">pt</span> <span class="o">=</span> <span class="n">Imath</span><span class="o">.</span><span class="n">PixelType</span><span class="p">(</span><span class="n">Imath</span><span class="o">.</span><span class="n">PixelType</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">)</span>
+        <span class="n">available_channels</span> <span class="o">=</span> <span class="n">exr_file</span><span class="o">.</span><span class="n">header</span><span class="p">()[</span><span class="s1">&#39;channels&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+        <span class="c1"># Determine which channels are available (supports grayscale, RGB, and RGBA)</span>
+        <span class="n">channel_map</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">:</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">:</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="s1">&#39;A&#39;</span><span class="p">}</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="p">[</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="s2">&quot;RGBA&quot;</span> <span class="k">if</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">available_channels</span> <span class="ow">or</span> <span class="s1">&#39;Y&#39;</span> <span class="ow">in</span> <span class="n">available_channels</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="s1">&#39;Y&#39;</span> <span class="ow">in</span> <span class="n">available_channels</span><span class="p">:</span>  <span class="c1"># Grayscale</span>
+            <span class="n">channels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span>
+
+        <span class="n">hdr_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">exr_file</span><span class="o">.</span><span class="n">channel</span><span class="p">(</span><span class="n">channel_map</span><span class="p">[</span><span class="n">ch</span><span class="p">],</span> <span class="n">pt</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span>
+             <span class="n">channels</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">output_format</span> <span class="o">==</span> <span class="s1">&#39;PIL&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">hdr_image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">output_format</span> <span class="o">==</span> <span class="s1">&#39;cv2&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">channels</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Grayscale to BGR</span>
+                <span class="n">hdr_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">hdr_image</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">hdr_image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">hdr_image</span>
+
+<div class="viewcode-block" id="OpenExrIO.write_image">
+<a class="viewcode-back" href="../../../../nukebridge.utils.image_io.html#nukebridge.utils.image_io.openexr.OpenExrIO.write_image">[docs]</a>
+    <span class="k">def</span> <span class="nf">write_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">image_format</span><span class="o">=</span><span class="s1">&#39;exr&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes an image to an EXR file.</span>
+
+<span class="sd">        This method takes a numpy array representing an image and writes it to an EXR file. If the image format is not &#39;exr&#39;, it falls back to the base class&#39;s write_image method.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            image (np.array): A numpy array representing the image to be written.</span>
+<span class="sd">            output_path (str): The path where the EXR file will be written.</span>
+<span class="sd">            image_format (str, optional): The format of the image. Defaults to &#39;exr&#39;.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Warning: If the image format is not &#39;exr&#39;, a warning will be raised and the base class&#39;s write_image method will be used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">image_format</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;exr&#39;</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">image_format</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_image_dtype</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>  <span class="c1"># Convert and normalize the image data</span>
+
+        <span class="n">header</span> <span class="o">=</span> <span class="n">OpenEXR</span><span class="o">.</span><span class="n">Header</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">channel_names</span> <span class="o">=</span> <span class="s1">&#39;RGBA&#39;</span><span class="p">[:</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span> <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span> <span class="k">else</span> <span class="s1">&#39;Y&#39;</span>
+        <span class="n">float_chan</span> <span class="o">=</span> <span class="n">Imath</span><span class="o">.</span><span class="n">Channel</span><span class="p">(</span><span class="n">Imath</span><span class="o">.</span><span class="n">PixelType</span><span class="p">(</span><span class="n">Imath</span><span class="o">.</span><span class="n">PixelType</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">))</span>
+        <span class="n">header</span><span class="p">[</span><span class="s1">&#39;channels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">float_chan</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">channel_names</span><span class="p">}</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># Grayscale</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">channel_names</span><span class="p">):</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
+
+        <span class="n">exr_file</span> <span class="o">=</span> <span class="n">OpenEXR</span><span class="o">.</span><span class="n">OutputFile</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
+        <span class="n">exr_file</span><span class="o">.</span><span class="n">writePixels</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">exr_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="OpenExrIO.write_multilayer">
+<a class="viewcode-back" href="../../../../nukebridge.utils.image_io.html#nukebridge.utils.image_io.openexr.OpenExrIO.write_multilayer">[docs]</a>
+    <span class="k">def</span> <span class="nf">write_multilayer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layers_dict</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">image_format</span><span class="o">=</span><span class="s1">&#39;exr&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a multilayer image to an EXR file.</span>
+
+<span class="sd">        This method takes a dictionary where the keys are the names of the layers and the values are numpy arrays representing the images for those layers. It writes each layer to a separate channel in the EXR file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            layers_dict (dict): A dictionary where the keys are the names of the layers and the values are numpy arrays representing the images for those layers.</span>
+<span class="sd">            output_path (str): The path where the EXR file will be written.</span>
+<span class="sd">            image_format (str, optional): The format of the image. Defaults to &#39;exr&#39;.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Warning: If the image format is not &#39;exr&#39;, a warning will be raised and the format will be set to &#39;exr&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">image_format</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;exr&#39;</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Image format will be set to EXR for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="n">layers_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_layer_data</span><span class="p">(</span><span class="n">layers_dict</span><span class="p">)</span>
+        <span class="c1"># Initialize EXR file header with width and height from the first layer</span>
+        <span class="n">first_layer_image</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">layers_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+        <span class="n">first_layer_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_image_dtype</span><span class="p">(</span><span class="n">first_layer_image</span><span class="p">)</span>
+        <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">first_layer_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">OpenEXR</span><span class="o">.</span><span class="n">Header</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="n">float_chan</span> <span class="o">=</span> <span class="n">Imath</span><span class="o">.</span><span class="n">Channel</span><span class="p">(</span><span class="n">Imath</span><span class="o">.</span><span class="n">PixelType</span><span class="p">(</span><span class="n">Imath</span><span class="o">.</span><span class="n">PixelType</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">))</span>
+
+        <span class="n">channels</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">key</span><span class="p">,</span> <span class="n">float_chan</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">layers_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()])</span>
+        <span class="n">header</span><span class="p">[</span><span class="s1">&#39;channels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">channels</span>
+        <span class="n">exr_file</span> <span class="o">=</span> <span class="n">OpenEXR</span><span class="o">.</span><span class="n">OutputFile</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
+        <span class="n">exr_data</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Process each layer according to its specified or inferred channel(s)</span>
+        <span class="k">for</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">layers_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">exr_data</span><span class="p">[</span><span class="n">layer_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
+
+        <span class="n">exr_file</span><span class="o">.</span><span class="n">writePixels</span><span class="p">(</span><span class="n">exr_data</span><span class="p">)</span>
+        <span class="n">exr_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;OpenExrIO class, supports &#39;EXR&#39; extension&quot;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Mahmoud Youssef.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

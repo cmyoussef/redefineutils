@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nukebridge.utils package &mdash; NukeBridge 1.0.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d55fa986"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="nukebridge.utils.image_io package" href="nukebridge.utils.image_io.html" />
+    <link rel="prev" title="nukebridge.gizmos.core package" href="nukebridge.gizmos.core.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            NukeBridge
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">nukebridge</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="nukebridge.html">nukebridge package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="nukebridge.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.config.html">nukebridge.config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.executors.html">nukebridge.executors package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.html">nukebridge.gizmos package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">nukebridge.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nukebridge.html#module-nukebridge">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NukeBridge</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">nukebridge</a></li>
+          <li class="breadcrumb-item"><a href="nukebridge.html">nukebridge package</a></li>
+      <li class="breadcrumb-item active">nukebridge.utils package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/nukebridge.utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nukebridge-utils-package">
+<h1>nukebridge.utils package<a class="headerlink" href="#nukebridge-utils-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="nukebridge.utils.image_io.html">nukebridge.utils.image_io package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nukebridge.utils.image_io.html#inheritance-diagrams">Inheritance Diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nukebridge.utils.image_io.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nukebridge.utils.image_io.html#module-nukebridge.utils.image_io.base">nukebridge.utils.image_io.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.base.ImageIO"><code class="docutils literal notranslate"><span class="pre">ImageIO</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.base.ImageIO.apply_mask"><code class="docutils literal notranslate"><span class="pre">ImageIO.apply_mask()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.base.ImageIO.consolidate_masks"><code class="docutils literal notranslate"><span class="pre">ImageIO.consolidate_masks()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.base.ImageIO.parse_image_path"><code class="docutils literal notranslate"><span class="pre">ImageIO.parse_image_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.base.ImageIO.read_image"><code class="docutils literal notranslate"><span class="pre">ImageIO.read_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.base.ImageIO.write_image"><code class="docutils literal notranslate"><span class="pre">ImageIO.write_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.base.ImageIO.write_multilayer"><code class="docutils literal notranslate"><span class="pre">ImageIO.write_multilayer()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.base.ImageIOEXR"><code class="docutils literal notranslate"><span class="pre">ImageIOEXR</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nukebridge.utils.image_io.html#module-nukebridge.utils.image_io.oiio">nukebridge.utils.image_io.oiio module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.oiio.OpenImageIOIO"><code class="docutils literal notranslate"><span class="pre">OpenImageIOIO</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.oiio.OpenImageIOIO.read_image"><code class="docutils literal notranslate"><span class="pre">OpenImageIOIO.read_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.oiio.OpenImageIOIO.write_image"><code class="docutils literal notranslate"><span class="pre">OpenImageIOIO.write_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.oiio.OpenImageIOIO.write_multilayer"><code class="docutils literal notranslate"><span class="pre">OpenImageIOIO.write_multilayer()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nukebridge.utils.image_io.html#module-nukebridge.utils.image_io.openexr">nukebridge.utils.image_io.openexr module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.openexr.OpenExrIO"><code class="docutils literal notranslate"><span class="pre">OpenExrIO</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.openexr.OpenExrIO.read_image"><code class="docutils literal notranslate"><span class="pre">OpenExrIO.read_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.openexr.OpenExrIO.write_image"><code class="docutils literal notranslate"><span class="pre">OpenExrIO.write_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.openexr.OpenExrIO.write_multilayer"><code class="docutils literal notranslate"><span class="pre">OpenExrIO.write_multilayer()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nukebridge.utils.image_io.html#module-nukebridge.utils.image_io">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nukebridge.utils.image_io.html#nukebridge.utils.image_io.get_image_io"><code class="docutils literal notranslate"><span class="pre">get_image_io()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-nukebridge.utils.common_utils">
+<span id="nukebridge-utils-common-utils-module"></span><h2>nukebridge.utils.common_utils module<a class="headerlink" href="#module-nukebridge.utils.common_utils" title="Link to this heading"></a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="nukebridge.utils.common_utils.FileLockException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.utils.common_utils.</span></span><span class="sig-name descname"><span class="pre">FileLockException</span></span><a class="reference internal" href="_modules/nukebridge/utils/common_utils.html#FileLockException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.common_utils.FileLockException" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nukebridge.utils.common_utils.acquire_lock">
+<span class="sig-prename descclassname"><span class="pre">nukebridge.utils.common_utils.</span></span><span class="sig-name descname"><span class="pre">acquire_lock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/common_utils.html#acquire_lock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.common_utils.acquire_lock" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nukebridge.utils.common_utils.check_file_complete">
+<span class="sig-prename descclassname"><span class="pre">nukebridge.utils.common_utils.</span></span><span class="sig-name descname"><span class="pre">check_file_complete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/common_utils.html#check_file_complete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.common_utils.check_file_complete" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nukebridge.utils.common_utils.is_file_empty">
+<span class="sig-prename descclassname"><span class="pre">nukebridge.utils.common_utils.</span></span><span class="sig-name descname"><span class="pre">is_file_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/common_utils.html#is_file_empty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.common_utils.is_file_empty" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nukebridge.utils.common_utils.release_lock">
+<span class="sig-prename descclassname"><span class="pre">nukebridge.utils.common_utils.</span></span><span class="sig-name descname"><span class="pre">release_lock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/common_utils.html#release_lock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.common_utils.release_lock" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-nukebridge.utils.execute_thread">
+<span id="nukebridge-utils-execute-thread-module"></span><h2>nukebridge.utils.execute_thread module<a class="headerlink" href="#module-nukebridge.utils.execute_thread" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.utils.execute_thread.ExecuteThread">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.utils.execute_thread.</span></span><span class="sig-name descname"><span class="pre">ExecuteThread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_cmd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_cmd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">open_new_terminal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/execute_thread.html#ExecuteThread"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.execute_thread.ExecuteThread" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Thread</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="nukebridge.utils.execute_thread.ExecuteThread.cmd">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cmd</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#nukebridge.utils.execute_thread.ExecuteThread.cmd" title="Link to this definition"></a></dt>
+<dd><p>Generate and return the command string or list based on the arguments and conditions.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nukebridge.utils.execute_thread.ExecuteThread.pidfile">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pidfile</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#nukebridge.utils.execute_thread.ExecuteThread.pidfile" title="Link to this definition"></a></dt>
+<dd><p>Generate and return the PID file path based on the user directory and terminal name.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.execute_thread.ExecuteThread.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/execute_thread.html#ExecuteThread.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.execute_thread.ExecuteThread.run" title="Link to this definition"></a></dt>
+<dd><p>Run the Python script using subprocess, with optional pre and post commands, and in a new terminal if specified.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nukebridge.utils.execute_thread.ExecuteThread.terminal_title">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">terminal_title</span></span><a class="headerlink" href="#nukebridge.utils.execute_thread.ExecuteThread.terminal_title" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.execute_thread.ExecuteThread.terminate">
+<span class="sig-name descname"><span class="pre">terminate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/execute_thread.html#ExecuteThread.terminate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.execute_thread.ExecuteThread.terminate" title="Link to this definition"></a></dt>
+<dd><p>Terminate the running process, if it exists.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nukebridge.utils.external_execute">
+<span id="nukebridge-utils-external-execute-module"></span><h2>nukebridge.utils.external_execute module<a class="headerlink" href="#module-nukebridge.utils.external_execute" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nukebridge.utils.external_execute.run_external">
+<span class="sig-prename descclassname"><span class="pre">nukebridge.utils.external_execute.</span></span><span class="sig-name descname"><span class="pre">run_external</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'low'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requirements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kyeargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/external_execute.html#run_external"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.external_execute.run_external" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-nukebridge.utils.icons">
+<span id="nukebridge-utils-icons-module"></span><h2>nukebridge.utils.icons module<a class="headerlink" href="#module-nukebridge.utils.icons" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.utils.icons.</span></span><span class="sig-name descname"><span class="pre">Icons</span></span><a class="reference internal" href="_modules/nukebridge/utils/icons.html#Icons"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.icons.Icons" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.apply_style_symbol">
+<span class="sig-name descname"><span class="pre">apply_style_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'📋'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.apply_style_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.arrow_right_symbol">
+<span class="sig-name descname"><span class="pre">arrow_right_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'→️'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.arrow_right_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.calendar_symbol">
+<span class="sig-name descname"><span class="pre">calendar_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'📅'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.calendar_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.camera_symbol">
+<span class="sig-name descname"><span class="pre">camera_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'📷'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.camera_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.check_mark_symbol">
+<span class="sig-name descname"><span class="pre">check_mark_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'✅'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.check_mark_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.clear_prompt_symbol">
+<span class="sig-name descname"><span class="pre">clear_prompt_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🗑️'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.clear_prompt_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.clipboard_symbol">
+<span class="sig-name descname"><span class="pre">clipboard_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'📋'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.clipboard_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.clock_symbol">
+<span class="sig-name descname"><span class="pre">clock_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🕓'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.clock_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.close_symbol">
+<span class="sig-name descname"><span class="pre">close_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'❌'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.close_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.comment_symbol">
+<span class="sig-name descname"><span class="pre">comment_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'💬'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.comment_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.detect_image_size_symbol">
+<span class="sig-name descname"><span class="pre">detect_image_size_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'📐'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.detect_image_size_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.disconnect_symbol">
+<span class="sig-name descname"><span class="pre">disconnect_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🔌'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.disconnect_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.download_symbol">
+<span class="sig-name descname"><span class="pre">download_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'📥'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.download_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.edit_symbol">
+<span class="sig-name descname"><span class="pre">edit_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'✏️'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.edit_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.execute_symbol">
+<span class="sig-name descname"><span class="pre">execute_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'▶️'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.execute_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.explosion_symbol">
+<span class="sig-name descname"><span class="pre">explosion_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'💥'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.explosion_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.extra_networks_symbol">
+<span class="sig-name descname"><span class="pre">extra_networks_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🎴'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.extra_networks_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.fast_forward_symbol">
+<span class="sig-name descname"><span class="pre">fast_forward_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'⏩'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.fast_forward_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.file_symbol">
+<span class="sig-name descname"><span class="pre">file_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'📄'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.file_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.folder_symbol">
+<span class="sig-name descname"><span class="pre">folder_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'📁'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.folder_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.globe_symbol">
+<span class="sig-name descname"><span class="pre">globe_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🌎'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.globe_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.info_symbol">
+<span class="sig-name descname"><span class="pre">info_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ℹ️'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.info_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.interrupt_symbol">
+<span class="sig-name descname"><span class="pre">interrupt_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'■️'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.interrupt_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.key_symbol">
+<span class="sig-name descname"><span class="pre">key_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🔑'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.key_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.launch_gui_symbol">
+<span class="sig-name descname"><span class="pre">launch_gui_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🚀'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.launch_gui_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.link_symbol">
+<span class="sig-name descname"><span class="pre">link_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🔗'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.link_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.load_symbol">
+<span class="sig-name descname"><span class="pre">load_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'📁'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.load_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.lock_symbol">
+<span class="sig-name descname"><span class="pre">lock_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🔒'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.lock_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.magnifying_glass_symbol">
+<span class="sig-name descname"><span class="pre">magnifying_glass_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🔎'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.magnifying_glass_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.microphone_symbol">
+<span class="sig-name descname"><span class="pre">microphone_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🎤'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.microphone_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.mute_symbol">
+<span class="sig-name descname"><span class="pre">mute_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🔕'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.mute_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.next_symbol">
+<span class="sig-name descname"><span class="pre">next_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'⏭'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.next_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.notification_symbol">
+<span class="sig-name descname"><span class="pre">notification_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🔔'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.notification_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.paste_symbol">
+<span class="sig-name descname"><span class="pre">paste_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'↙️'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.paste_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.pause_symbol">
+<span class="sig-name descname"><span class="pre">pause_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'⏸'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.pause_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.play_symbol">
+<span class="sig-name descname"><span class="pre">play_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'▶'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.play_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.previous_symbol">
+<span class="sig-name descname"><span class="pre">previous_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'⏮'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.previous_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.question_mark_symbol">
+<span class="sig-name descname"><span class="pre">question_mark_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'❓️'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.question_mark_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.random_symbol">
+<span class="sig-name descname"><span class="pre">random_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🎲️'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.random_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.redo_symbol">
+<span class="sig-name descname"><span class="pre">redo_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'↪️'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.redo_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.refresh_symbol">
+<span class="sig-name descname"><span class="pre">refresh_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🔄'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.refresh_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.repeat_symbol">
+<span class="sig-name descname"><span class="pre">repeat_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🔁'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.repeat_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.restore_progress_symbol">
+<span class="sig-name descname"><span class="pre">restore_progress_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🌀'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.restore_progress_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.reuse_symbol">
+<span class="sig-name descname"><span class="pre">reuse_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'♻️'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.reuse_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.rewind_symbol">
+<span class="sig-name descname"><span class="pre">rewind_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'⏪'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.rewind_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.save_style_symbol">
+<span class="sig-name descname"><span class="pre">save_style_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'💾'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.save_style_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.search_symbol">
+<span class="sig-name descname"><span class="pre">search_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🔍'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.search_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.settings_symbol">
+<span class="sig-name descname"><span class="pre">settings_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'⚙️'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.settings_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.shuffle_symbol">
+<span class="sig-name descname"><span class="pre">shuffle_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🔀'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.shuffle_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.speaker_symbol">
+<span class="sig-name descname"><span class="pre">speaker_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🔈'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.speaker_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.star_symbol">
+<span class="sig-name descname"><span class="pre">star_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'⭐'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.star_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.stop_symbol">
+<span class="sig-name descname"><span class="pre">stop_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'■'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.stop_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.switch_values_symbol">
+<span class="sig-name descname"><span class="pre">switch_values_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'⇅'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.switch_values_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.tag_symbol">
+<span class="sig-name descname"><span class="pre">tag_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🏷'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.tag_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.tractor_symbol">
+<span class="sig-name descname"><span class="pre">tractor_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🚜'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.tractor_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.trash_symbol">
+<span class="sig-name descname"><span class="pre">trash_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🗑'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.trash_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.undo_symbol">
+<span class="sig-name descname"><span class="pre">undo_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'↩️'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.undo_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.unlock_symbol">
+<span class="sig-name descname"><span class="pre">unlock_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'🔓'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.unlock_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.up_down_symbol">
+<span class="sig-name descname"><span class="pre">up_down_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'↕️'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.up_down_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.upload_symbol">
+<span class="sig-name descname"><span class="pre">upload_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'📤'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.upload_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.user_symbol">
+<span class="sig-name descname"><span class="pre">user_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'👤'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.user_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.video_symbol">
+<span class="sig-name descname"><span class="pre">video_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'📹'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.video_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.icons.Icons.warning_symbol">
+<span class="sig-name descname"><span class="pre">warning_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'⚠️'</span></em><a class="headerlink" href="#nukebridge.utils.icons.Icons.warning_symbol" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nukebridge.utils.img_utils">
+<span id="nukebridge-utils-img-utils-module"></span><h2>nukebridge.utils.img_utils module<a class="headerlink" href="#module-nukebridge.utils.img_utils" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nukebridge.utils.img_utils.load_image">
+<span class="sig-prename descclassname"><span class="pre">nukebridge.utils.img_utils.</span></span><span class="sig-name descname"><span class="pre">load_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convertToRGB</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/img_utils.html#load_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.img_utils.load_image" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-nukebridge.utils.logger">
+<span id="nukebridge-utils-logger-module"></span><h2>nukebridge.utils.logger module<a class="headerlink" href="#module-nukebridge.utils.logger" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.utils.logger.ColorfulFormatter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.utils.logger.</span></span><span class="sig-name descname"><span class="pre">ColorfulFormatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datefmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defaults</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/logger.html#ColorfulFormatter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.logger.ColorfulFormatter" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.logger.ColorfulFormatter.format">
+<span class="sig-name descname"><span class="pre">format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/logger.html#ColorfulFormatter.format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.logger.ColorfulFormatter.format" title="Link to this definition"></a></dt>
+<dd><p>Format the specified record as text.</p>
+<p>The record’s attribute dictionary is used as the operand to a
+string formatting operation which yields the returned string.
+Before formatting the dictionary, a couple of preparatory steps
+are carried out. The message attribute of the record is computed
+using LogRecord.getMessage(). If the formatting string uses the
+time (as determined by a call to usesTime(), formatTime() is
+called to format the event time. If there is exception information,
+it is formatted using formatException() and appended to the message.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.utils.logger.ColorfulFormatter.format_dict">
+<span class="sig-name descname"><span class="pre">format_dict</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{5:</span> <span class="pre">'\x1b[95m',</span> <span class="pre">10:</span> <span class="pre">'\x1b[94m',</span> <span class="pre">20:</span> <span class="pre">'\x1b[92m',</span> <span class="pre">30:</span> <span class="pre">'\x1b[93m',</span> <span class="pre">40:</span> <span class="pre">'\x1b[91m',</span> <span class="pre">50:</span> <span class="pre">'\x1b[1;31m'}</span></em><a class="headerlink" href="#nukebridge.utils.logger.ColorfulFormatter.format_dict" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.utils.logger.SingletonLogger">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.utils.logger.</span></span><span class="sig-name descname"><span class="pre">SingletonLogger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'NukeBridge'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/logger.html#SingletonLogger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.logger.SingletonLogger" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.logger.SingletonLogger.get_instance">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_instance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/logger.html#SingletonLogger.get_instance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.logger.SingletonLogger.get_instance" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nukebridge.utils.logger.custom_debug">
+<span class="sig-prename descclassname"><span class="pre">nukebridge.utils.logger.</span></span><span class="sig-name descname"><span class="pre">custom_debug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/logger.html#custom_debug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.logger.custom_debug" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nukebridge.utils.logger.dict_to_string">
+<span class="sig-prename descclassname"><span class="pre">nukebridge.utils.logger.</span></span><span class="sig-name descname"><span class="pre">dict_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/logger.html#dict_to_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.logger.dict_to_string" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-nukebridge.utils.soketserver">
+<span id="nukebridge-utils-soketserver-module"></span><h2>nukebridge.utils.soketserver module<a class="headerlink" href="#module-nukebridge.utils.soketserver" title="Link to this heading"></a></h2>
+<p>This module contains the implementation of a socket server and client for a Nuke node.</p>
+<p>The module is divided into three main classes:</p>
+<ol class="arabic simple">
+<li><p>SingletonMeta: A metaclass that ensures only one instance of a class is created for each unique port.</p></li>
+<li><p>ServerClientBase: A base class that provides a basic structure for server and client operations. It includes methods for closing connections and the server, and finding an available port. It also includes methods for encoding and decoding data, and receiving data from a client.</p></li>
+<li><p>SocketServer: A class that inherits from ServerClientBase and uses SingletonMeta as its metaclass. This class is responsible for creating a server that can accept multiple client connections and handle data transmission between the server and the clients.</p></li>
+<li><p>SocketClient: A class that inherits from ServerClientBase. This class is responsible for creating a client that can connect to a server, send data to the server, and receive data from the server.</p></li>
+</ol>
+<p>The module also includes a main function that initializes a SocketServer instance, accepts a client connection, and starts the server.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.ServerClientBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.utils.soketserver.</span></span><span class="sig-name descname"><span class="pre">ServerClientBase</span></span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#ServerClientBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.ServerClientBase" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for server and client operations.</p>
+<p>This class provides a basic structure for server and client operations. It includes methods for closing connections and the server, and finding an available port. It also includes methods for encoding and decoding data, and receiving data from a client.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>client_threads (dict): A dictionary to store client threads.
+client_connections (dict): A dictionary to store client connections.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.ServerClientBase.close_connection">
+<span class="sig-name descname"><span class="pre">close_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#ServerClientBase.close_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.ServerClientBase.close_connection" title="Link to this definition"></a></dt>
+<dd><p>Closes the connection with the client at the given address.</p>
+<p>This method should be overridden in a subclass.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>addr (tuple): The address of the client.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.ServerClientBase.close_server">
+<span class="sig-name descname"><span class="pre">close_server</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#ServerClientBase.close_server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.ServerClientBase.close_server" title="Link to this definition"></a></dt>
+<dd><p>Closes the server.</p>
+<p>This method should be overridden in a subclass.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.ServerClientBase.decode_data">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decode_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_buffer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#ServerClientBase.decode_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.ServerClientBase.decode_data" title="Link to this definition"></a></dt>
+<dd><p>Decodes the data received from the buffer.</p>
+<p>This method continuously checks the data buffer for new data. If new data is found, it is extracted, decoded, and returned. If the complete data is not received yet, the method breaks the loop and returns None.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data_buffer (bytes): The buffer containing the data to be decoded.</p>
+</dd>
+<dt>Returns:</dt><dd><p>object: The decoded data if the complete data is received, otherwise None.</p>
+</dd>
+<dt>Raises:</dt><dd><p>Exception: If an error occurred while decoding the data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.ServerClientBase.encode_data">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">encode_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#ServerClientBase.encode_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.ServerClientBase.encode_data" title="Link to this definition"></a></dt>
+<dd><p>Encodes the data into a serialized format.</p>
+<p>This method takes the data, serializes it using pickle, calculates the size of the serialized data, and then returns the encoded data in a specific format.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (object): The data to be encoded.</p>
+</dd>
+<dt>Returns:</dt><dd><p>bytes: The encoded data in the format b’data::’ + payload_size + serialized_data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.ServerClientBase.find_available_port">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">find_available_port</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#ServerClientBase.find_available_port"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.ServerClientBase.find_available_port" title="Link to this definition"></a></dt>
+<dd><p>Finds an available port.</p>
+<p>This method creates a temporary socket, binds it to an available port chosen by the OS, retrieves the chosen port, and then closes the temporary socket.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: The available port.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.ServerClientBase.receive_data">
+<span class="sig-name descname"><span class="pre">receive_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_handler</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_response_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#ServerClientBase.receive_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.ServerClientBase.receive_data" title="Link to this definition"></a></dt>
+<dd><p>Receives data from a client, decodes it, and optionally handles it.</p>
+<p>This method continuously receives data from a client until the client closes the connection or sends a ‘quit’ command. The received data is decoded and, if a data handler is provided, the decoded data is passed to the handler. If the handler returns a response and return_response_data is True, the response is sent back to the client.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>conn (socket): The client’s socket connection.
+addr (tuple): The client’s address.
+data_handler (callable, optional): A function to handle the decoded data. Defaults to None.
+return_response_data (bool, optional): Whether to send the handler’s response back to the client. Defaults to False.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ConnectionResetError: If the client closes the connection.
+Exception: If an unexpected error occurs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.SingletonMeta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.utils.soketserver.</span></span><span class="sig-name descname"><span class="pre">SingletonMeta</span></span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#SingletonMeta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.SingletonMeta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></p>
+<p>SingletonMeta metaclass.</p>
+<p>This metaclass ensures that only one instance of a class is created for each unique port. It stores the instances in a dictionary where the keys are the ports and the values are the instances.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>_instances (dict): A dictionary to store the instances of the classes that use this metaclass.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.SocketClient">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.utils.soketserver.</span></span><span class="sig-name descname"><span class="pre">SocketClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#SocketClient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.SocketClient" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nukebridge.utils.soketserver.ServerClientBase" title="nukebridge.utils.soketserver.ServerClientBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ServerClientBase</span></code></a></p>
+<p>SocketClient class that inherits from ServerClientBase.</p>
+<p>This class is responsible for creating a client that can connect to a server, send data to the server, and receive data from the server.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>is_client_connected (bool): A flag indicating whether the client is connected to the server.
+thread_list (list): A list to store threads.
+node_obj (object): Nuke node class instance, for example SimpleNode().
+gizmo (object): Nuke object for the gizmo that inside hte node.
+client (socket): The client’s socket connection.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.SocketClient.attempt_reconnect">
+<span class="sig-name descname"><span class="pre">attempt_reconnect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#SocketClient.attempt_reconnect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.SocketClient.attempt_reconnect" title="Link to this definition"></a></dt>
+<dd><p>Attempts to reconnect to the server.</p>
+<p>This method starts a new thread that attempts to reconnect to the server.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>start_sleep (int, optional): The initial delay in seconds before attempting to reconnect. Defaults to 0.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.SocketClient.attempt_to_send">
+<span class="sig-name descname"><span class="pre">attempt_to_send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_to_send</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">600</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#SocketClient.attempt_to_send"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.SocketClient.attempt_to_send" title="Link to this definition"></a></dt>
+<dd><p>Attempts to send data to the server.</p>
+<p>This method tries to send data to the server. If an error occurs, it attempts to reconnect to the server and then tries to send the data again.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data_to_send (object): The data to send to the server.
+timeout (int, optional): The timeout in seconds for waiting for a response. Defaults to 600.</p>
+</dd>
+<dt>Returns:</dt><dd><p>object: The response received from the server, or False if the data could not be sent.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.SocketClient.close_server">
+<span class="sig-name descname"><span class="pre">close_server</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#SocketClient.close_server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.SocketClient.close_server" title="Link to this definition"></a></dt>
+<dd><p>Closes the server.</p>
+<p>This method sends a ‘quit’ command to the server to close the server.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.SocketClient.connect_to_server">
+<span class="sig-name descname"><span class="pre">connect_to_server</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#SocketClient.connect_to_server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.SocketClient.connect_to_server" title="Link to this definition"></a></dt>
+<dd><p>Connects to the server.</p>
+<p>This method attempts to connect to the server. If the connection is successful, it sets the is_client_connected flag to True.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>bool: True if the connection is successful, otherwise False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.SocketClient.ensure_server_connection">
+<span class="sig-name descname"><span class="pre">ensure_server_connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#SocketClient.ensure_server_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.SocketClient.ensure_server_connection" title="Link to this definition"></a></dt>
+<dd><p>Ensures that the client is connected to the server.</p>
+<p>This method checks if the server is running and if the client is connected to the server. If the server is not running, it starts the server. If the client is not connected, it attempts to reconnect to the server.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.SocketClient.is_server_running">
+<span class="sig-name descname"><span class="pre">is_server_running</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#SocketClient.is_server_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.SocketClient.is_server_running" title="Link to this definition"></a></dt>
+<dd><p>Checks if the server is running.</p>
+<p>This method attempts to connect to the server’s port to check if the server is running.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>bool: True if the server is running, otherwise False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.SocketClient.send_data_and_wait_for_response">
+<span class="sig-name descname"><span class="pre">send_data_and_wait_for_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">600</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#SocketClient.send_data_and_wait_for_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.SocketClient.send_data_and_wait_for_response" title="Link to this definition"></a></dt>
+<dd><p>Sends data to the server and waits for a response.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (object): The data to send to the server.
+timeout (int, optional): The timeout in seconds for waiting for a response. Defaults to 600.</p>
+</dd>
+<dt>Returns:</dt><dd><p>object: The response received from the server.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.SocketServer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.utils.soketserver.</span></span><span class="sig-name descname"><span class="pre">SocketServer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#SocketServer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.SocketServer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nukebridge.utils.soketserver.ServerClientBase" title="nukebridge.utils.soketserver.ServerClientBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ServerClientBase</span></code></a></p>
+<p>SocketServer class that inherits from ServerClientBase and uses SingletonMeta as its metaclass.</p>
+<p>This class is responsible for creating a server that can accept multiple client connections and handle data transmission between the server and the clients. It uses the Singleton design pattern to ensure that only one instance of the server is created for each unique port.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>client_threads (dict): A dictionary to store client threads.
+client_connections (dict): A dictionary to store client connections.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.SocketServer.accept_client">
+<span class="sig-name descname"><span class="pre">accept_client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_handler</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_response_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#SocketServer.accept_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.SocketServer.accept_client" title="Link to this definition"></a></dt>
+<dd><p>Accepts a client connection and starts a new thread to receive data from the client.</p>
+<p>This method continuously accepts client connections until the server is closed. For each client connection, it starts a new thread that receives data from the client.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data_handler (callable, optional): A function to handle the decoded data. Defaults to None.
+return_response_data (bool, optional): Whether to send the handler’s response back to the client. Defaults to False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.SocketServer.close_connection">
+<span class="sig-name descname"><span class="pre">close_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#SocketServer.close_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.SocketServer.close_connection" title="Link to this definition"></a></dt>
+<dd><p>Closes the connection with the client at the given address.</p>
+<p>This method closes the connection with the client and removes the client’s connection and thread from the dictionaries.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>addr (tuple): The address of the client.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.SocketServer.close_server">
+<span class="sig-name descname"><span class="pre">close_server</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#SocketServer.close_server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.SocketServer.close_server" title="Link to this definition"></a></dt>
+<dd><p>Closes all client connections and then shuts down the server.</p>
+<p>This method closes all client connections, clears the connections and threads dictionaries, and then shuts down and closes the server socket.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.SocketServer.get_instances">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_instances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#SocketServer.get_instances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.SocketServer.get_instances" title="Link to this definition"></a></dt>
+<dd><p>Returns a copy of the dictionary containing all initialized instances
+of the SocketServer class.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>dict: A dictionary where the keys are the ports and the values are the instances of the SocketServer class.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.SocketServer.send_to_all_clients">
+<span class="sig-name descname"><span class="pre">send_to_all_clients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#SocketServer.send_to_all_clients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.SocketServer.send_to_all_clients" title="Link to this definition"></a></dt>
+<dd><p>Sends data to all connected clients.</p>
+<p>This method encodes the data and sends it to all connected clients.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (object): The data to be sent to the clients.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.utils.soketserver.SocketServer.start_accepting_clients">
+<span class="sig-name descname"><span class="pre">start_accepting_clients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_handler</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_response_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/utils/soketserver.html#SocketServer.start_accepting_clients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.utils.soketserver.SocketServer.start_accepting_clients" title="Link to this definition"></a></dt>
+<dd><p>Starts accepting client connections.</p>
+<p>This method starts a new thread that continuously accepts client connections. For each client connection, it starts a new thread that receives data from the client.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data_handler (callable, optional): A function to handle the decoded data. Defaults to None.
+return_response_data (bool, optional): Whether to send the handler’s response back to the client. Defaults to False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nukebridge.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-nukebridge.utils" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nukebridge.gizmos.core.html" class="btn btn-neutral float-left" title="nukebridge.gizmos.core package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nukebridge.utils.image_io.html" class="btn btn-neutral float-right" title="nukebridge.utils.image_io package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Mahmoud Youssef.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nukebridge.gizmos &mdash; NukeBridge 1.0.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d55fa986"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            NukeBridge
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">nukebridge</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NukeBridge</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../nukebridge.html">nukebridge</a></li>
+      <li class="breadcrumb-item active">nukebridge.gizmos</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nukebridge.gizmos</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module contains the NukeToolbarGenerator class which is responsible for generating a toolbar in Nuke with the gizmos defined in the current package.</span>
+
+<span class="sd">The NukeToolbarGenerator class has methods to get the current package, get the classes defined in the current package, populate the toolbar with the gizmos, and reload the classes.</span>
+
+<span class="sd">There is also a function, fix_mangled_text, defined in this module to fix any mangled text in the gizmo labels.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">ast</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">nuke</span>
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+
+<div class="viewcode-block" id="NukeToolbarGenerator">
+<a class="viewcode-back" href="../../nukebridge.gizmos.html#nukebridge.gizmos.NukeToolbarGenerator">[docs]</a>
+<span class="k">class</span> <span class="nc">NukeToolbarGenerator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The NukeToolbarGenerator class is responsible for generating a toolbar in Nuke with the gizmos defined in the current package.</span>
+
+<span class="sd">    The class has methods to get the current package, get the classes defined in the current package, populate the toolbar with the gizmos, and reload the classes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dev_mode</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the NukeToolbarGenerator with the development mode status.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dev_mode</span> <span class="o">=</span> <span class="n">dev_mode</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;NUKE_DEV&quot;</span><span class="p">,</span> <span class="s2">&quot;False&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;True&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">full_package_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_current_package</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">full_package_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">acronym</span> <span class="o">=</span> <span class="s2">&quot;ADG&quot;</span>
+
+<div class="viewcode-block" id="NukeToolbarGenerator.get_current_file_path">
+<a class="viewcode-back" href="../../nukebridge.gizmos.html#nukebridge.gizmos.NukeToolbarGenerator.get_current_file_path">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_current_file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the path of the current file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="NukeToolbarGenerator.get_current_package">
+<a class="viewcode-back" href="../../nukebridge.gizmos.html#nukebridge.gizmos.NukeToolbarGenerator.get_current_package">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_current_package</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the name and path of the current package.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">current_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_current_file_path</span><span class="p">()</span>
+        <span class="n">parent_folders</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">current_path</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">package_name</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">parent_folders</span><span class="p">:</span>
+            <span class="n">package_name</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">folder</span><span class="p">)</span>
+            <span class="n">full_package_name</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">full_package_name</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">full_package_name</span><span class="p">,</span> <span class="n">current_path</span>
+
+        <span class="k">return</span> <span class="n">full_package_name</span><span class="p">,</span> <span class="n">current_path</span></div>
+
+
+<div class="viewcode-block" id="NukeToolbarGenerator.get_classes">
+<a class="viewcode-back" href="../../nukebridge.gizmos.html#nukebridge.gizmos.NukeToolbarGenerator.get_classes">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Type</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a dictionary of the classes defined in the current package.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">classes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">current_module</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_path</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_path</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">filename</span> <span class="o">==</span> <span class="s1">&#39;__init__.py&#39;</span> <span class="ow">or</span> <span class="n">filename</span> <span class="o">==</span> <span class="n">current_module</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">module_name</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ext</span> <span class="o">==</span> <span class="s1">&#39;.py&#39;</span><span class="p">:</span>
+                <span class="n">full_module_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">full_package_name</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">full_module_name</span><span class="p">)</span>
+                <span class="n">menu_grp</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s1">&#39;MENU_GRP&#39;</span><span class="p">,</span> <span class="s1">&#39;generate&#39;</span><span class="p">)</span>
+                <span class="n">dev_mode</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s1">&#39;DEV_CLS&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">attr_name</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+                    <span class="n">attr</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="ow">and</span> <span class="n">attr_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">module_name</span><span class="p">:</span>
+                        <span class="n">classes</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">menu_grp</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;cls&#39;</span><span class="p">:</span> <span class="n">attr</span><span class="p">,</span> <span class="s1">&#39;module&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">full_package_name</span><span class="p">,</span>
+                                                                 <span class="s1">&#39;dev_mode&#39;</span><span class="p">:</span> <span class="n">dev_mode</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">classes</span></div>
+
+
+<div class="viewcode-block" id="NukeToolbarGenerator.populate_toolbar">
+<a class="viewcode-back" href="../../nukebridge.gizmos.html#nukebridge.gizmos.NukeToolbarGenerator.populate_toolbar">[docs]</a>
+    <span class="k">def</span> <span class="nf">populate_toolbar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolbar</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Populates the toolbar with the gizmos defined in the current package.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">toolbar</span> <span class="o">=</span> <span class="n">toolbar</span> <span class="ow">or</span> <span class="n">nuke</span><span class="o">.</span><span class="n">toolbar</span><span class="p">(</span><span class="s2">&quot;Nodes&quot;</span><span class="p">)</span>
+        <span class="n">icon_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_path</span><span class="p">),</span> <span class="s1">&#39;icons&#39;</span><span class="p">,</span> <span class="s2">&quot;cover.png&quot;</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">toolbar</span><span class="o">.</span><span class="n">addMenu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">module_name</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="n">icon_path</span><span class="p">)</span>
+        <span class="n">classes_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_classes</span><span class="p">()</span>
+        <span class="n">classes_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">gizmos</span> <span class="ow">in</span> <span class="n">classes_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gizmos</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev_mode</span> <span class="ow">and</span> <span class="n">g</span><span class="p">[</span><span class="s1">&#39;dev_mode&#39;</span><span class="p">]:</span>
+                    <span class="k">continue</span>
+                <span class="bp">cls</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="s1">&#39;cls&#39;</span><span class="p">]</span>
+                <span class="n">cmd_name</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span>
+                <span class="n">cmd_module</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__module__</span>
+                <span class="n">classes_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">cmd_module</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">cmd_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">base_class</span> <span class="o">=</span> <span class="n">cmd_module</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="n">m</span><span class="o">.</span><span class="n">addCommand</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">acronym</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">cmd_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                             <span class="sa">f</span><span class="s2">&quot;import </span><span class="si">{</span><span class="n">base_class</span><span class="si">}</span><span class="s2">;</span><span class="si">{</span><span class="n">cmd_module</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">cmd_name</span><span class="si">}</span><span class="s2">(name=&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">acronym</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">cmd_name</span><span class="si">}</span><span class="s2">&#39;)&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_classes_from_module</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">full_package_name</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">classes_list</span><span class="p">:</span>
+                <span class="n">classes_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+        <span class="n">m</span><span class="o">.</span><span class="n">addCommand</span><span class="p">(</span><span class="s1">&#39;Reload modules&#39;</span><span class="p">,</span>
+                     <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">full_package_name</span><span class="si">}</span><span class="s1">.NukeToolbarGenerator.reload_classes(&quot;</span><span class="si">{</span><span class="n">classes_list</span><span class="si">}</span><span class="s1">&quot;)&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="NukeToolbarGenerator.all_classes_from_module">
+<a class="viewcode-back" href="../../nukebridge.gizmos.html#nukebridge.gizmos.NukeToolbarGenerator.all_classes_from_module">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">all_classes_from_module</span><span class="p">(</span><span class="n">module</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list of all classes from a module.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span> <span class="k">if</span> <span class="n">module</span> <span class="ow">in</span> <span class="n">m</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">classes</span></div>
+
+
+<div class="viewcode-block" id="NukeToolbarGenerator.reload_classes">
+<a class="viewcode-back" href="../../nukebridge.gizmos.html#nukebridge.gizmos.NukeToolbarGenerator.reload_classes">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">reload_classes</span><span class="p">(</span><span class="n">classes_list</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reloads the classes in the classes list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">classes_list</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">classes_list</span><span class="p">)</span>
+        <span class="n">unique_packages</span> <span class="o">=</span> <span class="p">{</span><span class="n">cls_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">cls_name</span> <span class="ow">in</span> <span class="n">classes_list</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">cls_name</span><span class="p">}</span>
+        <span class="n">modules_to_reload</span> <span class="o">=</span> <span class="p">{</span><span class="n">module_name</span> <span class="k">for</span> <span class="n">module_name</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="nb">any</span><span class="p">(</span>
+            <span class="n">module_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">package</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">module_name</span> <span class="o">==</span> <span class="n">package</span> <span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="n">unique_packages</span><span class="p">)}</span>
+
+        <span class="k">for</span> <span class="n">module_name</span> <span class="ow">in</span> <span class="n">modules_to_reload</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">module_name</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Deleting </span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">del</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">module_name</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">module_name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">modules_to_reload</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reloading </span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">reloaded_module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+                <span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">reloaded_module</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error reloading </span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="fix_mangled_text">
+<a class="viewcode-back" href="../../nukebridge.gizmos.html#nukebridge.gizmos.fix_mangled_text">[docs]</a>
+<span class="k">def</span> <span class="nf">fix_mangled_text</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fixes any mangled text in the gizmo labels.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;ð[^\x00-\x7F]+&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">replacer</span><span class="p">(</span><span class="n">match</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;latin1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">UnicodeEncodeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nuke</span><span class="o">.</span><span class="n">allNodes</span><span class="p">():</span>
+        <span class="n">all_knobs</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">knobs</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="s1">&#39;gizmo_class_type&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_knobs</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="k">for</span> <span class="n">knob_name</span><span class="p">,</span> <span class="n">knob_obj</span> <span class="ow">in</span> <span class="n">all_knobs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">mangled_text</span> <span class="o">=</span> <span class="n">knob_obj</span><span class="o">.</span><span class="n">label</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">128</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">mangled_text</span><span class="p">):</span>
+                <span class="n">fixed_text</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">replacer</span><span class="p">,</span> <span class="n">mangled_text</span><span class="p">)</span>
+                <span class="n">knob_obj</span><span class="o">.</span><span class="n">setLabel</span><span class="p">(</span><span class="n">fixed_text</span><span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Example usage of the NukeToolbarGenerator class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">toolbar_gen</span> <span class="o">=</span> <span class="n">NukeToolbarGenerator</span><span class="p">(</span><span class="n">dev_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">toolbar_gen</span><span class="o">.</span><span class="n">populate_toolbar</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NukeBridge toolbar populated&quot;</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Mahmoud Youssef.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

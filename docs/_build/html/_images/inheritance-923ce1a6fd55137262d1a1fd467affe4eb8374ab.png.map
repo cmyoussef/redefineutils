@@ -1,0 +1,6 @@
+<map id="inheritance8ccc6ea6f8" name="inheritance8ccc6ea6f8">
+<area shape="rect" id="node1" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base" target="_top" title="Base class for creating gizmos in Nuke. It provides a framework for creating and managing gizmos, including UI setup," alt="" coords="173,4,402,51"/>
+<area shape="rect" id="node2" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive" target="_top" title="The BaseLive class extends the Base class and provides additional functionality for live interaction with gizmos in Nuke." alt="" coords="4,83,280,130"/>
+<area shape="rect" id="node4" href="#nukebridge.gizmos.simplenode.SimpleNode" target="_top" title="This is a simple class that inherits from the Base class." alt="" coords="296,83,572,130"/>
+<area shape="rect" id="node3" href="#nukebridge.gizmos.simplelivenode.SimpleLiveNode" target="_top" title="SimpleLiveNode is a class that inherits from the BaseLive class provided by the nukebridge package." alt="" coords="4,162,328,209"/>
+</map>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nukebridge.gizmos package &mdash; NukeBridge 1.0.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d55fa986"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="nukebridge.gizmos.core package" href="nukebridge.gizmos.core.html" />
+    <link rel="prev" title="nukebridge.executors.core package" href="nukebridge.executors.core.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            NukeBridge
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">nukebridge</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="nukebridge.html">nukebridge package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="nukebridge.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.config.html">nukebridge.config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.executors.html">nukebridge.executors package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">nukebridge.gizmos package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.utils.html">nukebridge.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nukebridge.html#module-nukebridge">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NukeBridge</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">nukebridge</a></li>
+          <li class="breadcrumb-item"><a href="nukebridge.html">nukebridge package</a></li>
+      <li class="breadcrumb-item active">nukebridge.gizmos package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/nukebridge.gizmos.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nukebridge-gizmos-package">
+<h1>nukebridge.gizmos package<a class="headerlink" href="#nukebridge-gizmos-package" title="Link to this heading"></a></h1>
+<section id="inheritance-diagrams">
+<h2>Inheritance Diagrams<a class="headerlink" href="#inheritance-diagrams" title="Link to this heading"></a></h2>
+<div class="graphviz"><img src="_images/inheritance-923ce1a6fd55137262d1a1fd467affe4eb8374ab.png" alt="Inheritance diagram of nukebridge.gizmos.simplelivenode, nukebridge.gizmos.simplenode" usemap="#inheritance8ccc6ea6f8" class="inheritance graphviz" /></div>
+<map id="inheritance8ccc6ea6f8" name="inheritance8ccc6ea6f8">
+<area shape="rect" id="node1" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base" target="_top" title="Base class for creating gizmos in Nuke. It provides a framework for creating and managing gizmos, including UI setup," alt="" coords="173,4,402,51"/>
+<area shape="rect" id="node2" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive" target="_top" title="The BaseLive class extends the Base class and provides additional functionality for live interaction with gizmos in Nuke." alt="" coords="4,83,280,130"/>
+<area shape="rect" id="node4" href="#nukebridge.gizmos.simplenode.SimpleNode" target="_top" title="This is a simple class that inherits from the Base class." alt="" coords="296,83,572,130"/>
+<area shape="rect" id="node3" href="#nukebridge.gizmos.simplelivenode.SimpleLiveNode" target="_top" title="SimpleLiveNode is a class that inherits from the BaseLive class provided by the nukebridge package." alt="" coords="4,162,328,209"/>
+</map></section>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="nukebridge.gizmos.core.html">nukebridge.gizmos.core package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nukebridge.gizmos.core.html#module-nukebridge.gizmos.core.base">nukebridge.gizmos.core.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base"><code class="docutils literal notranslate"><span class="pre">Base</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.MENU_GRP"><code class="docutils literal notranslate"><span class="pre">Base.MENU_GRP</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.THREADS_LIST"><code class="docutils literal notranslate"><span class="pre">Base.THREADS_LIST</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.add_divider"><code class="docutils literal notranslate"><span class="pre">Base.add_divider()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.add_padding"><code class="docutils literal notranslate"><span class="pre">Base.add_padding()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.cache_dir"><code class="docutils literal notranslate"><span class="pre">Base.cache_dir</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.check_files"><code class="docutils literal notranslate"><span class="pre">Base.check_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.config_loader"><code class="docutils literal notranslate"><span class="pre">Base.config_loader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.create_generate_knobs"><code class="docutils literal notranslate"><span class="pre">Base.create_generate_knobs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.create_generate_tab"><code class="docutils literal notranslate"><span class="pre">Base.create_generate_tab()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.create_inputs"><code class="docutils literal notranslate"><span class="pre">Base.create_inputs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.create_settings_knobs"><code class="docutils literal notranslate"><span class="pre">Base.create_settings_knobs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.create_settings_tab"><code class="docutils literal notranslate"><span class="pre">Base.create_settings_tab()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.create_terminal_execution_knobs"><code class="docutils literal notranslate"><span class="pre">Base.create_terminal_execution_knobs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.default_knobs"><code class="docutils literal notranslate"><span class="pre">Base.default_knobs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.execute_callback"><code class="docutils literal notranslate"><span class="pre">Base.execute_callback()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.export_env"><code class="docutils literal notranslate"><span class="pre">Base.export_env()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.find_node_in_group"><code class="docutils literal notranslate"><span class="pre">Base.find_node_in_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.force_evaluate_nodes"><code class="docutils literal notranslate"><span class="pre">Base.force_evaluate_nodes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.format_name"><code class="docutils literal notranslate"><span class="pre">Base.format_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.frame_padding"><code class="docutils literal notranslate"><span class="pre">Base.frame_padding</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.frame_range"><code class="docutils literal notranslate"><span class="pre">Base.frame_range</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.get_config_settings"><code class="docutils literal notranslate"><span class="pre">Base.get_config_settings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.get_export_dir"><code class="docutils literal notranslate"><span class="pre">Base.get_export_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.get_input_img_path"><code class="docutils literal notranslate"><span class="pre">Base.get_input_img_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.get_knob_info"><code class="docutils literal notranslate"><span class="pre">Base.get_knob_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.get_node"><code class="docutils literal notranslate"><span class="pre">Base.get_node()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.get_output_path"><code class="docutils literal notranslate"><span class="pre">Base.get_output_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.input_dict"><code class="docutils literal notranslate"><span class="pre">Base.input_dict</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.input_node"><code class="docutils literal notranslate"><span class="pre">Base.input_node</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.is_connected"><code class="docutils literal notranslate"><span class="pre">Base.is_connected()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.knobChanged"><code class="docutils literal notranslate"><span class="pre">Base.knobChanged()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.load_config"><code class="docutils literal notranslate"><span class="pre">Base.load_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.load_settings"><code class="docutils literal notranslate"><span class="pre">Base.load_settings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.models_filters"><code class="docutils literal notranslate"><span class="pre">Base.models_filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.neg_models_filters"><code class="docutils literal notranslate"><span class="pre">Base.neg_models_filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.on_destroy"><code class="docutils literal notranslate"><span class="pre">Base.on_destroy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.on_execute"><code class="docutils literal notranslate"><span class="pre">Base.on_execute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.on_interrupt"><code class="docutils literal notranslate"><span class="pre">Base.on_interrupt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.output_dir"><code class="docutils literal notranslate"><span class="pre">Base.output_dir</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.output_node"><code class="docutils literal notranslate"><span class="pre">Base.output_node</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.output_path"><code class="docutils literal notranslate"><span class="pre">Base.output_path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.populate_doc"><code class="docutils literal notranslate"><span class="pre">Base.populate_doc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.populate_ui"><code class="docutils literal notranslate"><span class="pre">Base.populate_ui()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.python_exe"><code class="docutils literal notranslate"><span class="pre">Base.python_exe</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.python_path_to_append"><code class="docutils literal notranslate"><span class="pre">Base.python_path_to_append</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.read_node"><code class="docutils literal notranslate"><span class="pre">Base.read_node</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.reload_button"><code class="docutils literal notranslate"><span class="pre">Base.reload_button()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.reload_read_nodes"><code class="docutils literal notranslate"><span class="pre">Base.reload_read_nodes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.run_instance_method"><code class="docutils literal notranslate"><span class="pre">Base.run_instance_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.save_config"><code class="docutils literal notranslate"><span class="pre">Base.save_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.save_settings"><code class="docutils literal notranslate"><span class="pre">Base.save_settings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.set_knob_info"><code class="docutils literal notranslate"><span class="pre">Base.set_knob_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.set_status"><code class="docutils literal notranslate"><span class="pre">Base.set_status()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.show_hide_knobs"><code class="docutils literal notranslate"><span class="pre">Base.show_hide_knobs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.status_bar"><code class="docutils literal notranslate"><span class="pre">Base.status_bar</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.update_args"><code class="docutils literal notranslate"><span class="pre">Base.update_args()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.update_cache_dir"><code class="docutils literal notranslate"><span class="pre">Base.update_cache_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.update_output"><code class="docutils literal notranslate"><span class="pre">Base.update_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.update_single_read_node"><code class="docutils literal notranslate"><span class="pre">Base.update_single_read_node()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.write_input"><code class="docutils literal notranslate"><span class="pre">Base.write_input()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base.write_inputs"><code class="docutils literal notranslate"><span class="pre">Base.write_inputs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nukebridge.gizmos.core.html#module-nukebridge.gizmos.core.baselive">nukebridge.gizmos.core.baselive module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive"><code class="docutils literal notranslate"><span class="pre">BaseLive</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.attempt_reconnect"><code class="docutils literal notranslate"><span class="pre">BaseLive.attempt_reconnect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.batch_process"><code class="docutils literal notranslate"><span class="pre">BaseLive.batch_process()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.close_server"><code class="docutils literal notranslate"><span class="pre">BaseLive.close_server()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.create_generate_knobs"><code class="docutils literal notranslate"><span class="pre">BaseLive.create_generate_knobs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.create_server_utils_knobs"><code class="docutils literal notranslate"><span class="pre">BaseLive.create_server_utils_knobs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.ensure_server_connection"><code class="docutils literal notranslate"><span class="pre">BaseLive.ensure_server_connection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.knobChanged"><code class="docutils literal notranslate"><span class="pre">BaseLive.knobChanged()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.knob_change_handler"><code class="docutils literal notranslate"><span class="pre">BaseLive.knob_change_handler()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.on_destroy"><code class="docutils literal notranslate"><span class="pre">BaseLive.on_destroy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.on_interrupt"><code class="docutils literal notranslate"><span class="pre">BaseLive.on_interrupt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.port"><code class="docutils literal notranslate"><span class="pre">BaseLive.port</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.process_server_response"><code class="docutils literal notranslate"><span class="pre">BaseLive.process_server_response()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.set_port_to_available"><code class="docutils literal notranslate"><span class="pre">BaseLive.set_port_to_available()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.start_server"><code class="docutils literal notranslate"><span class="pre">BaseLive.start_server()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.trigger_knob_change_handler"><code class="docutils literal notranslate"><span class="pre">BaseLive.trigger_knob_change_handler()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.updateUI"><code class="docutils literal notranslate"><span class="pre">BaseLive.updateUI()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.update_args"><code class="docutils literal notranslate"><span class="pre">BaseLive.update_args()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive.update_live_data"><code class="docutils literal notranslate"><span class="pre">BaseLive.update_live_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nukebridge.gizmos.core.html#module-nukebridge.gizmos.core.ui_doc">nukebridge.gizmos.core.ui_doc module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs"><code class="docutils literal notranslate"><span class="pre">UIElementDocs</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.batch_process_knob"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.batch_process_knob</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.cache_dir"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.cache_dir</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.execute_btn"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.execute_btn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.file_pattern_knob"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.file_pattern_knob</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.get_doc"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.get_doc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.interrupt_btn"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.interrupt_btn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.live_update_knob"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.live_update_knob</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.load_settings_btn"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.load_settings_btn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.logger_level"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.logger_level</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.logger_level_menu"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.logger_level_menu</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.output_dir"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.output_dir</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.post_cmd_knob"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.post_cmd_knob</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.pre_cmd_knob"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.pre_cmd_knob</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.python_path_knob"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.python_path_knob</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.save_settings_btn"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.save_settings_btn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.time_out"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.time_out</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.ui_doc.UIElementDocs.use_external_execute"><code class="docutils literal notranslate"><span class="pre">UIElementDocs.use_external_execute</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nukebridge.gizmos.core.html#module-nukebridge.gizmos.core">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nukebridge.gizmos.core.html#inheritance-diagram-for-nukebridge-gizmos-core-base-module">Inheritance Diagram for nukebridge.gizmos.core.base Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="documentation-of-submodules">
+<h2>Documentation of Submodules<a class="headerlink" href="#documentation-of-submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-nukebridge.gizmos.simplelivenode">
+<span id="nukebridge-gizmos-simplelivenode-module"></span><h2>nukebridge.gizmos.simplelivenode module<a class="headerlink" href="#module-nukebridge.gizmos.simplelivenode" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.gizmos.simplelivenode.SimpleLiveNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.gizmos.simplelivenode.</span></span><span class="sig-name descname"><span class="pre">SimpleLiveNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gizmo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/simplelivenode.html#SimpleLiveNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.simplelivenode.SimpleLiveNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.baselive.BaseLive" title="nukebridge.gizmos.core.baselive.BaseLive"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseLive</span></code></a></p>
+<p>SimpleLiveNode is a class that inherits from the BaseLive class provided by the nukebridge package.
+This class serves as a simple example of how to use the BaseLive class.</p>
+<p>The SimpleLiveNode class is responsible for creating and managing user interface elements (knobs) for the gizmo,
+tracking knob values, and updating live data based on knob values.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.simplelivenode.SimpleLiveNode.check_last_knob_value">
+<span class="sig-name descname"><span class="pre">check_last_knob_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">knob_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/simplelivenode.html#SimpleLiveNode.check_last_knob_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.simplelivenode.SimpleLiveNode.check_last_knob_value" title="Link to this definition"></a></dt>
+<dd><p>Checks if the last known value of a knob is different from the current value.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>xy (tuple): The current value of the knob.
+knob_name (str): The name of the knob.</p>
+</dd>
+<dt>Returns:</dt><dd><p>bool: True if the last known value is different from the current value, False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.simplelivenode.SimpleLiveNode.create_generate_knobs">
+<span class="sig-name descname"><span class="pre">create_generate_knobs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/simplelivenode.html#SimpleLiveNode.create_generate_knobs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.simplelivenode.SimpleLiveNode.create_generate_knobs" title="Link to this definition"></a></dt>
+<dd><p>This method is responsible for creating the knobs (user interface elements) for the gizmo.
+It creates a new tab, adds a divider, creates a tracking knob, and calls the parent class’s method to create additional knobs.
+It also checks if there’s an ‘open_new_terminal’ knob and sets its value to True if it exists.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.simplelivenode.SimpleLiveNode.create_tracking_knob">
+<span class="sig-name descname"><span class="pre">create_tracking_knob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/simplelivenode.html#SimpleLiveNode.create_tracking_knob"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.simplelivenode.SimpleLiveNode.create_tracking_knob" title="Link to this definition"></a></dt>
+<dd><p>THis
+Creates a tracking knob on the gizmo. The knob is named ‘track_{n:02d}’ or ‘track_{n:02d}_neg’ if neg is True.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>n (int): The number to use in the knob name.
+neg (bool): Whether to append ‘_neg’ to the knob name. Defaults to False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.simplelivenode.SimpleLiveNode.knobChanged">
+<span class="sig-name descname"><span class="pre">knobChanged</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">knob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/simplelivenode.html#SimpleLiveNode.knobChanged"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.simplelivenode.SimpleLiveNode.knobChanged" title="Link to this definition"></a></dt>
+<dd><p>Handles a change in the value of a knob. If the knob is in ‘updateUI_knobs’ and its value has changed, or if the current frame has changed,
+a timer is started to call the ‘knob_change_handler’ method after a delay.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>knob: The knob that has changed. Defaults to None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.simplelivenode.SimpleLiveNode.update_live_data">
+<span class="sig-name descname"><span class="pre">update_live_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">knob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/simplelivenode.html#SimpleLiveNode.update_live_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.simplelivenode.SimpleLiveNode.update_live_data" title="Link to this definition"></a></dt>
+<dd><p>Updates the live data for a given knob. This method is intended to be overridden by subclasses to provide
+specific functionality for different types of knobs.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>knob: The knob for which to update the live data.</p>
+</dd>
+<dt>Returns:</dt><dd><p>bool: False by default. Subclasses should return True if the live data for the knob was updated successfully.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nukebridge.gizmos.simplenode">
+<span id="nukebridge-gizmos-simplenode-module"></span><h2>nukebridge.gizmos.simplenode module<a class="headerlink" href="#module-nukebridge.gizmos.simplenode" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.gizmos.simplenode.SimpleNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.gizmos.simplenode.</span></span><span class="sig-name descname"><span class="pre">SimpleNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gizmo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/simplenode.html#SimpleNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.simplenode.SimpleNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="nukebridge.gizmos.core.html#nukebridge.gizmos.core.base.Base" title="nukebridge.gizmos.core.base.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code></a></p>
+<p>This is a simple class that inherits from the Base class.
+It’s a basic implementation of a node in the system.</p>
+</dd></dl>
+
+</section>
+<section id="module-nukebridge.gizmos">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-nukebridge.gizmos" title="Link to this heading"></a></h2>
+<p>This module contains the NukeToolbarGenerator class which is responsible for generating a toolbar in Nuke with the gizmos defined in the current package.</p>
+<p>The NukeToolbarGenerator class has methods to get the current package, get the classes defined in the current package, populate the toolbar with the gizmos, and reload the classes.</p>
+<p>There is also a function, fix_mangled_text, defined in this module to fix any mangled text in the gizmo labels.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.gizmos.NukeToolbarGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.gizmos.</span></span><span class="sig-name descname"><span class="pre">NukeToolbarGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos.html#NukeToolbarGenerator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.NukeToolbarGenerator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The NukeToolbarGenerator class is responsible for generating a toolbar in Nuke with the gizmos defined in the current package.</p>
+<p>The class has methods to get the current package, get the classes defined in the current package, populate the toolbar with the gizmos, and reload the classes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.NukeToolbarGenerator.all_classes_from_module">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">all_classes_from_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nukebridge/gizmos.html#NukeToolbarGenerator.all_classes_from_module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.NukeToolbarGenerator.all_classes_from_module" title="Link to this definition"></a></dt>
+<dd><p>Returns a list of all classes from a module.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.NukeToolbarGenerator.get_classes">
+<span class="sig-name descname"><span class="pre">get_classes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nukebridge/gizmos.html#NukeToolbarGenerator.get_classes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.NukeToolbarGenerator.get_classes" title="Link to this definition"></a></dt>
+<dd><p>Returns a dictionary of the classes defined in the current package.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.NukeToolbarGenerator.get_current_file_path">
+<span class="sig-name descname"><span class="pre">get_current_file_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos.html#NukeToolbarGenerator.get_current_file_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.NukeToolbarGenerator.get_current_file_path" title="Link to this definition"></a></dt>
+<dd><p>Returns the path of the current file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.NukeToolbarGenerator.get_current_package">
+<span class="sig-name descname"><span class="pre">get_current_package</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/nukebridge/gizmos.html#NukeToolbarGenerator.get_current_package"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.NukeToolbarGenerator.get_current_package" title="Link to this definition"></a></dt>
+<dd><p>Returns the name and path of the current package.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.NukeToolbarGenerator.populate_toolbar">
+<span class="sig-name descname"><span class="pre">populate_toolbar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toolbar</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos.html#NukeToolbarGenerator.populate_toolbar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.NukeToolbarGenerator.populate_toolbar" title="Link to this definition"></a></dt>
+<dd><p>Populates the toolbar with the gizmos defined in the current package.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.NukeToolbarGenerator.reload_classes">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reload_classes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classes_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos.html#NukeToolbarGenerator.reload_classes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.NukeToolbarGenerator.reload_classes" title="Link to this definition"></a></dt>
+<dd><p>Reloads the classes in the classes list.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nukebridge.gizmos.fix_mangled_text">
+<span class="sig-prename descclassname"><span class="pre">nukebridge.gizmos.</span></span><span class="sig-name descname"><span class="pre">fix_mangled_text</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos.html#fix_mangled_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.fix_mangled_text" title="Link to this definition"></a></dt>
+<dd><p>Fixes any mangled text in the gizmo labels.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nukebridge.executors.core.html" class="btn btn-neutral float-left" title="nukebridge.executors.core package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nukebridge.gizmos.core.html" class="btn btn-neutral float-right" title="nukebridge.gizmos.core package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Mahmoud Youssef.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

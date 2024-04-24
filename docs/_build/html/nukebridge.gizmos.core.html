@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nukebridge.gizmos.core package &mdash; NukeBridge 1.0.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d55fa986"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="nukebridge.utils package" href="nukebridge.utils.html" />
+    <link rel="prev" title="nukebridge.gizmos package" href="nukebridge.gizmos.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            NukeBridge
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">nukebridge</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="nukebridge.html">nukebridge package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="nukebridge.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.config.html">nukebridge.config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.executors.html">nukebridge.executors package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="nukebridge.gizmos.html">nukebridge.gizmos package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nukebridge.utils.html">nukebridge.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nukebridge.html#module-nukebridge">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NukeBridge</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">nukebridge</a></li>
+          <li class="breadcrumb-item"><a href="nukebridge.html">nukebridge package</a></li>
+          <li class="breadcrumb-item"><a href="nukebridge.gizmos.html">nukebridge.gizmos package</a></li>
+      <li class="breadcrumb-item active">nukebridge.gizmos.core package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/nukebridge.gizmos.core.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nukebridge-gizmos-core-package">
+<h1>nukebridge.gizmos.core package<a class="headerlink" href="#nukebridge-gizmos-core-package" title="Link to this heading"></a></h1>
+<p>This package contains the core classes for the gizmos.</p>
+<section id="module-nukebridge.gizmos.core.base">
+<span id="nukebridge-gizmos-core-base-module"></span><h2>nukebridge.gizmos.core.base module<a class="headerlink" href="#module-nukebridge.gizmos.core.base" title="Link to this heading"></a></h2>
+<p>This module contains the Base class which serves as a foundation for creating gizmos in Nuke.</p>
+<p>The Base class provides a framework for creating and managing gizmos, including UI setup, singleton pattern implementation, and execution of external processes. It also includes methods for saving and loading settings, updating the gizmo’s status, and handling the execution of the gizmo.</p>
+<p>The Base class is designed to be extended by other classes that implement specific gizmo functionality. These subclasses can override methods of the Base class to provide custom behavior.</p>
+<p>This module also includes a main section that creates an instance of the Base class for testing purposes.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.gizmos.core.base.</span></span><span class="sig-name descname"><span class="pre">Base</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gizmo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for creating gizmos in Nuke. It provides a framework for creating and managing gizmos, including UI setup,
+singleton pattern implementation, and execution of external processes.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.MENU_GRP">
+<span class="sig-name descname"><span class="pre">MENU_GRP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'generate'</span></em><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.MENU_GRP" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.THREADS_LIST">
+<span class="sig-name descname"><span class="pre">THREADS_LIST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.THREADS_LIST" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.add_divider">
+<span class="sig-name descname"><span class="pre">add_divider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.add_divider"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.add_divider" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.add_padding">
+<span class="sig-name descname"><span class="pre">add_padding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.add_padding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.add_padding" title="Link to this definition"></a></dt>
+<dd><p>Adds padding to the file name in a given path according to the class’s frame padding settings. Useful for generating file names that include frame numbers.</p>
+<p>&#64;param path: The initial file path, potentially without frame number padding.
+&#64;param ext: Optional. The file extension to use if changing the extension of the path. Uses the path’s current extension if not provided.
+&#64;return: The modified path with frame number padding added.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.cache_dir">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cache_dir</span></span><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.cache_dir" title="Link to this definition"></a></dt>
+<dd><p>Property that gets the value of the “cache_dir” knob from the gizmo.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>str: The value of the “cache_dir” knob.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.check_files">
+<span class="sig-name descname"><span class="pre">check_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.check_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.check_files" title="Link to this definition"></a></dt>
+<dd><p>Monitors a list of files until they are found or a timeout is reached. Used to wait for files to be generated.</p>
+<p>&#64;param files: A list of file paths to monitor.
+&#64;param timeout: How long to wait before giving up, in seconds.
+&#64;param sleep: How long to wait between checks, in seconds.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.config_loader">
+<span class="sig-name descname"><span class="pre">config_loader</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;nukebridge.config.config_loader.ConfigLoader</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.config_loader" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.create_generate_knobs">
+<span class="sig-name descname"><span class="pre">create_generate_knobs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.create_generate_knobs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.create_generate_knobs" title="Link to this definition"></a></dt>
+<dd><p>Sets up the UI knobs under the ‘Generate’ tab.
+This method is responsible for creating and organizing knobs related to the generation process.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.create_generate_tab">
+<span class="sig-name descname"><span class="pre">create_generate_tab</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.create_generate_tab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.create_generate_tab" title="Link to this definition"></a></dt>
+<dd><p>This method is responsible for creating a ‘Generate’ tab in the gizmo’s UI if it doesn’t already exist.
+The ‘Generate’ tab is used to house controls related to the generation of output from the gizmo.</p>
+<p>The method performs the following steps:
+1. Checks if a ‘Generate’ tab already exists in the gizmo’s UI.
+2. If not, it creates a new ‘Generate’ tab and adds it to the gizmo’s UI.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.create_inputs">
+<span class="sig-name descname"><span class="pre">create_inputs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.create_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.create_inputs" title="Link to this definition"></a></dt>
+<dd><p>This method is responsible for creating the necessary inputs for the gizmo.
+Currently, it returns the input_node property of the gizmo, but it can be overridden in subclasses to create more complex inputs.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Node: The input node of the gizmo.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.create_settings_knobs">
+<span class="sig-name descname"><span class="pre">create_settings_knobs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.create_settings_knobs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.create_settings_knobs" title="Link to this definition"></a></dt>
+<dd><p>This method is responsible for creating the settings knobs for the gizmo.</p>
+<p>The method performs the following steps:
+1. Calls the create_settings_tab method to create a ‘Settings’ tab in the gizmo’s UI if it doesn’t already exist.
+2. Adds a ‘Save Settings’ button to the gizmo’s UI, which when clicked, calls the save_settings method.
+3. Adds a ‘Load Settings’ button to the gizmo’s UI, which when clicked, calls the load_config method.
+4. Adds a divider to the gizmo’s UI with the label “Advanced CMD”.
+5. Adds a ‘pre cmd’ and ‘post cmd’ multiline string knobs to the gizmo’s UI for entering pre and post commands.
+6. Adds a divider to the gizmo’s UI.
+7. Adds a ‘logger level’ menu to the gizmo’s UI for setting the logger level.
+8. Adds a ‘time_out’ knob to the gizmo’s UI for setting the timeout duration.
+9. Adds another divider to the gizmo’s UI with the label “Directory location”.
+10. Adds an ‘output format’ knob to the gizmo’s UI for setting the output format.
+11. Adds an ‘output dir’ knob to the gizmo’s UI for setting the output directory.
+12. Adds a ‘cache dir’ knob to the gizmo’s UI for setting the cache directory.
+13. Adds a ‘python exe’ knob to the gizmo’s UI for setting the Python executable path.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.create_settings_tab">
+<span class="sig-name descname"><span class="pre">create_settings_tab</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.create_settings_tab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.create_settings_tab" title="Link to this definition"></a></dt>
+<dd><p>Creates a ‘Settings’ tab in the gizmo’s UI if it doesn’t already exist.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.create_terminal_execution_knobs">
+<span class="sig-name descname"><span class="pre">create_terminal_execution_knobs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.create_terminal_execution_knobs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.create_terminal_execution_knobs" title="Link to this definition"></a></dt>
+<dd><p>Creates knobs for controlling the execution of processes in an external terminal.
+This includes options to execute, interrupt, and manage execution settings.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.default_knobs">
+<span class="sig-name descname"><span class="pre">default_knobs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.default_knobs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.execute_callback">
+<span class="sig-name descname"><span class="pre">execute_callback</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.execute_callback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.execute_callback" title="Link to this definition"></a></dt>
+<dd><p>A callback method that is called upon the completion of the execution process. It typically updates the gizmo’s UI to indicate that the process has finished and performs any necessary cleanup.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.export_env">
+<span class="sig-name descname"><span class="pre">export_env</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.export_env"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.export_env" title="Link to this definition"></a></dt>
+<dd><p>Exports the environment for the external process. This includes setting up environment variables for the cache directory
+and adding the nukebridge module directory to the PYTHONPATH.</p>
+<p>The environment variables are stored in the args dictionary under the ‘export_env’ key.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.find_node_in_group">
+<span class="sig-name descname"><span class="pre">find_node_in_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.find_node_in_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.find_node_in_group" title="Link to this definition"></a></dt>
+<dd><p>Searches for a node with the specified name within the gizmo’s node group.</p>
+<p>&#64;param node_name: The name of the node to find.
+&#64;return: The found node if it exists within the group, None otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.force_evaluate_nodes">
+<span class="sig-name descname"><span class="pre">force_evaluate_nodes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.force_evaluate_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.force_evaluate_nodes" title="Link to this definition"></a></dt>
+<dd><p>Forces the evaluation of all nodes in the gizmo. This is done by changing the label of the ‘Output1’ node,
+which triggers an update of the node graph in Nuke.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.format_name">
+<span class="sig-name descname"><span class="pre">format_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.format_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.format_name" title="Link to this definition"></a></dt>
+<dd><p>Formats a path based on user input, replacing placeholders with dynamic values and handling datetime formatting.</p>
+<p>&#64;param user_input: The format string provided by the user, which may include datetime formats, placeholders, and intended directories.
+&#64;return: A path string with placeholders replaced by their corresponding dynamic values.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.frame_padding">
+<span class="sig-name descname"><span class="pre">frame_padding</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'%04d'</span></em><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.frame_padding" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.frame_range">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">frame_range</span></span><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.frame_range" title="Link to this definition"></a></dt>
+<dd><p>Property that gets the frame range for the gizmo.</p>
+<p>If the ‘use_frame_range_knobs’ knob is set to True, it returns the values of the ‘first_frame_knob’ and ‘last_frame_knob’.
+If the ‘use_frame_range_knobs’ knob is set to False, it returns the current frame for both the start and end frame.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>tuple: A tuple containing the start and end frame as integers.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.get_config_settings">
+<span class="sig-name descname"><span class="pre">get_config_settings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.get_config_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.get_config_settings" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.get_export_dir">
+<span class="sig-name descname"><span class="pre">get_export_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.get_export_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.get_export_dir" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the directory path where export files should be stored.
+This path is usually based on user configurations and may involve some formatting based on the current state.</p>
+<p>&#64;return: The path to the directory where export files should be stored.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.get_input_img_path">
+<span class="sig-name descname"><span class="pre">get_input_img_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.get_input_img_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.get_input_img_path" title="Link to this definition"></a></dt>
+<dd><p>Constructs the file path for an input image based on the provided input node and the current configuration.</p>
+<dl class="simple">
+<dt>&#64;param input_node: Optional. The node for which to construct the input image path.</dt><dd><p>If not provided, uses the class’s input node.</p>
+</dd>
+</dl>
+<p>&#64;return: The constructed file path for the input image.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.get_knob_info">
+<span class="sig-name descname"><span class="pre">get_knob_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.get_knob_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.get_knob_info" title="Link to this definition"></a></dt>
+<dd><p>Retrieves information about the knobs of a node or the gizmo and returns it as a dictionary.</p>
+<p>&#64;param node: Optional. The node from which to gather knob information. If not provided, gathers information from the gizmo.
+&#64;return: A dictionary with knob names as keys and their values and types.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.get_node">
+<span class="sig-name descname"><span class="pre">get_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodeName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodeType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.get_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.get_node" title="Link to this definition"></a></dt>
+<dd><p>Retrieves a node by name within the gizmo’s context or creates it if it doesn’t exist and a type is provided.</p>
+<p>&#64;param nodeName: The name of the node to retrieve or create.
+&#64;param nodeType: Optional. The type of node to create if the node does not exist. If None, no node will be created if it doesn’t exist.
+&#64;return: The node if found or created, or None if not found and not created.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.get_output_path">
+<span class="sig-name descname"><span class="pre">get_output_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ext</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'png'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.get_output_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.get_output_path" title="Link to this definition"></a></dt>
+<dd><p>Gets the output path for the gizmo, adding padding to the file name according to the class’s frame padding settings.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>ext (str): The file extension/type to use for the output file. Defaults to ‘png’.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: The modified path with frame number padding added.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.input_dict">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">input_dict</span></span><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.input_dict" title="Link to this definition"></a></dt>
+<dd><p>Property that gets a dictionary with ‘input’ as key and the input_node as value.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>dict: A dictionary with ‘input’ as key and the input_node as value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.input_node">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">input_node</span></span><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.input_node" title="Link to this definition"></a></dt>
+<dd><p>Property that gets the “Input1” node of type ‘Input’ from the gizmo.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Node: The “Input1” node of type ‘Input’.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.is_connected">
+<span class="sig-name descname"><span class="pre">is_connected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.is_connected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.is_connected" title="Link to this definition"></a></dt>
+<dd><p>Checks whether the specified node, or the class’s input node if none is specified, is connected to any input.</p>
+<p>&#64;param node: Optional. The node to check for connectivity. If not provided, checks the class’s default input node.
+&#64;return: True if the node is connected, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.knobChanged">
+<span class="sig-name descname"><span class="pre">knobChanged</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">knob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.knobChanged"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.knobChanged" title="Link to this definition"></a></dt>
+<dd><p>Called when a knob value changes. It can implement custom behavior based on the changed knob.</p>
+<p>&#64;param knob: The knob that has changed.
+&#64;return: True if the change is handled and does not need further processing, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.load_config">
+<span class="sig-name descname"><span class="pre">load_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.load_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.load_config" title="Link to this definition"></a></dt>
+<dd><p>Loads configuration settings from a file and applies them to the gizmo.</p>
+<p>This method typically reads from a user-specific configuration file and sets various knobs or properties based on the stored values.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.load_settings">
+<span class="sig-name descname"><span class="pre">load_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.load_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.load_settings" title="Link to this definition"></a></dt>
+<dd><p>Loads settings from a file and applies them to the specified node or the gizmo if no node is specified.</p>
+<p>&#64;param node: Optional. The node to which the settings will be applied. If not provided, settings are applied to the gizmo.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.models_filters">
+<span class="sig-name descname"><span class="pre">models_filters</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.models_filters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.neg_models_filters">
+<span class="sig-name descname"><span class="pre">neg_models_filters</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.neg_models_filters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.on_destroy">
+<span class="sig-name descname"><span class="pre">on_destroy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.on_destroy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.on_destroy" title="Link to this definition"></a></dt>
+<dd><p>This method is called when the gizmo is destroyed.
+Currently, it does nothing, but it can be overridden in subclasses to perform cleanup tasks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.on_execute">
+<span class="sig-name descname"><span class="pre">on_execute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.on_execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.on_execute" title="Link to this definition"></a></dt>
+<dd><p>Handles the execution logic for the gizmo. This method prepares the arguments, starts the execution thread if necessary, and updates the UI to reflect the current execution state.</p>
+<p>It can execute a predefined command directly or delegate the execution to an external tool or service, depending on the gizmo’s configuration.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.on_interrupt">
+<span class="sig-name descname"><span class="pre">on_interrupt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.on_interrupt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.on_interrupt" title="Link to this definition"></a></dt>
+<dd><p>Handles interrupting or terminating the ongoing execution process.
+This is typically bound to a UI element allowing users to stop a process before completion.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.output_dir">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_dir</span></span><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.output_dir" title="Link to this definition"></a></dt>
+<dd><p>Property that gets the value of the “output_dir” knob from the gizmo.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>str: The value of the “output_dir” knob.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.output_node">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_node</span></span><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.output_node" title="Link to this definition"></a></dt>
+<dd><p>Property that gets the “Output1” node of type ‘Output’ from the gizmo.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Node: The “Output1” node of type ‘Output’.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.output_path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_path</span></span><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.output_path" title="Link to this definition"></a></dt>
+<dd><p>Property that gets the output path for the gizmo. The output path is determined by formatting the value of the
+‘output_format_knob’ with the ‘format_name’ method. This allows for dynamic paths based on user configurations
+and the current state.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>str: The output path for the gizmo.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.populate_doc">
+<span class="sig-name descname"><span class="pre">populate_doc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.populate_doc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.populate_doc" title="Link to this definition"></a></dt>
+<dd><p>Populates the tooltips of the knobs in the gizmo with their corresponding documentation.</p>
+<p>&#64;param node: The node for which to populate the documentation. If not provided, the gizmo’s node is used.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.populate_ui">
+<span class="sig-name descname"><span class="pre">populate_ui</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.populate_ui"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.populate_ui" title="Link to this definition"></a></dt>
+<dd><p>This method is responsible for setting up the user interface (UI) of the gizmo.
+It creates the necessary inputs, generate knobs, and settings knobs for the gizmo.
+It also populates the documentation for the UI elements.</p>
+<dl class="simple">
+<dt>The method performs the following steps:</dt><dd><ol class="arabic simple">
+<li><p>Begins the gizmo context.</p></li>
+<li><p>Calls the create_inputs method to create the necessary inputs for the gizmo.</p></li>
+<li><p>Calls the create_generate_knobs method to create the generate knobs for the gizmo.</p></li>
+<li><p>Calls the create_settings_knobs method to create the settings knobs for the gizmo.</p></li>
+<li><p>Ends the gizmo context.</p></li>
+<li><p>Calls the populate_doc method to populate the documentation for the UI elements.</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.python_exe">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">python_exe</span></span><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.python_exe" title="Link to this definition"></a></dt>
+<dd><p>Property that gets the value of the “python_exe_knob” from the gizmo.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>str: The value of the “python_exe_knob” knob.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.python_path_to_append">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">python_path_to_append</span></span><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.python_path_to_append" title="Link to this definition"></a></dt>
+<dd><p>Property that returns a list of paths to be appended to the PYTHONPATH.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.read_node">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_node</span></span><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.read_node" title="Link to this definition"></a></dt>
+<dd><p>Property that gets the “Read1” node of type ‘Read’ from the gizmo.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Node: The “Read1” node of type ‘Read’.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.reload_button">
+<span class="sig-name descname"><span class="pre">reload_button</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.reload_button"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.reload_button" title="Link to this definition"></a></dt>
+<dd><p>Creates or retrieves a ‘reload’ button knob for the gizmo.
+This can be used to trigger a refresh or reload of certain data.</p>
+<p>&#64;return: The reload button knob.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.reload_read_nodes">
+<span class="sig-name descname"><span class="pre">reload_read_nodes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.reload_read_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.reload_read_nodes" title="Link to this definition"></a></dt>
+<dd><p>Reloads all Read nodes within the gizmo. This is typically used to refresh the content of Read nodes
+after changes to their source files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.run_instance_method">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_instance_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.run_instance_method"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.run_instance_method" title="Link to this definition"></a></dt>
+<dd><p>A class method that executes a method of an existing instance based on a node name. It is typically used as a callback from UI elements to execute instance methods.</p>
+<p>&#64;param args: The first argument should be the method name to call. Any subsequent arguments are passed to the method.
+&#64;param kwargs: Keyword arguments to pass to the method.
+&#64;return: The result of the method call, if any.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.save_config">
+<span class="sig-name descname"><span class="pre">save_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.save_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.save_config" title="Link to this definition"></a></dt>
+<dd><p>Saves the current configuration settings to a file.</p>
+<p>This method typically writes to a user-specific configuration file, storing values from various knobs or properties that need to be persisted.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.save_settings">
+<span class="sig-name descname"><span class="pre">save_settings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.save_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.save_settings" title="Link to this definition"></a></dt>
+<dd><p>Saves the current settings to a file for persistence. This includes knob values and possibly other UI state information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.set_knob_info">
+<span class="sig-name descname"><span class="pre">set_knob_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.set_knob_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.set_knob_info" title="Link to this definition"></a></dt>
+<dd><p>Sets the values of knobs based on information provided in a dictionary.</p>
+<p>&#64;param info_dict: A dictionary containing knob names as keys and their values.
+&#64;param node: Optional. The node whose knobs will be set. If not provided, sets the knobs on the gizmo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.set_status">
+<span class="sig-name descname"><span class="pre">set_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">running</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.set_status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.set_status" title="Link to this definition"></a></dt>
+<dd><p>Sets the status of the gizmo, updating the UI to reflect whether it’s running or idle.</p>
+<p>&#64;param running: A boolean indicating whether the gizmo is running. If True, the gizmo is marked as running.
+&#64;param msg: The message to display in the status bar.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.show_hide_knobs">
+<span class="sig-name descname"><span class="pre">show_hide_knobs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">knob_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.show_hide_knobs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.show_hide_knobs" title="Link to this definition"></a></dt>
+<dd><p>Shows or hides the specified list of knobs on the gizmo’s UI.</p>
+<p>&#64;param knob_list: A list of knob names to be shown or hidden. Can also be a single knob name as a string.
+&#64;param show: Boolean indicating whether to show (True) or hide (False) the specified knobs.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.status_bar">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">status_bar</span></span><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.status_bar" title="Link to this definition"></a></dt>
+<dd><p>This property retrieves the ‘status_bar_knob’ from the gizmo’s knobs.
+If the knob does not exist, it creates a new Text_Knob with the name ‘status_bar_knob’ and adds it to the gizmo.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>nuke.Text_Knob: The status bar knob of the gizmo.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.update_args">
+<span class="sig-name descname"><span class="pre">update_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.update_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.update_args" title="Link to this definition"></a></dt>
+<dd><p>Updates the arguments dictionary that will be passed to external processes. This includes setting up the paths for input and output files and including additional data as necessary.</p>
+<p>This method should be overridden in subclasses to provide specific argument setups required for their functionality.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.update_cache_dir">
+<span class="sig-name descname"><span class="pre">update_cache_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.update_cache_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.update_cache_dir" title="Link to this definition"></a></dt>
+<dd><p>Updates the cache directory path based on the user’s input or a default location.</p>
+<p>&#64;return: The updated cache directory path.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.update_output">
+<span class="sig-name descname"><span class="pre">update_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_batch</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.update_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.update_output" title="Link to this definition"></a></dt>
+<dd><p>Updates the output nodes based on the given batch of output files.
+Creates new Read nodes for each file in the output batch and sets their properties accordingly.</p>
+<p>&#64;param output_batch: A list of output file paths or a single output file path.
+Each path is used to create or update a Read node within the gizmo.
+&#64;return: A list of updated or created Read nodes corresponding to the output files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.update_single_read_node">
+<span class="sig-name descname"><span class="pre">update_single_read_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.update_single_read_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.update_single_read_node" title="Link to this definition"></a></dt>
+<dd><p>Updates a single Read node with a new file path and reloads it. It also adjusts the frame range and on_error behavior.</p>
+<p>&#64;param node: The Read node to update.
+&#64;param file_path: The new file path to assign to the node.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.write_input">
+<span class="sig-name descname"><span class="pre">write_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputPath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hard_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.write_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.write_input" title="Link to this definition"></a></dt>
+<dd><p>Writes the input of a specified node to a file.
+It supports writing a temporary single-pixel image for quick checks or a full image based on the node’s output.</p>
+<p>&#64;param outputPath: The path where the output file will be saved. It may include a pattern for frame numbering.
+&#64;param node: Optional. The node whose output will be written. Defaults to the input node of the gizmo.
+&#64;param ext: Optional. The file extension/type to use for the output file. Defaults to self.ext.
+&#64;param frame_range: Optional. A tuple specifying the start and end frames to write. Uses the gizmo’s frame range if not provided.
+&#64;param temp: Optional. If True, writes a temporary 1x1 pixel image instead of the full output. Defaults to False.
+&#64;param hard_error: Optional. If True, raises an error if the node is not connected. Defaults to False.
+&#64;return: The path to the written file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.base.Base.write_inputs">
+<span class="sig-name descname"><span class="pre">write_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/base.html#Base.write_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.base.Base.write_inputs" title="Link to this definition"></a></dt>
+<dd><p>Writes the inputs of the gizmo to files. The inputs are determined by the input_dict property of the gizmo.
+Each input is written to a file using the write_input method, and the file path is stored in the args dictionary
+with the corresponding key from input_dict.
+Args:</p>
+<blockquote>
+<div><p>frame_range (tuple): Optional. A tuple specifying the start and end frames to write.
+Uses the gizmo’s frame range if not provided.</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nukebridge.gizmos.core.baselive">
+<span id="nukebridge-gizmos-core-baselive-module"></span><h2>nukebridge.gizmos.core.baselive module<a class="headerlink" href="#module-nukebridge.gizmos.core.baselive" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.gizmos.core.baselive.</span></span><span class="sig-name descname"><span class="pre">BaseLive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gizmo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nukebridge.gizmos.core.base.Base" title="nukebridge.gizmos.core.base.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code></a></p>
+<p>The BaseLive class extends the Base class and provides additional functionality for live interaction with gizmos in Nuke.
+It includes methods for creating and managing a server connection, updating the UI, and handling knob changes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.attempt_reconnect">
+<span class="sig-name descname"><span class="pre">attempt_reconnect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.attempt_reconnect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.attempt_reconnect" title="Link to this definition"></a></dt>
+<dd><p>Attempts to reconnect to the server.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.batch_process">
+<span class="sig-name descname"><span class="pre">batch_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">single_frame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.batch_process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.batch_process" title="Link to this definition"></a></dt>
+<dd><p>Processes a batch of frames, sending updated data for each frame to the server.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.close_server">
+<span class="sig-name descname"><span class="pre">close_server</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.close_server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.close_server" title="Link to this definition"></a></dt>
+<dd><p>Closes the server connection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.create_generate_knobs">
+<span class="sig-name descname"><span class="pre">create_generate_knobs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.create_generate_knobs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.create_generate_knobs" title="Link to this definition"></a></dt>
+<dd><p>Creates a set of knobs on the gizmo for generating output. These include knobs for setting the frame range,
+starting a batch process, and updating the UI.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.create_server_utils_knobs">
+<span class="sig-name descname"><span class="pre">create_server_utils_knobs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.create_server_utils_knobs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.create_server_utils_knobs" title="Link to this definition"></a></dt>
+<dd><p>Creates a set of utility knobs on the gizmo for managing the server connection. These include knobs for setting the port,
+finding an available port, starting the server, connecting to the server, and closing the server.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.ensure_server_connection">
+<span class="sig-name descname"><span class="pre">ensure_server_connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.ensure_server_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.ensure_server_connection" title="Link to this definition"></a></dt>
+<dd><p>Ensures that a connection to the server is established.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.knobChanged">
+<span class="sig-name descname"><span class="pre">knobChanged</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">knob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.knobChanged"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.knobChanged" title="Link to this definition"></a></dt>
+<dd><p>Handles a change in the value of a knob. If the knob is in ‘updateUI_knobs’ and its value has changed, or if the current frame has changed,
+a timer is started to call the ‘knob_change_handler’ method after a delay.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>knob: The knob that has changed. Defaults to None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.knob_change_handler">
+<span class="sig-name descname"><span class="pre">knob_change_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.knob_change_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.knob_change_handler" title="Link to this definition"></a></dt>
+<dd><p>Handles changes in knob values and sends updated data to the server.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>batch (bool): If True, indicates that the method is being called as part of a batch process. Defaults to False.</p>
+</dd>
+<dt>Returns:</dt><dd><p>bool: The response from the server after attempting to send data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.on_destroy">
+<span class="sig-name descname"><span class="pre">on_destroy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.on_destroy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.on_destroy" title="Link to this definition"></a></dt>
+<dd><p>Closes the server when the gizmo is destroyed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.on_interrupt">
+<span class="sig-name descname"><span class="pre">on_interrupt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.on_interrupt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.on_interrupt" title="Link to this definition"></a></dt>
+<dd><p>Handles an interrupt signal by closing the server and terminating all running threads.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.port">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">port</span></span><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.port" title="Link to this definition"></a></dt>
+<dd><p>Property that gets the port for the server connection. If a ‘port_knob’ exists on the gizmo, its value is used.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: The port for the server connection.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.process_server_response">
+<span class="sig-name descname"><span class="pre">process_server_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server_respond</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.process_server_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.process_server_response" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.set_port_to_available">
+<span class="sig-name descname"><span class="pre">set_port_to_available</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.set_port_to_available"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.set_port_to_available" title="Link to this definition"></a></dt>
+<dd><p>Sets the port to an available port.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.start_server">
+<span class="sig-name descname"><span class="pre">start_server</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.start_server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.start_server" title="Link to this definition"></a></dt>
+<dd><p>Starts the server and updates the status.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.trigger_knob_change_handler">
+<span class="sig-name descname"><span class="pre">trigger_knob_change_handler</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.trigger_knob_change_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.trigger_knob_change_handler" title="Link to this definition"></a></dt>
+<dd><p>Triggers the knob change handler. If a knob change timer is currently running, it is cancelled before a new timer is started.
+The new timer will call the ‘knob_change_handler’ method after a delay of 0.5 seconds.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.updateUI">
+<span class="sig-name descname"><span class="pre">updateUI</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.updateUI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.updateUI" title="Link to this definition"></a></dt>
+<dd><p>Updates the UI of the gizmo. This is done by calling the ‘knobChanged’ method for each knob in ‘updateUI_knobs’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.update_args">
+<span class="sig-name descname"><span class="pre">update_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.update_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.update_args" title="Link to this definition"></a></dt>
+<dd><p>Updates the arguments with the current port.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.baselive.BaseLive.update_live_data">
+<span class="sig-name descname"><span class="pre">update_live_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">knob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/baselive.html#BaseLive.update_live_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.baselive.BaseLive.update_live_data" title="Link to this definition"></a></dt>
+<dd><p>Updates the live data for a given knob. This method is intended to be overridden by subclasses to provide
+specific functionality for different types of knobs.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>knob: The knob for which to update the live data.</p>
+</dd>
+<dt>Returns:</dt><dd><p>bool: False by default. Subclasses should return True if the live data for the knob was updated successfully.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nukebridge.gizmos.core.ui_doc">
+<span id="nukebridge-gizmos-core-ui-doc-module"></span><h2>nukebridge.gizmos.core.ui_doc module<a class="headerlink" href="#module-nukebridge.gizmos.core.ui_doc" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nukebridge.gizmos.core.ui_doc.</span></span><span class="sig-name descname"><span class="pre">UIElementDocs</span></span><a class="reference internal" href="_modules/nukebridge/gizmos/core/ui_doc.html#UIElementDocs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.batch_process_knob">
+<span class="sig-name descname"><span class="pre">batch_process_knob</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Starts</span> <span class="pre">a</span> <span class="pre">batch</span> <span class="pre">process</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">range</span> <span class="pre">of</span> <span class="pre">frames.</span> <span class="pre">This</span> <span class="pre">will</span> <span class="pre">send</span> <span class="pre">updated</span> <span class="pre">data</span> <span class="pre">for</span> <span class="pre">each</span> <span class="pre">frame</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">server.'</span></em><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.batch_process_knob" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.cache_dir">
+<span class="sig-name descname"><span class="pre">cache_dir</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160; <span class="pre">Directory</span> <span class="pre">where</span> <span class="pre">the</span> <span class="pre">cache</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">generated</span> <span class="pre">images</span> <span class="pre">will</span> <span class="pre">be</span> <span class="pre">stored.\n</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.cache_dir" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.execute_btn">
+<span class="sig-name descname"><span class="pre">execute_btn</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&quot;\n</span>&#160;&#160;&#160; <span class="pre">Press</span> <span class="pre">this</span> <span class="pre">button</span> <span class="pre">to</span> <span class="pre">generate</span> <span class="pre">the</span> <span class="pre">image.</span> <span class="pre">Once</span> <span class="pre">the</span> <span class="pre">button</span> <span class="pre">is</span> <span class="pre">pressed</span> <span class="pre">a</span> <span class="pre">process</span> <span class="pre">is</span> <span class="pre">launched</span> <span class="pre">on</span> <span class="pre">the</span> <span class="pre">Nuke's</span> <span class="pre">terminal.</span> <span class="pre">You</span> <span class="pre">can</span> <span class="pre">look</span> <span class="pre">there</span> <span class="pre">to</span> <span class="pre">see</span> <span class="pre">the</span> <span class="pre">progress</span> <span class="pre">or</span> <span class="pre">errors.\n</span>&#160;&#160;&#160; <span class="pre">&quot;</span></em><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.execute_btn" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.file_pattern_knob">
+<span class="sig-name descname"><span class="pre">file_pattern_knob</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160; <span class="pre">Custom</span> <span class="pre">Filename</span> <span class="pre">and</span> <span class="pre">Path</span> <span class="pre">Configuration\n\n</span>&#160;&#160;&#160; <span class="pre">Configure</span> <span class="pre">the</span> <span class="pre">naming</span> <span class="pre">convention</span> <span class="pre">for</span> <span class="pre">your</span> <span class="pre">output</span> <span class="pre">files</span> <span class="pre">and</span> <span class="pre">folders</span> <span class="pre">by</span> <span class="pre">using</span> <span class="pre">a</span> <span class="pre">customizable</span> <span class="pre">format</span> <span class="pre">string.</span> <span class="pre">\n</span>&#160;&#160;&#160; <span class="pre">The</span> <span class="pre">default</span> <span class="pre">format</span> <span class="pre">is:\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&lt;span</span> <span class="pre">style=\'color:blue\'&gt;&amp;lt;scriptName&amp;gt;/&amp;lt;nodeName&amp;gt;/%Y%m%d/%Y%m%d_%H%M%S&lt;/span&gt;\n</span>&#160;&#160;&#160; <span class="pre">This</span> <span class="pre">format</span> <span class="pre">will</span> <span class="pre">generate</span> <span class="pre">directories</span> <span class="pre">and</span> <span class="pre">filenames</span> <span class="pre">based</span> <span class="pre">on</span> <span class="pre">the</span> <span class="pre">current</span> <span class="pre">script</span> <span class="pre">name,</span> <span class="pre">node</span> <span class="pre">name,</span> <span class="pre">and</span> <span class="pre">timestamp.</span> <span class="pre">\n\n</span>&#160;&#160;&#160; <span class="pre">You</span> <span class="pre">can</span> <span class="pre">adjust</span> <span class="pre">this</span> <span class="pre">format</span> <span class="pre">to</span> <span class="pre">meet</span> <span class="pre">your</span> <span class="pre">needs.</span> <span class="pre">Here\'s</span> <span class="pre">how:\n\n</span>&#160;&#160;&#160; <span class="pre">\t&lt;b&gt;1</span> <span class="pre">-</span> <span class="pre">&lt;span</span> <span class="pre">style=\'color:green\'&gt;&amp;lt;scriptName&amp;gt;&lt;/span&gt;:&lt;/b&gt;</span> <span class="pre">Will</span> <span class="pre">be</span> <span class="pre">replaced</span> <span class="pre">with</span> <span class="pre">the</span> <span class="pre">name</span> <span class="pre">of</span> <span class="pre">your</span> <span class="pre">current</span> <span class="pre">Nuke</span> <span class="pre">script.</span> <span class="pre">If</span> <span class="pre">the</span> <span class="pre">script</span> <span class="pre">is</span> <span class="pre">unsaved,</span> <span class="pre">&quot;untitled&quot;</span> <span class="pre">will</span> <span class="pre">be</span> <span class="pre">used.\n</span>&#160;&#160;&#160; <span class="pre">\t&lt;b&gt;2</span> <span class="pre">-</span> <span class="pre">&lt;span</span> <span class="pre">style=\'color:green\'&gt;&amp;lt;nodeName&amp;gt;&lt;/span&gt;:&lt;/b&gt;</span> <span class="pre">Will</span> <span class="pre">be</span> <span class="pre">replaced</span> <span class="pre">with</span> <span class="pre">the</span> <span class="pre">name</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">current</span> <span class="pre">node.\n</span>&#160;&#160;&#160; <span class="pre">\t&lt;b&gt;3</span> <span class="pre">-</span> <span class="pre">&lt;span</span> <span class="pre">style=\'color:green\'&gt;Date</span> <span class="pre">and</span> <span class="pre">Time</span> <span class="pre">Formatting:&lt;/span&gt;&lt;/b&gt;</span> <span class="pre">Use</span> <span class="pre">standard</span> <span class="pre">Python</span> <span class="pre">strftime</span> <span class="pre">codes</span> <span class="pre">to</span> <span class="pre">format</span> <span class="pre">the</span> <span class="pre">current</span> <span class="pre">date</span> <span class="pre">and</span> <span class="pre">time.</span> <span class="pre">\n</span>&#160;&#160;&#160; <span class="pre">\t</span>&#160;&#160;&#160; <span class="pre">For</span> <span class="pre">example,</span> <span class="pre">&lt;span</span> <span class="pre">style=\'color:blue\'&gt;%Y&lt;/span&gt;</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">full</span> <span class="pre">year,</span> <span class="pre">&lt;span</span> <span class="pre">style=\'color:blue\'&gt;%m&lt;/span&gt;</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">month,</span> <span class="pre">&lt;span</span> <span class="pre">style=\'color:blue\'&gt;%d&lt;/span&gt;</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">day,</span> <span class="pre">&lt;span</span> <span class="pre">style=\'color:blue\'&gt;%H&lt;/span&gt;</span> <span class="pre">for</span> <span class="pre">hours,</span> <span class="pre">&lt;span</span> <span class="pre">style=\'color:blue\'&gt;%M&lt;/span&gt;</span> <span class="pre">for</span> <span class="pre">minutes,</span> <span class="pre">and</span> <span class="pre">&lt;span</span> <span class="pre">style=\'color:blue\'&gt;%S&lt;/span&gt;</span> <span class="pre">for</span> <span class="pre">seconds.\n</span>&#160;&#160;&#160; <span class="pre">\t&lt;b&gt;4</span> <span class="pre">-&lt;/b&gt;</span> <span class="pre">Separate</span> <span class="pre">sections</span> <span class="pre">with</span> <span class="pre">&lt;span</span> <span class="pre">style=\'color:blue\'&gt;/&lt;/span&gt;</span> <span class="pre">to</span> <span class="pre">create</span> <span class="pre">a</span> <span class="pre">directory</span> <span class="pre">structure</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">generated</span> <span class="pre">path.</span> <span class="pre">\n\n</span>&#160;&#160;&#160; <span class="pre">Customize</span> <span class="pre">the</span> <span class="pre">format</span> <span class="pre">to</span> <span class="pre">organize</span> <span class="pre">your</span> <span class="pre">outputs</span> <span class="pre">into</span> <span class="pre">folders</span> <span class="pre">by</span> <span class="pre">date,</span> <span class="pre">script,</span> <span class="pre">or</span> <span class="pre">node,</span> <span class="pre">and</span> <span class="pre">append</span> <span class="pre">a</span> <span class="pre">unique</span> <span class="pre">timestamp</span> <span class="pre">to</span> <span class="pre">filenames</span> <span class="pre">to</span> <span class="pre">avoid</span> <span class="pre">overwrites.\n</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.file_pattern_knob" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.get_doc">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_doc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ui_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nukebridge/gizmos/core/ui_doc.html#UIElementDocs.get_doc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.get_doc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.interrupt_btn">
+<span class="sig-name descname"><span class="pre">interrupt_btn</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160; <span class="pre">Interrupts</span> <span class="pre">the</span> <span class="pre">current</span> <span class="pre">launched</span> <span class="pre">process.\n</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.interrupt_btn" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.live_update_knob">
+<span class="sig-name descname"><span class="pre">live_update_knob</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&quot;Enable</span> <span class="pre">this</span> <span class="pre">to</span> <span class="pre">update</span> <span class="pre">the</span> <span class="pre">node</span> <span class="pre">when</span> <span class="pre">moving</span> <span class="pre">to</span> <span class="pre">a</span> <span class="pre">frame</span> <span class="pre">that</span> <span class="pre">hasn't</span> <span class="pre">been</span> <span class="pre">rendered</span> <span class="pre">yet.&quot;</span></em><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.live_update_knob" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.load_settings_btn">
+<span class="sig-name descname"><span class="pre">load_settings_btn</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160; <span class="pre">Retrieves</span> <span class="pre">the</span> <span class="pre">latest</span> <span class="pre">saved</span> <span class="pre">settings</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">current</span> <span class="pre">user</span> <span class="pre">directory\n</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.load_settings_btn" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.logger_level">
+<span class="sig-name descname"><span class="pre">logger_level</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160; <span class="pre">\'critical\':</span> <span class="pre">&quot;Use</span> <span class="pre">this</span> <span class="pre">level</span> <span class="pre">for</span> <span class="pre">very</span> <span class="pre">serious</span> <span class="pre">errors</span> <span class="pre">that</span> <span class="pre">may</span> <span class="pre">prevent</span> <span class="pre">the</span> <span class="pre">program</span> <span class="pre">from</span> <span class="pre">running.&quot;\n</span>&#160;&#160;&#160; <span class="pre">\n</span>&#160;&#160;&#160; <span class="pre">\'error\':</span> <span class="pre">&quot;Use</span> <span class="pre">this</span> <span class="pre">level</span> <span class="pre">for</span> <span class="pre">serious</span> <span class="pre">errors.</span> <span class="pre">The</span> <span class="pre">program</span> <span class="pre">may</span> <span class="pre">still</span> <span class="pre">run,</span> <span class="pre">but</span> <span class="pre">there</span> <span class="pre">could</span> <span class="pre">be</span> <span class="pre">issues.&quot;\n</span>&#160;&#160;&#160; <span class="pre">\n</span>&#160;&#160;&#160; <span class="pre">\'warning\':</span> <span class="pre">&quot;Use</span> <span class="pre">this</span> <span class="pre">level</span> <span class="pre">to</span> <span class="pre">indicate</span> <span class="pre">potential</span> <span class="pre">problems</span> <span class="pre">that</span> <span class="pre">could</span> <span class="pre">occur</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">future,</span> <span class="pre">or</span> <span class="pre">to</span> <span class="pre">log</span> <span class="pre">unexpected</span> <span class="pre">events.&quot;\n</span>&#160;&#160;&#160; <span class="pre">\n</span>&#160;&#160;&#160; <span class="pre">\'info\':</span> <span class="pre">&quot;Use</span> <span class="pre">this</span> <span class="pre">level</span> <span class="pre">for</span> <span class="pre">general</span> <span class="pre">system</span> <span class="pre">information.</span> <span class="pre">Useful</span> <span class="pre">to</span> <span class="pre">confirm</span> <span class="pre">that</span> <span class="pre">things</span> <span class="pre">are</span> <span class="pre">operating</span> <span class="pre">as</span> <span class="pre">expected.&quot;\n</span>&#160;&#160;&#160; <span class="pre">\n</span>&#160;&#160;&#160; <span class="pre">\'debug\':</span> <span class="pre">&quot;Use</span> <span class="pre">this</span> <span class="pre">level</span> <span class="pre">for</span> <span class="pre">detailed</span> <span class="pre">information</span> <span class="pre">useful</span> <span class="pre">in</span> <span class="pre">diagnosing</span> <span class="pre">problems.</span> <span class="pre">This</span> <span class="pre">level</span> <span class="pre">logs</span> <span class="pre">output</span> <span class="pre">from</span> <span class="pre">all</span> <span class="pre">steps</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">program\'s</span> <span class="pre">execution.&quot;\n</span>&#160;&#160;&#160; <span class="pre">\n</span>&#160;&#160;&#160; <span class="pre">\'notset\':</span> <span class="pre">&quot;This</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">default</span> <span class="pre">logger</span> <span class="pre">level</span> <span class="pre">before</span> <span class="pre">a</span> <span class="pre">specific</span> <span class="pre">level</span> <span class="pre">is</span> <span class="pre">set.</span> <span class="pre">When</span> <span class="pre">used</span> <span class="pre">in</span> <span class="pre">logging,</span> <span class="pre">it</span> <span class="pre">behaves</span> <span class="pre">like</span> <span class="pre">the</span> <span class="pre">root</span> <span class="pre">logger.&quot;\n</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.logger_level" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.logger_level_menu">
+<span class="sig-name descname"><span class="pre">logger_level_menu</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160; <span class="pre">\'critical\':</span> <span class="pre">&quot;Use</span> <span class="pre">this</span> <span class="pre">level</span> <span class="pre">for</span> <span class="pre">very</span> <span class="pre">serious</span> <span class="pre">errors</span> <span class="pre">that</span> <span class="pre">may</span> <span class="pre">prevent</span> <span class="pre">the</span> <span class="pre">program</span> <span class="pre">from</span> <span class="pre">running.&quot;\n</span>&#160;&#160;&#160; <span class="pre">\n</span>&#160;&#160;&#160; <span class="pre">\'error\':</span> <span class="pre">&quot;Use</span> <span class="pre">this</span> <span class="pre">level</span> <span class="pre">for</span> <span class="pre">serious</span> <span class="pre">errors.</span> <span class="pre">The</span> <span class="pre">program</span> <span class="pre">may</span> <span class="pre">still</span> <span class="pre">run,</span> <span class="pre">but</span> <span class="pre">there</span> <span class="pre">could</span> <span class="pre">be</span> <span class="pre">issues.&quot;\n</span>&#160;&#160;&#160; <span class="pre">\n</span>&#160;&#160;&#160; <span class="pre">\'warning\':</span> <span class="pre">&quot;Use</span> <span class="pre">this</span> <span class="pre">level</span> <span class="pre">to</span> <span class="pre">indicate</span> <span class="pre">potential</span> <span class="pre">problems</span> <span class="pre">that</span> <span class="pre">could</span> <span class="pre">occur</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">future,</span> <span class="pre">or</span> <span class="pre">to</span> <span class="pre">log</span> <span class="pre">unexpected</span> <span class="pre">events.&quot;\n</span>&#160;&#160;&#160; <span class="pre">\n</span>&#160;&#160;&#160; <span class="pre">\'info\':</span> <span class="pre">&quot;Use</span> <span class="pre">this</span> <span class="pre">level</span> <span class="pre">for</span> <span class="pre">general</span> <span class="pre">system</span> <span class="pre">information.</span> <span class="pre">Useful</span> <span class="pre">to</span> <span class="pre">confirm</span> <span class="pre">that</span> <span class="pre">things</span> <span class="pre">are</span> <span class="pre">operating</span> <span class="pre">as</span> <span class="pre">expected.&quot;\n</span>&#160;&#160;&#160; <span class="pre">\n</span>&#160;&#160;&#160; <span class="pre">\'debug\':</span> <span class="pre">&quot;Use</span> <span class="pre">this</span> <span class="pre">level</span> <span class="pre">for</span> <span class="pre">detailed</span> <span class="pre">information</span> <span class="pre">useful</span> <span class="pre">in</span> <span class="pre">diagnosing</span> <span class="pre">problems.</span> <span class="pre">This</span> <span class="pre">level</span> <span class="pre">logs</span> <span class="pre">output</span> <span class="pre">from</span> <span class="pre">all</span> <span class="pre">steps</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">program\'s</span> <span class="pre">execution.&quot;\n</span>&#160;&#160;&#160; <span class="pre">\n</span>&#160;&#160;&#160; <span class="pre">\'notset\':</span> <span class="pre">&quot;This</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">default</span> <span class="pre">logger</span> <span class="pre">level</span> <span class="pre">before</span> <span class="pre">a</span> <span class="pre">specific</span> <span class="pre">level</span> <span class="pre">is</span> <span class="pre">set.</span> <span class="pre">When</span> <span class="pre">used</span> <span class="pre">in</span> <span class="pre">logging,</span> <span class="pre">it</span> <span class="pre">behaves</span> <span class="pre">like</span> <span class="pre">the</span> <span class="pre">root</span> <span class="pre">logger.&quot;\n</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.logger_level_menu" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.output_dir">
+<span class="sig-name descname"><span class="pre">output_dir</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160; <span class="pre">Directory</span> <span class="pre">where</span> <span class="pre">the</span> <span class="pre">generated</span> <span class="pre">images</span> <span class="pre">will</span> <span class="pre">be</span> <span class="pre">stored</span> <span class="pre">in</span> <span class="pre">PNG</span> <span class="pre">format.</span> <span class="pre">Located</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">local</span> <span class="pre">user</span> <span class="pre">folder</span> <span class="pre">by</span> <span class="pre">default.\n</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.output_dir" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.post_cmd_knob">
+<span class="sig-name descname"><span class="pre">post_cmd_knob</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160; <span class="pre">Terminal</span> <span class="pre">command</span> <span class="pre">to</span> <span class="pre">be</span> <span class="pre">executed</span> <span class="pre">after</span> <span class="pre">the</span> <span class="pre">stable</span> <span class="pre">diffusion</span> <span class="pre">process</span> <span class="pre">has</span> <span class="pre">been</span> <span class="pre">completed.\n</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.post_cmd_knob" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.pre_cmd_knob">
+<span class="sig-name descname"><span class="pre">pre_cmd_knob</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160; <span class="pre">Terminal</span> <span class="pre">command</span> <span class="pre">to</span> <span class="pre">be</span> <span class="pre">executed</span> <span class="pre">before</span> <span class="pre">the</span> <span class="pre">stable</span> <span class="pre">diffusion</span> <span class="pre">process</span> <span class="pre">starts\n</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.pre_cmd_knob" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.python_path_knob">
+<span class="sig-name descname"><span class="pre">python_path_knob</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160; <span class="pre">Path</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">python</span> <span class="pre">runtime</span> <span class="pre">directory\n</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.python_path_knob" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.save_settings_btn">
+<span class="sig-name descname"><span class="pre">save_settings_btn</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160; <span class="pre">Saves</span> <span class="pre">the</span> <span class="pre">current</span> <span class="pre">settings</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">current</span> <span class="pre">user</span> <span class="pre">directory\n</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.save_settings_btn" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.time_out">
+<span class="sig-name descname"><span class="pre">time_out</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160; <span class="pre">This</span> <span class="pre">knob</span> <span class="pre">sets</span> <span class="pre">the</span> <span class="pre">maximum</span> <span class="pre">time,</span> <span class="pre">in</span> <span class="pre">milliseconds,</span> <span class="pre">that</span> <span class="pre">the</span> <span class="pre">client</span> <span class="pre">will</span> <span class="pre">wait</span> <span class="pre">for</span> <span class="pre">a</span> <span class="pre">response</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">server</span> <span class="pre">for</span> <span class="pre">each</span> <span class="pre">frame.</span> <span class="pre">\n</span>&#160;&#160;&#160; <span class="pre">If</span> <span class="pre">the</span> <span class="pre">server</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">respond</span> <span class="pre">within</span> <span class="pre">this</span> <span class="pre">time,</span> <span class="pre">the</span> <span class="pre">process</span> <span class="pre">will</span> <span class="pre">return</span> <span class="pre">None.\n</span>&#160;&#160;&#160; <span class="pre">When</span> <span class="pre">running</span> <span class="pre">a</span> <span class="pre">batch</span> <span class="pre">process,</span> <span class="pre">the</span> <span class="pre">total</span> <span class="pre">waiting</span> <span class="pre">time</span> <span class="pre">will</span> <span class="pre">be</span> <span class="pre">this</span> <span class="pre">value</span> <span class="pre">multiplied</span> <span class="pre">by</span> <span class="pre">the</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">frames</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">batch.\n</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.time_out" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nukebridge.gizmos.core.ui_doc.UIElementDocs.use_external_execute">
+<span class="sig-name descname"><span class="pre">use_external_execute</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160;&#160; <span class="pre">This</span> <span class="pre">advanced</span> <span class="pre">feature</span> <span class="pre">enables</span> <span class="pre">you</span> <span class="pre">to</span> <span class="pre">utilize</span> <span class="pre">external</span> <span class="pre">machines,</span> <span class="pre">either</span> <span class="pre">through</span> <span class="pre">a</span> <span class="pre">render</span> <span class="pre">farm</span> <span class="pre">or</span> <span class="pre">by</span> <span class="pre">running</span> <span class="pre">advanced</span> <span class="pre">code.\n</span>&#160;&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#nukebridge.gizmos.core.ui_doc.UIElementDocs.use_external_execute" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nukebridge.gizmos.core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-nukebridge.gizmos.core" title="Link to this heading"></a></h2>
+</section>
+<section id="inheritance-diagram-for-nukebridge-gizmos-core-base-module">
+<h2>Inheritance Diagram for nukebridge.gizmos.core.base Module<a class="headerlink" href="#inheritance-diagram-for-nukebridge-gizmos-core-base-module" title="Link to this heading"></a></h2>
+<div class="graphviz"><img src="_images/inheritance-0b6d30d23bc02746af5501d2ade2cc8a70807421.png" alt="Inheritance diagram of nukebridge.gizmos.core.base" usemap="#inheritancef75ca68185" class="inheritance graphviz" /></div>
+<map id="inheritancef75ca68185" name="inheritancef75ca68185">
+<area shape="rect" id="node1" href="#nukebridge.gizmos.core.base.Base" target="_top" title="Base class for creating gizmos in Nuke. It provides a framework for creating and managing gizmos, including UI setup," alt="" coords="5,5,77,77"/>
+</map></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nukebridge.gizmos.html" class="btn btn-neutral float-left" title="nukebridge.gizmos package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nukebridge.utils.html" class="btn btn-neutral float-right" title="nukebridge.utils package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Mahmoud Youssef.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
